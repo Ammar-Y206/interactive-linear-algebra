@@ -433,6 +433,110 @@ export const GLOSSARY: GlossaryEntry[] = [
     related: ["Linear transformation", "Dot product"],
     category: "Concept",
   },
+  {
+    term: "Change of basis",
+    definition:
+      "Switching the coordinate system used to describe vectors. The change-of-basis matrix (columns = new basis in old coordinates) translates new coordinates to old; its inverse does the reverse.",
+    lessonSlug: "change-of-basis",
+    related: ["Basis vectors", "Coordinate", "Matrix"],
+    category: "Concept",
+  },
+  {
+    term: "Change-of-basis matrix",
+    definition:
+      "The matrix whose columns are the new basis vectors (written in old coordinates). Multiplied by new-basis coordinates, it yields old-basis coordinates. Its inverse translates the other way.",
+    lessonSlug: "change-of-basis",
+    related: ["Change of basis", "Inverse matrix"],
+    category: "Concept",
+  },
+  {
+    term: "Similarity transform",
+    definition:
+      "The sandwich A⁻¹MA: re-expresses a transformation M in a new basis. Same transformation, different coordinate language. Used to diagonalize matrices via an eigenbasis.",
+    lessonSlug: "change-of-basis",
+    related: ["Change of basis", "Eigenbasis"],
+    category: "Operation",
+  },
+  {
+    term: "Eigenvector",
+    definition:
+      "A non-zero vector that stays on its own span during a transformation — only stretched or squished (by its eigenvalue λ), never rotated off. Satisfies Av = λv.",
+    lessonSlug: "eigenvectors",
+    related: ["Eigenvalue", "Linear transformation"],
+    category: "Vector",
+  },
+  {
+    term: "Eigenvalue",
+    definition:
+      "The scalar λ by which an eigenvector v is scaled: Av = λv. Can be positive (stretch), negative (flip), fractional (squish), or zero (collapse to origin).",
+    lessonSlug: "eigenvectors",
+    related: ["Eigenvector"],
+    category: "Concept",
+  },
+  {
+    term: "Characteristic polynomial",
+    definition:
+      "det(A − λI) as a polynomial in λ. Its roots are the eigenvalues of A. For 2×2 matrices, the mean-product trick computes them faster.",
+    lessonSlug: "eigenvectors",
+    related: ["Eigenvalue", "Determinant"],
+    category: "Concept",
+  },
+  {
+    term: "Eigenbasis",
+    definition:
+      "A basis made entirely of eigenvectors. In that basis the matrix becomes diagonal (just the eigenvalues) — making operations like matrix powers trivial. Not every transformation has one (e.g. 90° rotations don't).",
+    lessonSlug: "eigenvectors",
+    related: ["Eigenvector", "Diagonal matrix", "Change of basis"],
+    category: "Concept",
+  },
+  {
+    term: "Diagonal matrix",
+    definition:
+      "A matrix with non-zero entries only on the main diagonal. In an eigenbasis, the transformation matrix is diagonal — with eigenvalues down the diagonal. Powers are trivial: just raise each diagonal entry to the power.",
+    lessonSlug: "eigenvectors",
+    related: ["Eigenbasis", "Eigenvalue"],
+    category: "Concept",
+  },
+  {
+    term: "Trace",
+    definition:
+      "The sum of a matrix's diagonal entries. Equals the sum of the eigenvalues. Half the trace is the mean of the eigenvalues — key to the quick-computation trick.",
+    lessonSlug: "eigenvalue-trick",
+    related: ["Eigenvalue", "Determinant"],
+    category: "Concept",
+  },
+  {
+    term: "Mean-product formula",
+    definition:
+      "If two numbers have mean m and product p, they are m ± √(m² − p). Applied to eigenvalues: λ = trace/2 ± √((trace/2)² − det). Reads eigenvalues straight off a 2×2 matrix.",
+    lessonSlug: "eigenvalue-trick",
+    related: ["Eigenvalue", "Trace", "Determinant"],
+    category: "Operation",
+  },
+  {
+    term: "Vector space",
+    definition:
+      "Any set with sensible notions of addition and scalar multiplication satisfying 8 axioms. Arrows, lists of numbers, functions, and more all qualify — so the entire theory of linear algebra applies to all of them.",
+    lessonSlug: "abstract-vector-spaces",
+    related: ["Vector", "Linear transformation"],
+    category: "Concept",
+  },
+  {
+    term: "Linear operator",
+    definition:
+      "A linear transformation on a function space. The derivative is the classic example: (f+g)' = f'+g' and (c·f)' = c·f'. Same two properties as linear transformations on arrows.",
+    lessonSlug: "abstract-vector-spaces",
+    related: ["Linear transformation", "Vector space"],
+    category: "Concept",
+  },
+  {
+    term: "Axioms (vector space)",
+    definition:
+      "The 8 rules addition and scaling must satisfy for a set to be a vector space: associativity, commutativity, identity, inverses, distributivity, compatibility. An interface between the theory and any new 'vector-like' object.",
+    lessonSlug: "abstract-vector-spaces",
+    related: ["Vector space"],
+    category: "Concept",
+  },
 ];
 
 /** Resolve the lesson number for a glossary entry. */

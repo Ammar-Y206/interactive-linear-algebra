@@ -1200,6 +1200,385 @@ export const LESSONS: LessonMeta[] = [
         "Every coordinate depends on a choice of basis. Next we'll see what it means to switch coordinate systems — and how matrices translate between the language of one basis and another.",
     },
   },
+  {
+    slug: "change-of-basis",
+    number: 13,
+    title: "Change of basis",
+    tagline: "Speaking different coordinate languages",
+    description:
+      "Coordinates are not intrinsic — they depend on your basis vectors. Jennifer's (1,0) is your (2,1). The change-of-basis matrix translates her coordinates to yours; its inverse does the reverse. And A⁻¹MA re-expresses a transformation in her language.",
+    durationMin: 19,
+    difficulty: "Advanced",
+    componentKey: "change-of-basis",
+    objectives: [
+      {
+        title: "See coordinates as basis-dependent",
+        detail:
+          "The same vector has different coordinate descriptions under different bases. î, ĵ are one basis; any two non-collinear vectors form another — and the numbers change even though the vector doesn't.",
+      },
+      {
+        title: "Translate with the change-of-basis matrix",
+        detail:
+          "Put Jennifer's basis vectors (written in YOUR coordinates) as columns of a matrix. Multiplying it by her coordinates yields yours — it transforms your grid into hers, translating her language to yours.",
+      },
+      {
+        title: "Go the other way with the inverse",
+        detail:
+          "The inverse of the change-of-basis matrix translates your coordinates to hers — playing the transformation backward.",
+      },
+      {
+        title: "Re-express transformations: A⁻¹MA",
+        detail:
+          "To describe a transformation M in Jennifer's language: translate in (A), apply M, translate out (A⁻¹). The sandwich A⁻¹MA is the same transformation, viewed from her coordinate system.",
+      },
+    ],
+    quiz: [
+      {
+        id: "cb1",
+        prompt:
+          "Jennifer's basis vectors b₁, b₂ are (2,1) and (−1,1) in your coordinates. She describes a vector as (−1, 2). What is it in your coordinates?",
+        options: ["(−4, 1)", "(1, 3)", "(−1, 2)", "(3, −1)"],
+        answer: 0,
+        explanation:
+          "Her (−1, 2) means −1·b₁ + 2·b₂ = −1·(2,1) + 2·(−1,1) = (−2−2, −1+2) = (−4, 1). The change-of-basis matrix [b₁|b₂] times her coordinates gives yours.",
+      },
+      {
+        id: "cb2",
+        prompt:
+          "The change-of-basis matrix with Jennifer's basis as columns translates…",
+        options: [
+          "Your coordinates to hers",
+          "Her coordinates to yours — it transforms your grid into hers",
+          "Nothing — it's just notation",
+          "Vectors to numbers",
+        ],
+        answer: 1,
+        explanation:
+          "Geometrically it moves your basis (î, ĵ) to hers (b₁, b₂). Numerically it takes a vector described in her coordinates and outputs the same vector in yours. Grid transforms one way; the coordinate translation goes the other — that's the 'backwards' feeling.",
+      },
+      {
+        id: "cb3",
+        prompt:
+          "To express a transformation M in Jennifer's coordinate system, you compute…",
+        options: [
+          "M · A",
+          "A · M · A⁻¹",
+          "A⁻¹ · M · A — translate in, apply M, translate out",
+          "Just M — it's the same in any basis",
+        ],
+        answer: 2,
+        explanation:
+          "Start with her coordinates. Multiply by A (translate to yours), then M (apply the transformation), then A⁻¹ (translate back to hers). The sandwich A⁻¹MA is the same transformation, but written in her language.",
+      },
+      {
+        id: "cb4",
+        prompt:
+          "Why does the change-of-basis matrix feel 'backwards' — transforming the grid one way but translating coordinates the other?",
+        options: [
+          "It's a bug in the notation",
+          "Because it takes your MISconception (using her coordinates in your system) and transforms it into the vector she actually meant",
+          "Because matrices commute",
+          "It only works for square matrices",
+        ],
+        answer: 1,
+        explanation:
+          "When Jennifer says (−1,2), your first instinct is to plot (−1,2) on YOUR grid — a misconception. The matrix transforms that misconception into the vector she actually meant. The grid moves one way; the coordinate meaning translates the other.",
+      },
+    ],
+    whatsNext: {
+      title: "Eigenvectors & Eigenvalues",
+      blurb:
+        "Some special vectors survive a transformation on their own span — just stretched or squished. Finding these eigenvectors and their eigenvalues reveals what a transformation is really doing, independent of coordinates.",
+    },
+  },
+  {
+    slug: "eigenvectors",
+    number: 14,
+    title: "Eigenvectors and eigenvalues",
+    tagline: "Vectors that stay on their own span",
+    description:
+      "Most vectors get knocked off their span during a transformation. Eigenvectors don't — they just stretch or squish. The eigenvalue is the scaling factor. Finding them (Av = λv) reveals the transformation's essence, independent of coordinates — and an eigenbasis diagonalizes the matrix.",
+    durationMin: 20,
+    difficulty: "Advanced",
+    componentKey: "eigenvectors",
+    objectives: [
+      {
+        title: "Spot an eigenvector",
+        detail:
+          "An eigenvector stays on its own line (span) during the transformation — only stretched or squished, never rotated off. The eigenvalue λ is the scaling factor (positive, negative, or fractional).",
+      },
+      {
+        title: "Read the equation Av = λv",
+        detail:
+          "Applying A to an eigenvector v equals scaling v by λ. This is the symbolic heart: a matrix-vector product that reduces to a scalar multiplication.",
+      },
+      {
+        title: "Find eigenvalues via det(A − λI) = 0",
+        detail:
+          "Rearrange to (A − λI)v = 0. For a non-zero v to exist, the transformation must squish space — so det(A − λI) = 0. Solve for λ.",
+      },
+      {
+        title: "Use an eigenbasis to diagonalize",
+        detail:
+          "If eigenvectors span the space, use them as a new basis. In that basis the matrix is diagonal (just the eigenvalues) — and powers become trivial.",
+      },
+    ],
+    quiz: [
+      {
+        id: "e1",
+        prompt:
+          "An eigenvector of a transformation is a vector that…",
+        options: [
+          "Becomes the zero vector",
+          "Stays on its own span — only stretched or squished, not rotated off",
+          "Has length 1",
+          "Points along the x-axis",
+        ],
+        answer: 1,
+        explanation:
+          "Eigenvectors remain on their own line through the origin; the transformation only scales them (by the eigenvalue λ). They don't get knocked off their span.",
+      },
+      {
+        id: "e2",
+        prompt:
+          "The eigenvalue equation is Av = λv. What do A, v, and λ represent?",
+        options: [
+          "A = area, v = vector, λ = length",
+          "A = the transformation matrix, v = an eigenvector, λ = its eigenvalue (the scaling factor)",
+          "A = angle, v = volume, λ = limit",
+          "A = axis, v = value, λ = lambda-function",
+        ],
+        answer: 1,
+        explanation:
+          "A is the matrix representing the transformation. v is an eigenvector. λ is the eigenvalue — the factor by which A stretches (or squishes, or flips) v. Av = λv says: applying A to v is the same as just scaling v by λ.",
+      },
+      {
+        id: "e3",
+        prompt:
+          "To find eigenvalues, you solve det(A − λI) = 0. Why must the determinant be zero?",
+        options: [
+          "Because eigenvalues are always zero",
+          "Because (A − λI)v = 0 needs a non-zero v, which requires the transformation to squish space — and squishing means det = 0",
+          "Because the identity matrix has determinant zero",
+          "It's just a convention",
+        ],
+        answer: 1,
+        explanation:
+          "From Av = λv you get (A − λI)v = 0. For a non-zero v to satisfy this, A − λI must squish space to a lower dimension (collapsing v onto zero). And a transformation squishes iff its determinant is zero. So det(A − λI) = 0 finds the λ values that allow non-zero eigenvectors.",
+      },
+      {
+        id: "e4",
+        prompt:
+          "A 90° rotation in 2D has no (real) eigenvectors. Why?",
+        options: [
+          "Rotations can't have eigenvectors in any dimension",
+          "Every vector gets rotated off its span — no vector stays on its own line (except the zero vector)",
+          "Its determinant is zero",
+          "It's not a linear transformation",
+        ],
+        answer: 1,
+        explanation:
+          "A 90° rotation turns every vector away from its original line — nothing stays on its span. Algebraically, the characteristic polynomial (λ² + 1) has only imaginary roots (±i), signaling no real eigenvectors. (In 3D, though, a rotation DOES have an eigenvector: the axis of rotation.)",
+      },
+    ],
+    whatsNext: {
+      title: "A Quick Trick for Eigenvalues",
+      blurb:
+        "For 2×2 matrices, there's a faster way to find eigenvalues than the full characteristic polynomial: read the trace (sum of eigenvalues) and determinant (product) straight off the matrix, then use the mean-product formula.",
+    },
+  },
+  {
+    slug: "eigenvalue-trick",
+    number: 15,
+    title: "A quick trick for computing eigenvalues",
+    tagline: "Mean and product, straight off the matrix",
+    description:
+      "For 2×2 matrices, skip the characteristic polynomial. The eigenvalues' mean = trace/2; their product = determinant. So λ = trace/2 ± √((trace/2)² − det). Three facts, one formula — read eigenvalues straight off the matrix.",
+    durationMin: 13,
+    difficulty: "Advanced",
+    componentKey: "eigenvalue-trick",
+    objectives: [
+      {
+        title: "Know the trace = sum of eigenvalues",
+        detail:
+          "The trace (sum of diagonal entries) equals the sum of the eigenvalues. So the mean of the eigenvalues = mean of the diagonal entries.",
+      },
+      {
+        title: "Know the determinant = product of eigenvalues",
+        detail:
+          "The determinant equals the product of the eigenvalues — both describe how the transformation scales area overall.",
+      },
+      {
+        title: "Recover two numbers from mean and product",
+        detail:
+          "If two numbers have mean m and product p, they are m ± √(m² − p). This is the difference-of-squares formula in disguise.",
+      },
+      {
+        title: "Apply it: λ = trace/2 ± √((trace/2)² − det)",
+        detail:
+          "Read the trace and determinant off the matrix, plug in, and the eigenvalues fall out — no characteristic polynomial needed. Faster and more meaningful for 2×2 matrices.",
+      },
+    ],
+    quiz: [
+      {
+        id: "et1",
+        prompt:
+          "The trace of a 2×2 matrix (sum of diagonal entries) equals…",
+        options: [
+          "The product of the eigenvalues",
+          "The sum of the eigenvalues",
+          "The determinant",
+          "The largest eigenvalue",
+        ],
+        answer: 1,
+        explanation:
+          "The trace = sum of the eigenvalues. So the mean of the eigenvalues = mean of the two diagonal entries. This is one of the two facts behind the trick.",
+      },
+      {
+        id: "et2",
+        prompt:
+          "The determinant of a 2×2 matrix equals…",
+        options: [
+          "The sum of the eigenvalues",
+          "The product of the eigenvalues",
+          "The trace",
+          "Always 1",
+        ],
+        answer: 1,
+        explanation:
+          "The determinant = product of the eigenvalues. This makes sense: the determinant is the area-scaling factor, and the eigenvalues are the scaling factors along the eigenvector directions — their product is the overall area scale.",
+      },
+      {
+        id: "et3",
+        prompt:
+          "For a matrix with trace 10 and determinant 16, what are the eigenvalues?",
+        options: [
+          "2 and 8 (mean 5, product 16; 5 ± √(25−16) = 5 ± 3)",
+          "4 and 6",
+          "1 and 16",
+          "5 and 5",
+        ],
+        answer: 0,
+        explanation:
+          "Mean = trace/2 = 5. Product = det = 16. So λ = 5 ± √(25 − 16) = 5 ± 3 = 2 and 8. Check: 2+8 = 10 = trace ✓, 2·8 = 16 = det ✓.",
+      },
+      {
+        id: "et4",
+        prompt:
+          "Why is the mean-product formula more meaningful than the quadratic formula for eigenvalues?",
+        options: [
+          "It's shorter to write",
+          "Each term carries geometric meaning — trace and determinant are readable straight off the matrix, no intermediate polynomial",
+          "It works for matrices of any size",
+          "It's more accurate",
+        ],
+        answer: 1,
+        explanation:
+          "The real advantage: you read the mean (trace/2) and product (det) directly off the matrix without setting up the characteristic polynomial. Each term has geometric meaning, so the computation reinforces understanding rather than being rote symbol-pushing. It's the quadratic formula reframed around meaningful quantities.",
+      },
+    ],
+    whatsNext: {
+      title: "Abstract Vector Spaces",
+      blurb:
+        "Vectors aren't just arrows or lists of numbers — functions are vectors too. The derivative is a linear transformation. The 8 axioms define what 'vector-like' means, and the whole theory generalizes far beyond geometry.",
+    },
+  },
+  {
+    slug: "abstract-vector-spaces",
+    number: 16,
+    title: "Abstract vector spaces",
+    tagline: "Functions are vectors too",
+    description:
+      "What is a vector, really? Not just an arrow or a list of numbers — anything you can add and scale (following the rules) is a vector. Functions qualify: the derivative is a linear transformation, complete with its own matrix. The 8 axioms define the abstract notion of a vector space.",
+    durationMin: 22,
+    difficulty: "Advanced",
+    componentKey: "abstract-vector-spaces",
+    objectives: [
+      {
+        title: "See functions as vectors",
+        detail:
+          "You can add two functions (f+g)(x) = f(x)+g(x) and scale one (c·f)(x) = c·f(x). That's the same structure as adding and scaling arrows — just with infinitely many 'coordinates'.",
+      },
+      {
+        title: "Recognize the derivative as linear",
+        detail:
+          "The derivative turns one function into another, and it's linear: (f+g)' = f' + g' and (c·f)' = c·f'. It's a linear transformation — on the vector space of functions.",
+      },
+      {
+        title: "Represent the derivative as a matrix",
+        detail:
+          "Using the basis {1, x, x², x³, …} for polynomials, the derivative becomes an infinite matrix with 1, 2, 3, … counting down an offset diagonal. Matrix-vector multiplication IS differentiation.",
+      },
+      {
+        title: "Understand the 8 axioms",
+        detail:
+          "A vector space is any set with sensible notions of addition and scaling satisfying 8 axioms. Arrows, lists of numbers, functions, and more all qualify — so the whole theory of linear algebra applies to all of them.",
+      },
+    ],
+    quiz: [
+      {
+        id: "av1",
+        prompt:
+          "How do you add two functions f and g?",
+        options: [
+          "f(g(x))",
+          "(f+g)(x) = f(x) + g(x) — add their outputs at each input",
+          "f(x) · g(x)",
+          "You can't add functions",
+        ],
+        answer: 1,
+        explanation:
+          "The sum function f+g is defined pointwise: at each input x, its value is f(x) + g(x). This mirrors adding vectors coordinate-by-coordinate — just with infinitely many 'coordinates' (one per input).",
+      },
+      {
+        id: "av2",
+        prompt:
+          "Why is the derivative a linear transformation?",
+        options: [
+          "Because it produces straight lines",
+          "Because (f+g)' = f' + g' and (c·f)' = c·f' — it preserves addition and scaling",
+          "Because it's a matrix",
+          "Because derivatives are always 1",
+        ],
+        answer: 1,
+        explanation:
+          "Linearity means additivity and scaling: the derivative of a sum is the sum of derivatives, and the derivative of a scaled function is the scaled derivative. These two properties — the same ones that define linear transformations on arrows — make the derivative linear on the space of functions.",
+      },
+      {
+        id: "av3",
+        prompt:
+          "Using the basis {1, x, x², x³, …} for polynomials, the derivative acts as a matrix that…",
+        options: [
+          "Has 1s on the main diagonal",
+          "Has 1, 2, 3, … counting down an offset diagonal (the derivative of xⁿ is n·xⁿ⁻¹)",
+          "Is all zeros",
+          "Is 2×2",
+        ],
+        answer: 1,
+        explanation:
+          "The derivative of xⁿ is n·xⁿ⁻¹, so the n-th basis function maps to n times the (n−1)-th. That puts 1, 2, 3, … on the sub-diagonal (one below the main). Matrix-vector multiplication with a polynomial's coordinates literally performs differentiation.",
+      },
+      {
+        id: "av4",
+        prompt:
+          "What is a 'vector space' in the abstract, axiomatic sense?",
+        options: [
+          "Only the set of arrows in 2D or 3D",
+          "Only lists of real numbers",
+          "Any set with notions of addition and scaling that satisfy the 8 axioms — arrows, lists, functions, and more all qualify",
+          "A space that contains vectors of length 1",
+        ],
+        answer: 2,
+        explanation:
+          "A vector space is defined by 8 axioms that addition and scaling must satisfy. Arrows, lists of numbers, functions, and many other objects all qualify. By proving results in terms of the axioms, the entire theory of linear algebra applies to all vector spaces at once — that's the power of abstraction.",
+      },
+    ],
+    whatsNext: {
+      title: "Course Complete",
+      blurb:
+        "You've built intuition for the entire essence of linear algebra — from vectors through transformations, determinants, eigenvalues, and abstract spaces. The foundation is yours; the applications are endless.",
+    },
+  },
 ];
 
 /** Total number of lessons currently in the course. */

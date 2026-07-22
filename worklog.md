@@ -662,3 +662,74 @@ Recommended next-phase priorities:
 - Add Lesson 13 ("Change of Basis") when transcript arrives. Natural
   reuse of the TransformationSim — change of basis is just a
   transformation between coordinate systems.
+
+---
+Task ID: 11
+Agent: main (Z.ai Code) — add Lessons 13, 14, 15, 16 (FINAL BATCH)
+Task: Add four lessons completing the course: "Change of basis" (L13),
+"Eigenvectors and eigenvalues" (L14), "A quick trick for computing
+eigenvalues" (L15), "Abstract vector spaces" (L16). WITHOUT modifying
+Lessons 1–12.
+
+Work Log:
+- Appended all 4 lessons to `lib/course-config.ts` (slugs change-of-basis,
+  eigenvectors, eigenvalue-trick, abstract-vector-spaces; componentKeys
+  match; numbers 13-16; all Advanced). 16 quiz questions total. L16's
+  whatsNext points to "Course Complete" — the series is finished.
+- Registered all 4 in `lessons/registry.tsx`.
+- Appended 14 glossary terms (Change of basis, Change-of-basis matrix,
+  Similarity transform, Eigenvector, Eigenvalue, Characteristic polynomial,
+  Eigenbasis, Diagonal matrix, Trace, Mean-product formula, Vector space,
+  Linear operator, Axioms).
+- Created 4 new reusable simulations:
+  - `simulations/change-of-basis-sim.tsx` — two coordinate systems (yours
+    + Jennifer's); draggable b₁/b₂; live change-of-basis matrix + inverse;
+    same vector shown in both languages.
+  - `simulations/eigenvectors-sim.tsx` — drag î'/ĵ'; computes eigenvalues
+    via the characteristic polynomial; draws eigenvector span lines + the
+    stretch arrows; detects no-real-eigenvalues case (rotations).
+  - `simulations/eigenvalue-trick-sim.tsx` — editable 2×2 matrix with
+    live trace/det/mean-product computation; presets; verification.
+  - `simulations/abstract-vector-spaces-sim.tsx` — polynomial coefficient
+    sliders; displays the derivative matrix (5×5 slice with 1,2,3,4 on
+    the offset diagonal); matrix-vector mult = differentiation.
+- Created 4 lesson pages, each with confetti, concept checks, full
+  8-section structure.
+
+BUG FIX: Extended `ConceptCheck` accent palette to include "violet"
+(used by the change-of-basis and abstract-vector-spaces lessons).
+Previously only emerald/amber/rose/cyan were supported. Now all shared
+components (SummaryCard, SimulationContainer, SectionHeading,
+ConceptCheck) support 5 accents.
+
+Stage Summary:
+- All 4 lessons verified with agent-browser:
+  - L13: h1 "Change of basis", 53 SVGs, 1 concept check.
+  - L14: h1 "Eigenvectors and eigenvalues", 53 SVGs, 1 concept check.
+  - L15: h1 "A quick trick for computing eigenvalues", 50 SVGs, 1 check.
+  - L16: h1 "Abstract vector spaces", 52 SVGs, 1 concept check, sim present.
+  - L16 (capstone) quiz: B,B,B,C → 100% + "Flawless!" + confetti.
+  - Sidebar shows all 16 lessons.
+  - No errors. Lint clean. Dev server healthy.
+- Lessons 1–12 completely untouched. Architecture held: purely append-
+  only (config + registry + glossary + 8 new files + 1 accent-palette
+  extension to ConceptCheck).
+
+COURSE COMPLETE: The platform now has the full "Essence of Linear
+Algebra" series — 16 lessons, 67 glossary terms, 7 achievements, 17
+reusable simulations. The append-only architecture held throughout:
+each lesson was added by creating new files and appending to config/
+registry/glossary, never modifying existing lessons. The foundation
+built in Lesson 1 (shared components, progress store, course shell)
+served all 16 lessons without structural change.
+
+Unresolved issues / risks:
+- The 15-min webDevReview cron (id 285428) still risks 429 rate-limits.
+  Recommend reducing to 60 min or disabling now that the course is
+  complete.
+
+Recommended next-phase priorities:
+- The course is complete. Optional future work: add a "review" mode
+  that surfaces random quiz questions across lessons; add a print/
+  export progress certificate; or extend with supplementary topics
+  (SVD, least squares, PCA) using the same architecture.

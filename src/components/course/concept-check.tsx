@@ -21,7 +21,7 @@ import { cn } from "@/lib/utils";
 export interface ConceptCheckProps {
   prompt: string;
   answer: string;
-  accent?: "emerald" | "amber" | "rose" | "cyan";
+  accent?: "emerald" | "amber" | "rose" | "cyan" | "violet";
 }
 
 const accents = {
@@ -56,6 +56,14 @@ const accents = {
     iconText: "text-cyan-300",
     label: "text-cyan-300",
     reveal: "bg-cyan-500/10 text-cyan-100",
+  },
+  violet: {
+    border: "border-violet-500/30",
+    bg: "bg-violet-500/5",
+    iconBg: "bg-violet-500/15",
+    iconText: "text-violet-300",
+    label: "text-violet-300",
+    reveal: "bg-violet-500/10 text-violet-100",
   },
 };
 

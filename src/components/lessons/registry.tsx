@@ -25,6 +25,10 @@ import { DotProductLesson } from "@/components/lessons/dot-product-lesson";
 import { CrossProductLesson } from "@/components/lessons/cross-product-lesson";
 import { CrossProductDualityLesson } from "@/components/lessons/cross-product-duality-lesson";
 import { CramersRuleLesson } from "@/components/lessons/cramers-rule-lesson";
+import { ChangeOfBasisLesson } from "@/components/lessons/change-of-basis-lesson";
+import { EigenvectorsLesson } from "@/components/lessons/eigenvectors-lesson";
+import { EigenvalueTrickLesson } from "@/components/lessons/eigenvalue-trick-lesson";
+import { AbstractVectorSpacesLesson } from "@/components/lessons/abstract-vector-spaces-lesson";
 import { IntroductionPage } from "@/components/lessons/introduction";
 import { CourseCompletionPage } from "@/components/lessons/course-completion";
 import { getLessonBySlug } from "@/lib/course-config";
@@ -50,6 +54,10 @@ export const LESSON_REGISTRY: Record<
   "cross-product": CrossProductLesson,
   "cross-product-duality": CrossProductDualityLesson,
   "cramers-rule": CramersRuleLesson,
+  "change-of-basis": ChangeOfBasisLesson,
+  eigenvectors: EigenvectorsLesson,
+  "eigenvalue-trick": EigenvalueTrickLesson,
+  "abstract-vector-spaces": AbstractVectorSpacesLesson,
 };
 
 /** Special (non-lesson) page renderers. */
