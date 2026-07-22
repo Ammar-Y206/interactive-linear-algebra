@@ -480,3 +480,58 @@ Recommended next-phase priorities:
   extend TransformationSim to show area scaling (2D) and reuse
   Transform3DSim for volume scaling (3D). The flatten/dependence
   detection already in Transform3DSim is a perfect segue.
+
+---
+Task ID: 8
+Agent: main (Z.ai Code) — add Lesson 6
+Task: Add Lesson 6 "The determinant" to the existing platform WITHOUT
+modifying Lessons 1–5.
+
+Work Log:
+- Appended Lesson 6 to `lib/course-config.ts` (slug "determinant",
+  componentKey "determinant", number 6, "Core", 18 min). 4 quiz
+  questions; whatsNext teases inverse matrices & linear systems.
+- Registered `DeterminantLesson` in `lessons/registry.tsx`.
+- Appended 4 glossary terms (Determinant, Orientation, Parallelepiped,
+  Right-hand rule).
+- Created `simulations/determinant-sim.tsx` — the determinant viz.
+  Draggable î/ĵ define the matrix; the unit square morphs into a
+  parallelogram (emerald) with a ghost original square (slate) for
+  reference; live det = ad−bc readout, color-coded by sign; 5 presets
+  (Scale det=6, Shear det=1, Collapse det=0, Flip det<0, Identity);
+  status badges ("space squished to a line" / "orientation FLIPPED" /
+  "Areas ×N · orientation preserved"). Reusable for future inverse/
+  eigenvalue lessons.
+- Created `lessons/determinant-lesson.tsx` with 8 sections: hero,
+  objectives, area scaling (DeterminantSim), det=0 dimension collapse,
+  negative & orientation, 3D volumes & parallelepiped, the ad−bc
+  formula, quiz + summary + what's next. 2 inline ConceptChecks +
+  confetti on completion.
+- Fixed a JSX parsing error: `<` in button label "Flip (det<0)" was
+  parsed as a tag opener; escaped to `&lt;`.
+
+Stage Summary:
+- Lesson 6 verified end-to-end with agent-browser:
+  - Page renders: h1 "The determinant", 55 SVGs, 11 sections, 2 concept
+    checks, DeterminantSim present, 5 presets.
+  - Scale preset → det = 6.00 ✓
+  - Collapse preset → det = 0.00 + "space squished to a line" badge ✓
+  - Flip preset → det = -3.00 + "orientation FLIPPED" badge ✓
+  - Quiz: answered B,B,A,A → 100% + "Flawless!" + confetti.
+  - Sidebar shows all 6 lessons.
+  - Keyboard ← navigates Lesson 6 → Lesson 5.
+  - No errors. Lint clean. Dev server healthy.
+- Lessons 1–5 completely untouched. Architecture held: purely append-
+  only (config + registry + glossary + 2 new files).
+- Course now has 6 lessons, 33 glossary terms, 7 achievements, 7
+  reusable simulations.
+
+Unresolved issues / risks:
+- The 15-min webDevReview cron (id 285428) still risks 429 rate-limits
+  when running concurrently with active sessions. Recommend reducing to
+  60 min.
+
+Recommended next-phase priorities:
+- Add Lesson 7 ("Inverse Matrices & Linear Systems") when transcript
+  arrives. Natural fit: det≠0 is the invertibility test (just covered);
+  reuse DeterminantSim to show the inverse "un-doing" a transform.

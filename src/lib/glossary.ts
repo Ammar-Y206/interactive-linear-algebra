@@ -249,6 +249,38 @@ export const GLOSSARY: GlossaryEntry[] = [
     related: ["Matrix", "3D linear transformation"],
     category: "Concept",
   },
+  {
+    term: "Determinant",
+    definition:
+      "The single number measuring how a linear transformation scales area (2D) or volume (3D). det=3 triples areas; det=0 means a dimension collapsed; det<0 means space was flipped.",
+    lessonSlug: "determinant",
+    related: ["Linear transformation", "Orientation", "Linearly dependent"],
+    category: "Concept",
+  },
+  {
+    term: "Orientation",
+    definition:
+      "The 'handedness' of space. A transformation inverts orientation when it flips space over (e.g. ĵ crosses to the other side of î). A flipped orientation gives a negative determinant.",
+    lessonSlug: "determinant",
+    related: ["Determinant", "Right-hand rule"],
+    category: "Concept",
+  },
+  {
+    term: "Parallelepiped",
+    definition:
+      "The slanted 3D box a unit cube becomes after a linear transformation. Its volume equals the (absolute value of the) determinant of the transformation.",
+    lessonSlug: "determinant",
+    related: ["Determinant", "3D linear transformation"],
+    category: "Concept",
+  },
+  {
+    term: "Right-hand rule",
+    definition:
+      "A way to read 3D orientation: point the right hand's fingers along î, ĵ, k̂ in turn. If the thumb still points along k̂ after a transformation, orientation is preserved (det>0); if you'd need your left hand, it's flipped (det<0).",
+    lessonSlug: "determinant",
+    related: ["Orientation", "Determinant"],
+    category: "Concept",
+  },
 ];
 
 /** Resolve the lesson number for a glossary entry. */

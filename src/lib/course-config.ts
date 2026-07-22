@@ -533,6 +533,102 @@ export const LESSONS: LessonMeta[] = [
         "How much does a transformation stretch or squish space? The determinant measures the scaling factor of area (and volume) — and reveals when a transformation collapses a dimension entirely.",
     },
   },
+  {
+    slug: "determinant",
+    number: 6,
+    title: "The determinant",
+    tagline: "How much a transformation stretches space",
+    description:
+      "The determinant is the single number measuring how a transformation scales area — stretch, squish, or flip. Zero means a dimension collapsed; negative means space got turned inside-out. See why det=0 is the most important test in linear algebra.",
+    durationMin: 18,
+    difficulty: "Core",
+    componentKey: "determinant",
+    objectives: [
+      {
+        title: "Read the determinant as an area scale",
+        detail:
+          "A transformation scales every region's area by one factor — the determinant. det=3 triples areas; det=½ halves them; det=1 leaves areas unchanged (like a shear).",
+      },
+      {
+        title: "Decode det = 0",
+        detail:
+          "If the determinant is zero, the transformation squished all of space onto a line (or a point) — a dimension was lost. The matrix columns are linearly dependent.",
+      },
+      {
+        title: "Interpret negative determinants",
+        detail:
+          "A negative determinant means the transformation flips space over — inverting orientation. The absolute value is still the area scale; the sign is the flip.",
+      },
+      {
+        title: "Compute ad − bc, and why",
+        detail:
+          "For a 2×2 matrix [a,b | c,d], det = ad − bc. a·d is the rectangle area when b,c=0; the −bc term corrects for diagonal stretching. The intuition matters more than the formula.",
+      },
+    ],
+    quiz: [
+      {
+        id: "d1",
+        prompt:
+          "A transformation has determinant 6. What does that tell you?",
+        options: [
+          "It rotates space by 6 degrees",
+          "Every region's area is scaled by a factor of 6",
+          "It has 6 columns",
+          "It flips space over",
+        ],
+        answer: 1,
+        explanation:
+          "The determinant is the area-scaling factor. det=6 means every region's area becomes 6 times what it was. Orientation is unchanged (the sign is positive).",
+      },
+      {
+        id: "d2",
+        prompt:
+          "A 2×2 matrix has determinant 0. What does that mean geometrically?",
+        options: [
+          "The transformation is a rotation",
+          "Space gets squished onto a line (or a point) — a dimension is lost",
+          "Areas double",
+          "The matrix is the identity",
+        ],
+        answer: 1,
+        explanation:
+          "det=0 means every area becomes zero — the whole plane collapsed to a line (or point). The matrix's columns are linearly dependent: one is a scaled copy of the other. This is why det=0 is the key test for whether a transformation crushes a dimension.",
+      },
+      {
+        id: "d3",
+        prompt:
+          "A transformation has determinant −3. What happened to space?",
+        options: [
+          "It scaled areas by 3 and flipped the orientation",
+          "It shrunk areas by a factor of −3",
+          "It rotated space 180°",
+          "Nothing — the sign is irrelevant",
+        ],
+        answer: 0,
+        explanation:
+          "The absolute value |−3| = 3 is the area scale; the negative sign means orientation was inverted (space got flipped over, like turning a sheet of paper onto its other side). Both pieces of information matter.",
+      },
+      {
+        id: "d4",
+        prompt:
+          "For the matrix [3, 0 | 0, 2], what is the determinant, and why?",
+        options: [
+          "6 — it's a·d − b·c = 3·2 − 0·0, scaling î by 3 and ĵ by 2",
+          "5 — the sum of the diagonal",
+          "0 — because the off-diagonals are zero",
+          "1 — the unit square stays unit area",
+        ],
+        answer: 0,
+        explanation:
+          "det = ad − bc = 3·2 − 0·0 = 6. î stretches to length 3, ĵ to length 2, so the unit square becomes a 3×2 rectangle of area 6. The off-diagonal zeros mean no diagonal slant, so the rectangle area is just the product of the stretches.",
+      },
+    ],
+    whatsNext: {
+      title: "Inverse Matrices & Linear Systems",
+      blurb:
+        "If a transformation squishes space to a line, you can't undo it — information is lost. The determinant tells you when an inverse exists. Next we solve linear systems by asking: which vector maps to this one?",
+    },
+  },
 ];
 
 /** Total number of lessons currently in the course. */
