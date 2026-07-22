@@ -369,6 +369,70 @@ export const GLOSSARY: GlossaryEntry[] = [
     related: ["Dot product", "Linear transformation"],
     category: "Concept",
   },
+  {
+    term: "Cross product (2D)",
+    definition:
+      "The signed area of the parallelogram spanned by two 2D vectors v and w. Computed as the determinant of the matrix with columns v, w. Positive when v is right of w; swaps sign under order change.",
+    lessonSlug: "cross-products",
+    related: ["Determinant", "Parallelogram", "Cross product (3D)"],
+    category: "Operation",
+  },
+  {
+    term: "Cross product (3D)",
+    definition:
+      "A new 3D vector from two 3D vectors v and w: perpendicular to both, with length = the parallelogram's area, direction by the right-hand rule. Computed via the î/ĵ/k̂ determinant trick.",
+    lessonSlug: "cross-products",
+    related: ["Cross product (2D)", "Right-hand rule", "Parallelogram"],
+    category: "Operation",
+  },
+  {
+    term: "Right-hand rule (cross product)",
+    definition:
+      "Point the right hand's forefinger along v, middle finger along w; the thumb points along v × w. Picks the perpendicular direction consistent with orientation.",
+    lessonSlug: "cross-products",
+    related: ["Cross product (3D)", "Orientation"],
+    category: "Concept",
+  },
+  {
+    term: "Parallelogram",
+    definition:
+      "The four-sided shape spanned by two vectors (copy each, translate to the other's tip). Its area is the absolute value of the 2D cross product / determinant of the two vectors.",
+    lessonSlug: "cross-products",
+    related: ["Cross product (2D)", "Determinant"],
+    category: "Concept",
+  },
+  {
+    term: "Parallelepiped",
+    definition:
+      "The slanted 3D box spanned by three vectors. Its signed volume is the determinant of the 3×3 matrix with those vectors as columns — the geometric heart of the 3D cross product's duality.",
+    lessonSlug: "cross-products-duality",
+    related: ["Determinant", "Cross product (3D)", "Duality"],
+    category: "Concept",
+  },
+  {
+    term: "Dual vector",
+    definition:
+      "The unique vector p such that a linear transformation to the number line equals dotting with p. For the parallelepiped-volume transformation, the dual vector is v × w.",
+    lessonSlug: "cross-products-duality",
+    related: ["Duality", "Cross product (3D)"],
+    category: "Concept",
+  },
+  {
+    term: "Cramer's rule",
+    definition:
+      "A method to solve A·x = v: each coordinate xᵢ = det(A with column i replaced by v) / det(A). Reads coordinates as signed areas that scale by det(A). Elegant but slower than Gaussian elimination.",
+    lessonSlug: "cramers-rule",
+    related: ["Determinant", "Linear system of equations"],
+    category: "Concept",
+  },
+  {
+    term: "Orthonormal transformation",
+    definition:
+      "A transformation that preserves dot products (and thus lengths and angles) — rotations and reflections. Its columns are perpendicular unit vectors. Solving systems with them is trivial: just dot with each column.",
+    lessonSlug: "cramers-rule",
+    related: ["Linear transformation", "Dot product"],
+    category: "Concept",
+  },
 ];
 
 /** Resolve the lesson number for a glossary entry. */

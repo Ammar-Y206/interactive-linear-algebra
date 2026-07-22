@@ -18,7 +18,7 @@ export interface SummaryCardProps {
   /** optional small formula or keyword shown in mono */
   formula?: string;
   icon?: React.ReactNode;
-  accent?: "emerald" | "amber" | "rose" | "cyan";
+  accent?: "emerald" | "amber" | "rose" | "cyan" | "violet";
   index?: number;
 }
 
@@ -27,6 +27,7 @@ const accentMap = {
   amber: { ring: "ring-amber-500/20", text: "text-amber-300", bg: "bg-amber-500/10" },
   rose: { ring: "ring-rose-500/20", text: "text-rose-300", bg: "bg-rose-500/10" },
   cyan: { ring: "ring-cyan-500/20", text: "text-cyan-300", bg: "bg-cyan-500/10" },
+  violet: { ring: "ring-violet-500/20", text: "text-violet-300", bg: "bg-violet-500/10" },
 };
 
 export function SummaryCard({

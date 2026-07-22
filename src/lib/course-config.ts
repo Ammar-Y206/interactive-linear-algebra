@@ -912,6 +912,294 @@ export const LESSONS: LessonMeta[] = [
         "If the dot product collapses two vectors to a number, the cross product builds a new vector perpendicular to both. It's duality in reverse — and it computes areas and orientations in 3D.",
     },
   },
+  {
+    slug: "cross-products",
+    number: 10,
+    title: "Cross products",
+    tagline: "Area, orientation, and the perpendicular vector",
+    description:
+      "In 2D, the cross product is the signed area of the parallelogram two vectors span — positive if v is right of w, negative otherwise. In 3D, it's a new vector: perpendicular to both, length = area, direction by the right-hand rule. And yes, it's computed with a determinant.",
+    durationMin: 16,
+    difficulty: "Advanced",
+    componentKey: "cross-product",
+    objectives: [
+      {
+        title: "Read the 2D cross product as signed area",
+        detail:
+          "v × w = the signed area of the parallelogram spanned by v and w. Positive when v is to the right of w; negative when it's to the left. Order matters: w × v = −(v × w).",
+      },
+      {
+        title: "Compute it as a determinant",
+        detail:
+          "Put v and w as the columns of a 2×2 matrix and take its determinant. The determinant measures area scaling — and the unit square becomes exactly that parallelogram.",
+      },
+      {
+        title: "Meet the 3D cross product",
+        detail:
+          "Two 3D vectors produce a new 3D vector: perpendicular to both, with length = the parallelogram's area, direction set by the right-hand rule.",
+      },
+      {
+        title: "Use the î/ĵ/k̂ determinant trick",
+        detail:
+          "Write a 3×3 matrix with î, ĵ, k̂ in the first column and v, w in the others; compute its determinant. The result is a vector — the cross product. (Why this works is the next lesson.)",
+      },
+    ],
+    quiz: [
+      {
+        id: "cp1",
+        prompt:
+          "In 2D, v × w equals…",
+        options: [
+          "The dot product of v and w",
+          "The signed area of the parallelogram spanned by v and w",
+          "The length of v plus the length of w",
+          "The angle between v and w",
+        ],
+        answer: 1,
+        explanation:
+          "The 2D cross product is the signed area of the parallelogram the two vectors define. Sign tracks orientation: positive when v is right of w, negative when left.",
+      },
+      {
+        id: "cp2",
+        prompt:
+          "How is w × v related to v × w?",
+        options: [
+          "They're equal",
+          "w × v = −(v × w) — order matters; swapping flips the sign",
+          "w × v = 2(v × w)",
+          "w × v is always zero",
+        ],
+        answer: 1,
+        explanation:
+          "Swapping the order flips the orientation, so the sign reverses: w × v = −(v × w). This anti-commutativity is a defining feature of the cross product.",
+      },
+      {
+        id: "cp3",
+        prompt:
+          "The 3D cross product v × w is a vector. What are its length and direction?",
+        options: [
+          "Length = |v| + |w|; direction = along v",
+          "Length = area of the parallelogram; direction = perpendicular to both, by the right-hand rule",
+          "Length = 1; direction = along w",
+          "Length = |v|·|w|; direction = the bisector of v and w",
+        ],
+        answer: 1,
+        explanation:
+          "The cross product's length is the parallelogram's area; its direction is perpendicular to the plane of v and w, chosen by the right-hand rule (forefinger v, middle finger w, thumb = v × w).",
+      },
+      {
+        id: "cp4",
+        prompt:
+          "Two vectors are parallel. What is their cross product?",
+        options: [
+          "A unit vector",
+          "Zero — the parallelogram has zero area",
+          "Equal to their dot product",
+          "A vector along v",
+        ],
+        answer: 1,
+        explanation:
+          "Parallel vectors span a degenerate parallelogram of area zero, so the cross product is the zero vector. This is the standard test for parallelism in 3D.",
+      },
+    ],
+    whatsNext: {
+      title: "Cross Products via Linear Transformations",
+      blurb:
+        "Why does sticking î, ĵ, k̂ into a matrix and taking a determinant produce the right vector? It's duality again — the cross product is the dual of a volume-measuring transformation.",
+    },
+  },
+  {
+    slug: "cross-products-duality",
+    number: 11,
+    title: "Cross products in the light of linear transformations",
+    tagline: "Why the determinant trick works",
+    description:
+      "The cross product's determinant computation looks like a notational accident. It's not. Define a transformation from 3D to the number line — the signed volume of a parallelepiped — and its dual vector IS v × w. Geometry meets computation through duality.",
+    durationMin: 18,
+    difficulty: "Advanced",
+    componentKey: "cross-product-duality",
+    objectives: [
+      {
+        title: "Define the volume transformation",
+        detail:
+          "Fix v and w; map any input (x,y,z) to the signed volume of the parallelepiped it forms with v and w. This is a linear function from 3D to the number line.",
+      },
+      {
+        title: "Find its dual vector",
+        detail:
+          "By duality, every 3D→1D linear map corresponds to a unique vector p such that applying the map = dotting with p. For the volume transformation, p = v × w.",
+      },
+      {
+        title: "Connect the computation to the geometry",
+        detail:
+          "Computationally, the dual vector's coordinates come from the determinant-with-î-ĵ-k̂ trick. Geometrically, p must be perpendicular to v and w with length = parallelogram area. Same vector, two paths.",
+      },
+      {
+        title: "See why perpendicularity emerges",
+        detail:
+          "The volume = (area of v,w parallelogram) × (height of (x,y,z) perpendicular to that plane) = dot of (x,y,z) with a perpendicular vector of that area. That perpendicular vector is the dual — the cross product.",
+      },
+    ],
+    quiz: [
+      {
+        id: "cpd1",
+        prompt:
+          "What linear transformation's dual vector is v × w?",
+        options: [
+          "The one mapping (x,y,z) to the signed volume of the parallelepiped formed by (x,y,z), v, and w",
+          "The one mapping (x,y,z) to its own length",
+          "The one rotating (x,y,z) by 90°",
+          "The one projecting (x,y,z) onto v",
+        ],
+        answer: 0,
+        explanation:
+          "Fix v, w and map any (x,y,z) to the determinant of the 3×3 matrix with columns (x,y,z), v, w — i.e. the parallelepiped's signed volume. This is linear, so by duality it has a dual vector. That dual vector is v × w.",
+      },
+      {
+        id: "cpd2",
+        prompt:
+          "Why does the dual vector end up perpendicular to v and w?",
+        options: [
+          "Because duality always produces perpendicular vectors",
+          "Because the volume only depends on the component of (x,y,z) perpendicular to v and w's plane — so the dual points along that perpendicular direction",
+          "Because the determinant is always perpendicular",
+          "It's a coincidence",
+        ],
+        answer: 1,
+        explanation:
+          "The parallelepiped's volume = (base area) × (height perpendicular to the base). The height is exactly the component of (x,y,z) perpendicular to v and w's plane. So the transformation measures projection onto that perpendicular direction — which means its dual vector points that way.",
+      },
+      {
+        id: "cpd3",
+        prompt:
+          "Why does putting î, ĵ, k̂ in the first column of the matrix produce the right answer?",
+        options: [
+          "It's pure notation — there's no real reason",
+          "Computing the dual vector's coordinates means collecting the coefficients of x, y, z in the determinant — and labeling them with î, ĵ, k̂ packages those coefficients as a vector",
+          "Because î, ĵ, k̂ are numbers",
+          "It only works for unit vectors",
+        ],
+        answer: 1,
+        explanation:
+          "The dual vector p = (p₁, p₂, p₃) satisfies: dot(p, (x,y,z)) = the determinant. Expanding the determinant collects terms as p₁·x + p₂·y + p₃·z. Writing î, ĵ, k̂ in column 1 is just a way to label those coefficients as vector coordinates — packaging the algebra as a vector.",
+      },
+      {
+        id: "cpd4",
+        prompt:
+          "Both the computational trick and the geometric reasoning produce a dual vector. Why must they be the same vector?",
+        options: [
+          "They don't have to be — it's a lucky coincidence",
+          "Duality guarantees a UNIQUE dual vector for each linear transformation — so two approaches to the same transformation must yield the same vector",
+          "Because both involve determinants",
+          "Only when v and w are perpendicular",
+        ],
+        answer: 1,
+        explanation:
+          "Duality is a one-to-one correspondence: each linear transformation to the number line has exactly one dual vector. Since both the î-ĵ-k̂ computation and the geometric reasoning describe the dual of the SAME volume transformation, they must produce the same vector. That's why the trick works.",
+      },
+    ],
+    whatsNext: {
+      title: "Cramer's Rule, Geometrically",
+      blurb:
+        "A beautiful way to solve linear systems: read each coordinate of the input as a signed area (or volume) that scales uniformly with the transformation. Divide by det(A) and you've solved Ax = v.",
+    },
+  },
+  {
+    slug: "cramers-rule",
+    number: 12,
+    title: "Cramer's rule, explained geometrically",
+    tagline: "Solving systems with areas and volumes",
+    description:
+      "Cramer's rule solves Ax = v by a gorgeous trick: each coordinate of the input is a signed area (or volume) that the transformation scales by det(A). Swap one column for v, take the determinant, divide — and you have that coordinate. Not the fastest method, but arguably the prettiest.",
+    durationMin: 17,
+    difficulty: "Advanced",
+    componentKey: "cramers-rule",
+    objectives: [
+      {
+        title: "Read coordinates as signed areas",
+        detail:
+          "The y-coordinate of a vector = the signed area of the parallelogram it spans with î. The x-coordinate = the area it spans with ĵ. A roundabout way to describe coordinates — but it survives transformations.",
+      },
+      {
+        title: "See areas scale by det(A)",
+        detail:
+          "Under a transformation, every area scales by the same factor — the determinant. So the transformed parallelogram's area = det(A) × the original coordinate. Divide to recover the coordinate.",
+      },
+      {
+        title: "Apply Cramer's rule",
+        detail:
+          "To find coordinate i: replace column i of A with the output vector v, take that determinant, divide by det(A). Each coordinate is a ratio of two determinants.",
+      },
+      {
+        title: "Know its place",
+        detail:
+          "Cramer's rule is elegant but not efficient — Gaussian elimination is faster. Its value is conceptual: it ties determinants, areas, and linear systems into one picture.",
+      },
+    ],
+    quiz: [
+      {
+        id: "cr1",
+        prompt:
+          "Cramer's rule expresses the solution to A·x = v in terms of…",
+        options: [
+          "Inverse matrices only",
+          "Ratios of determinants — one det(A) in the denominator, and a swapped-column determinant per coordinate",
+          "Gaussian elimination",
+          "Dot products with the columns",
+        ],
+        answer: 1,
+        explanation:
+          "Each coordinate xᵢ = det(A with column i replaced by v) / det(A). The numerator is the scaled signed area/volume encoding that coordinate; dividing by det(A) undoes the scaling.",
+      },
+      {
+        id: "cr2",
+        prompt:
+          "Why does the y-coordinate of a vector equal the signed area of the parallelogram it spans with î?",
+        options: [
+          "Because î has length 1, so the parallelogram's area = base (1) × height (the y-coordinate)",
+          "It's a coincidence",
+          "Because î is perpendicular to everything",
+          "Because the determinant is always 1",
+        ],
+        answer: 0,
+        explanation:
+          "The parallelogram spanned by î = (1,0) and (x,y) has base 1 and perpendicular height |y|. Area = base × height = |y|. With orientation, the signed area is exactly y — a geometric encoding of the coordinate.",
+      },
+      {
+        id: "cr3",
+        prompt:
+          "Under a transformation A, the parallelogram encoding the y-coordinate becomes…",
+        options: [
+          "Unchanged",
+          "Scaled by det(A) — every area scales by the same factor",
+          "Scaled by |v|",
+          "Squished to zero",
+        ],
+        answer: 1,
+        explanation:
+          "The determinant is the universal area-scaling factor. So the transformed parallelogram has area = det(A) × (the original y-coordinate). That's the key: the coordinate is encoded in a quantity that scales predictably.",
+      },
+      {
+        id: "cr4",
+        prompt:
+          "When does Cramer's rule fail?",
+        options: [
+          "Never — it always works",
+          "When det(A) = 0 — you can't divide by zero (and the system has no unique solution anyway)",
+          "When A is square",
+          "When v is the zero vector",
+        ],
+        answer: 1,
+        explanation:
+          "Cramer's rule divides by det(A), so it needs det(A) ≠ 0. That's exactly the case where A has an inverse and the system has a unique solution. When det = 0, the transformation squished space and there's no unique input to recover.",
+      },
+    ],
+    whatsNext: {
+      title: "Change of Basis",
+      blurb:
+        "Every coordinate depends on a choice of basis. Next we'll see what it means to switch coordinate systems — and how matrices translate between the language of one basis and another.",
+    },
+  },
 ];
 
 /** Total number of lessons currently in the course. */

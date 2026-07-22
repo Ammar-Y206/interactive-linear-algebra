@@ -17,7 +17,7 @@ export interface SectionHeadingProps {
   description?: string;
   icon?: React.ReactNode;
   align?: "left" | "center";
-  accent?: "emerald" | "amber" | "rose" | "cyan";
+  accent?: "emerald" | "amber" | "rose" | "cyan" | "violet";
 }
 
 const accentText = {
@@ -25,6 +25,7 @@ const accentText = {
   amber: "text-amber-300",
   rose: "text-rose-300",
   cyan: "text-cyan-300",
+  violet: "text-violet-300",
 };
 
 export function SectionHeading({

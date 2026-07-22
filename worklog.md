@@ -596,3 +596,69 @@ Recommended next-phase priorities:
 - Add Lesson 10 ("Cross products") when transcript arrives. Natural
   reuse of the duality concept just introduced; build a CrossProductSim
   showing the perpendicular vector + the parallelogram area.
+
+---
+Task ID: 10
+Agent: main (Z.ai Code) — add Lessons 10, 11, 12
+Task: Add three lessons: "Cross products" (L10), "Cross products in the
+light of linear transformations" (L11), "Cramer's rule, explained
+geometrically" (L12). WITHOUT modifying Lessons 1–9.
+
+Work Log:
+- Appended all 3 lessons to `lib/course-config.ts` (slugs cross-products,
+  cross-products-duality, cramers-rule; componentKeys cross-product,
+  cross-product-duality, cramers-rule; numbers 10/11/12; Advanced).
+  12 quiz questions total.
+- Registered all 3 in `lessons/registry.tsx`.
+- Appended 9 glossary terms (Cross product 2D/3D, Right-hand rule CP,
+  Parallelogram, Parallelepiped, Dual vector, Cramer's rule,
+  Orthonormal transformation).
+- Created 3 new reusable simulations:
+  - `simulations/cross-product-sim.tsx` — 2D mode (parallelogram + signed
+    area = determinant) and 3D mode (perpendicular cross-product vector
+    with right-hand rule). Mode toggle.
+  - `simulations/cross-product-duality-sim.tsx` — shows the volume
+    transformation (parallelepiped of u, v, w) and its dual = v × w;
+    sliders for u; toggle to reveal the dual vector; live
+    volume = u · (v × w) readout.
+  - `simulations/cramers-rule-sim.tsx` — solves A·x=v via Cramer's rule;
+    draggable î', ĵ', v; shows the unit square → det(A) parallelogram,
+    the y-encoding parallelogram (î'+v), and the recovered x vector;
+    live det(A), det([v|ĵ']), det([î'|v]) readouts and the ratios.
+- Created 3 lesson pages (cross-product-lesson, cross-product-duality-
+  lesson, cramers-rule-lesson) each with confetti, concept checks, full
+  8-section structure.
+
+BUG FIXES (runtime errors caught during verification):
+- Extended `SummaryCard`, `SimulationContainer`, and `SectionHeading`
+  accent palettes to include "violet" (used by the duality lesson's
+  violet-themed sections/sims). Previously these components only
+  supported emerald/amber/rose/cyan, causing undefined-access crashes
+  when passed accent="violet". Now all three support 5 accents.
+
+Stage Summary:
+- All 3 lessons verified with agent-browser:
+  - L10 renders: h1 "Cross products", 52 SVGs, 1 concept check, sim
+    with 2D/3D toggle.
+  - L11 renders: h1 "Cross products in the light of linear
+    transformations", 51 SVGs, 1 concept check, duality sim with
+    reveal toggle.
+  - L12 renders: h1 "Cramer's rule, explained geometrically", 51 SVGs,
+    1 concept check, Cramer's rule sim.
+  - L11 quiz: A,B,B,B → 100% + "Flawless!" + confetti.
+  - Sidebar shows all 12 lessons.
+  - No errors. Lint clean. Dev server healthy.
+- Lessons 1–9 completely untouched. Architecture held: purely append-
+  only (config + registry + glossary + 6 new files + 3 accent-palette
+  extensions to shared components).
+- Course now has 12 lessons, 53 glossary terms, 7 achievements, 13
+  reusable simulations.
+
+Unresolved issues / risks:
+- The 15-min webDevReview cron (id 285428) still risks 429 rate-limits.
+  Recommend reducing to 60 min.
+
+Recommended next-phase priorities:
+- Add Lesson 13 ("Change of Basis") when transcript arrives. Natural
+  reuse of the TransformationSim — change of basis is just a
+  transformation between coordinate systems.

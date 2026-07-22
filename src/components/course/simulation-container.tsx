@@ -25,7 +25,7 @@ export interface SimulationContainerProps {
   controls?: React.ReactNode;
   className?: string;
   /** accent color used for the badge + left border glow */
-  accent?: "emerald" | "amber" | "rose" | "cyan";
+  accent?: "emerald" | "amber" | "rose" | "cyan" | "violet";
 }
 
 const accentMap = {
@@ -44,6 +44,10 @@ const accentMap = {
   cyan: {
     badge: "bg-cyan-500/15 text-cyan-300 border-cyan-500/30",
     bar: "from-cyan-500/60 to-cyan-400/0",
+  },
+  violet: {
+    badge: "bg-violet-500/15 text-violet-300 border-violet-500/30",
+    bar: "from-violet-500/60 to-violet-400/0",
   },
 };
 

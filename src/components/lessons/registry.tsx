@@ -22,6 +22,9 @@ import { DeterminantLesson } from "@/components/lessons/determinant-lesson";
 import { InverseLesson } from "@/components/lessons/inverse-lesson";
 import { NonsquareLesson } from "@/components/lessons/nonsquare-lesson";
 import { DotProductLesson } from "@/components/lessons/dot-product-lesson";
+import { CrossProductLesson } from "@/components/lessons/cross-product-lesson";
+import { CrossProductDualityLesson } from "@/components/lessons/cross-product-duality-lesson";
+import { CramersRuleLesson } from "@/components/lessons/cramers-rule-lesson";
 import { IntroductionPage } from "@/components/lessons/introduction";
 import { CourseCompletionPage } from "@/components/lessons/course-completion";
 import { getLessonBySlug } from "@/lib/course-config";
@@ -44,6 +47,9 @@ export const LESSON_REGISTRY: Record<
   inverse: InverseLesson,
   nonsquare: NonsquareLesson,
   "dot-product": DotProductLesson,
+  "cross-product": CrossProductLesson,
+  "cross-product-duality": CrossProductDualityLesson,
+  "cramers-rule": CramersRuleLesson,
 };
 
 /** Special (non-lesson) page renderers. */
