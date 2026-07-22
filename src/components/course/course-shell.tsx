@@ -14,7 +14,8 @@
  */
 
 import { useEffect, useState } from "react";
-import { Menu, Search, Command, GraduationCap, ChevronLeft, ChevronRight } from "lucide-react";
+import { Menu, Search, Command, GraduationCap, ChevronLeft, ChevronRight, PanelLeftClose, PanelLeftOpen } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -38,7 +39,38 @@ export interface CourseShellProps {
 export function CourseShell({ currentPage, onNavigate, children }: CourseShellProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  // read the persisted collapse preference once via lazy initializer (client-only)
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(() =>
+    typeof window !== "undefined" && localStorage.getItem("vectorflow-sidebar-collapsed") === "true"
+  );
   const readingProgress = useReadingProgress();
+
+  // toggle handler that also persists (avoids setState-in-effect)
+  function toggleSidebar() {
+    setSidebarCollapsed((c) => {
+      const next = !c;
+      try { localStorage.setItem("vectorflow-sidebar-collapsed", String(next)); } catch {}
+      return next;
+    });
+  }
+
+  // [ key toggles the desktop sidebar (ignored while typing or a dialog is open)
+  useEffect(() => {
+    function handler(e: KeyboardEvent) {
+      const target = e.target as HTMLElement;
+      const typing =
+        target?.tagName === "INPUT" ||
+        target?.tagName === "TEXTAREA" ||
+        target?.isContentEditable;
+      if (typing || searchOpen || mobileOpen) return;
+      if (e.key === "[") {
+        e.preventDefault();
+        toggleSidebar();
+      }
+    }
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [searchOpen, mobileOpen]);
 
   // ⌘K / Ctrl+K to open search
   useEffect(() => {
@@ -90,8 +122,13 @@ export function CourseShell({ currentPage, onNavigate, children }: CourseShellPr
 
   return (
     <div className="flex min-h-screen w-full bg-background">
-      {/* desktop sidebar */}
-      <aside className="fixed inset-y-0 left-0 z-30 hidden w-72 border-r border-border/60 lg:block">
+      {/* desktop sidebar — collapses to zero width when hidden */}
+      <aside
+        className={cn(
+          "fixed inset-y-0 left-0 z-30 hidden border-r border-border/60 transition-[width] duration-300 ease-in-out lg:block overflow-hidden",
+          sidebarCollapsed ? "w-0 border-r-0" : "w-72"
+        )}
+      >
         <Sidebar currentPage={currentPage} onNavigate={onNavigate} />
       </aside>
 
@@ -117,10 +154,22 @@ export function CourseShell({ currentPage, onNavigate, children }: CourseShellPr
         </SheetContent>
       </Sheet>
 
-      {/* main column */}
-      <div className="flex min-h-screen flex-1 flex-col lg:pl-72">
+      {/* main column — expands when sidebar is collapsed */}
+      <div className={cn("flex min-h-screen flex-1 flex-col transition-[padding] duration-300 ease-in-out", sidebarCollapsed ? "lg:pl-0" : "lg:pl-72")}>
         {/* top bar */}
         <header className="sticky top-0 z-20 flex h-14 items-center gap-2 border-b border-border/60 bg-background/70 px-4 pl-16 backdrop-blur-xl lg:pl-6">
+          {/* sidebar collapse toggle (desktop only) */}
+          <Button
+            variant="ghost"
+            size="icon"
+            className="hidden size-8 lg:flex"
+            onClick={toggleSidebar}
+            aria-label={sidebarCollapsed ? "Show sidebar" : "Hide sidebar"}
+            title={sidebarCollapsed ? "Show sidebar ([)" : "Hide sidebar ([)"}
+          >
+            {sidebarCollapsed ? <PanelLeftOpen className="size-4" /> : <PanelLeftClose className="size-4" />}
+          </Button>
+
           {/* prev/next arrows */}
           <div className="hidden items-center gap-1 sm:flex">
             <Button
@@ -218,6 +267,10 @@ export function CourseShell({ currentPage, onNavigate, children }: CourseShellPr
               <span className="hidden items-center gap-1.5 md:inline-flex">
                 <kbd className="rounded border border-border/60 bg-background/60 px-1.5 py-0.5 font-mono text-[10px]">⌘K</kbd>
                 search
+              </span>
+              <span className="hidden items-center gap-1.5 lg:inline-flex">
+                <kbd className="rounded border border-border/60 bg-background/60 px-1.5 py-0.5 font-mono text-[10px]">[</kbd>
+                toggle sidebar
               </span>
               <span className="font-mono">{TOTAL_LESSONS} lessons</span>
             </div>

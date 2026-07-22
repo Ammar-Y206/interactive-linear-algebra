@@ -52,3 +52,11 @@ prompt
 server.log
 # Skills directory
 /skills/
+# Vectorflow project-specific
+/dev.log
+/server.log
+/db/*.db
+/upload/
+/.zscripts/
+/skills/
+/mini-services/*/node_modules

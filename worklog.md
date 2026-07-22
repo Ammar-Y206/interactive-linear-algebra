@@ -901,3 +901,32 @@ content was deleted.
 
 Verified: lint clean, no duplicate-key console errors. Both
 Parallelepiped entries still display and navigate correctly.
+
+---
+Task ID: 15
+Agent: main (Z.ai Code) — sidebar collapse toggle + GitHub deploy prep
+Task: (1) Add a button to hide/show the desktop sidebar (user reported
+no toggle exists). (2) Prep the project for GitHub deployment.
+
+Sidebar collapse feature:
+- Added `sidebarCollapsed` state to CourseShell, initialized lazily
+  from localStorage (client-only, no setState-in-effect).
+- Added a toggle button in the top bar (desktop only) using
+  PanelLeftClose / PanelLeftOpen icons from lucide.
+- The sidebar <aside> animates width 72→0 with overflow-hidden; the
+  main column padding transitions 72→0. Smooth 300ms ease.
+- Keyboard shortcut: `[` toggles the sidebar (ignored while typing or
+  a dialog is open).
+- Preference persists across page loads via localStorage.
+- Footer hint updated to show the `[` shortcut.
+
+GitHub deployment prep:
+- Added project-specific entries to .gitignore: dev.log, server.log,
+  db/*.db, upload/, .zscripts/, skills/, mini-services/*/node_modules.
+- The project already had .git initialized and a basic .gitignore.
+- Deploy steps documented for the user: create GitHub repo, git add/
+  commit, git remote add origin, git push -u origin main. Noted the
+  Personal Access Token requirement (GitHub no longer accepts passwords).
+
+Verified: collapse button present, clicking hides the sidebar and swaps
+to a "show" button, no errors, lint clean.
