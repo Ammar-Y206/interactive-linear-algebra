@@ -16,6 +16,7 @@
 import { VectorsLesson } from "@/components/lessons/vectors-lesson";
 import { SpanLesson } from "@/components/lessons/span-lesson";
 import { TransformationsLesson } from "@/components/lessons/transformations-lesson";
+import { CompositionLesson } from "@/components/lessons/composition-lesson";
 import { IntroductionPage } from "@/components/lessons/introduction";
 import { CourseCompletionPage } from "@/components/lessons/course-completion";
 import { getLessonBySlug } from "@/lib/course-config";
@@ -32,6 +33,7 @@ export const LESSON_REGISTRY: Record<
   vectors: VectorsLesson,
   span: SpanLesson,
   transformations: TransformationsLesson,
+  composition: CompositionLesson,
 };
 
 /** Special (non-lesson) page renderers. */

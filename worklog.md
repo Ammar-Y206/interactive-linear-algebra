@@ -367,3 +367,59 @@ Recommended next-phase priorities:
   registry + glossary.
 - Consider adding a "determinant" mini-lesson or extending the squish
   detection in TransformationSim to preview the determinant concept.
+
+---
+Task ID: 6
+Agent: main (Z.ai Code) — add Lesson 4
+Task: Add Lesson 4 "Matrix multiplication as composition" to the
+existing platform WITHOUT modifying Lessons 1–3.
+
+Work Log:
+- Appended Lesson 4 to `lib/course-config.ts` (slug "matrix-
+  multiplication", componentKey "composition", number 4, "Core").
+  4 quiz questions; whatsNext teases 3D.
+- Registered `CompositionLesson` in `lessons/registry.tsx` under
+  componentKey "composition".
+- Appended 4 glossary terms (Composition, Matrix multiplication,
+  Non-commutative, Associative).
+- Created `simulations/composition-sim.tsx` — reusable composition
+  visualization. Two editable matrices M1 (right, first) and M2 (left,
+  second) with draggable î/ĵ; three overlaid grids (original faint →
+  after M1 medium → composed boldest); tracked input vector through
+  both stages (emerald → violet intermediate → rose final); live
+  three-matrix display (M2 · M1 = Product); 4 presets (Rotate→Shear,
+  Shear→Rotate, Swap order, Identity). Built standalone (morphing
+  multi-grid needs custom SVG, like TransformationSim).
+- Created `lessons/composition-lesson.tsx` with 8 sections: hero,
+  objectives, recap, composing (CompositionSim), right-to-left order,
+  column-by-column computation, non-commutativity + associativity,
+  quiz + summary + what's next. 2 inline ConceptChecks + confetti.
+
+Stage Summary:
+- Lesson 4 verified end-to-end with agent-browser:
+  - Page renders: h1 "Matrix multiplication as composition", 54 SVGs,
+    11 sections, 2 concept checks, CompositionSim present, 4 presets.
+  - Non-commutativity DEMONSTRATED: Rotate→Shear product = [1,-1|1,0]
+    with v→(1,2); Shear→Rotate product = [0,-1|1,1] with v→(-1,3).
+    Different products, different destinations — order matters, live.
+  - Quiz: answered B,B,B,B → 100% + "Flawless!" + confetti.
+  - Sidebar shows all 4 lessons (1 Vectors / 2 Span / 3 Transformations
+    / 4 Composition) with correct numbers & difficulties.
+  - Keyboard ← navigates Lesson 4 → Lesson 3.
+  - No errors. Lint clean. Dev server healthy.
+- Lessons 1–3 completely untouched. Architecture held: purely append-
+  only (config + registry + glossary + 2 new files).
+- Course now has 4 lessons, 26 glossary terms, 7 achievements, 5
+  reusable simulations.
+
+Unresolved issues / risks:
+- The 15-min webDevReview cron (id 285428) still risks 429 rate-limits
+  when running concurrently with active sessions. Recommend reducing to
+  60 min.
+
+Recommended next-phase priorities:
+- Add Lesson 5 ("Three Dimensions" / determinants) when transcript
+  arrives. Determinant would reuse TransformationSim (extend to show
+  area scaling) — natural next step.
+- The CompositionSim could be extended to show a 3rd matrix (ABC) to
+  make associativity tactile.

@@ -193,6 +193,38 @@ export const GLOSSARY: GlossaryEntry[] = [
     related: ["Linear transformation", "Matrix"],
     category: "Concept",
   },
+  {
+    term: "Composition",
+    definition:
+      "Applying one transformation then another. The overall effect is itself a linear transformation, whose matrix is the product of the two — read right-to-left, since the rightmost matrix acts first.",
+    lessonSlug: "matrix-multiplication",
+    related: ["Matrix multiplication", "Linear transformation"],
+    category: "Concept",
+  },
+  {
+    term: "Matrix multiplication",
+    definition:
+      "The matrix representing a composition. Column 1 of the product = left matrix × column 1 of the right matrix (where î ends up); column 2 = left × column 2 (where ĵ ends up).",
+    lessonSlug: "matrix-multiplication",
+    related: ["Composition", "Matrix", "Matrix-vector multiplication"],
+    category: "Operation",
+  },
+  {
+    term: "Non-commutative",
+    definition:
+      "Matrix multiplication is NOT commutative: A·B ≠ B·A in general. A shear-then-rotate usually differs from rotate-then-shear — you can see it by tracking î and ĵ.",
+    lessonSlug: "matrix-multiplication",
+    related: ["Matrix multiplication", "Composition"],
+    category: "Concept",
+  },
+  {
+    term: "Associative",
+    definition:
+      "Matrix multiplication IS associative: (A·B)·C = A·(B·C). Geometrically obvious — both sides mean 'apply C, then B, then A'. The grouping changes the computation, not the sequence.",
+    lessonSlug: "matrix-multiplication",
+    related: ["Matrix multiplication", "Composition"],
+    category: "Concept",
+  },
 ];
 
 /** Resolve the lesson number for a glossary entry. */

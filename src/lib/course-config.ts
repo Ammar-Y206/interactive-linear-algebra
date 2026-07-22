@@ -346,6 +346,102 @@ export const LESSONS: LessonMeta[] = [
         "If one transformation follows another, what single matrix does the job of both? Matrix multiplication is composition — and once you see it geometrically, the formula writes itself.",
     },
   },
+  {
+    slug: "matrix-multiplication",
+    number: 4,
+    title: "Matrix multiplication as composition",
+    tagline: "Two transforms, one matrix",
+    description:
+      "When one transformation follows another, the overall effect is a new transformation — a composition. Its matrix is the product, read right-to-left, and computed column by column. See why order matters and why associativity is obvious.",
+    durationMin: 20,
+    difficulty: "Core",
+    componentKey: "composition",
+    objectives: [
+      {
+        title: "Compose transformations",
+        detail:
+          "Understand that applying one transformation then another yields a single new transformation — the composition — with its own matrix.",
+      },
+      {
+        title: "Read products right-to-left",
+        detail:
+          "In M2·M1·v, M1 applies first, then M2. The order comes from function notation — you read the sequence from right to left.",
+      },
+      {
+        title: "Compute the product by columns",
+        detail:
+          "Column 1 of the product = left matrix × column 1 of the right matrix (where î ends up). Column 2 = left × column 2 (where ĵ ends up).",
+      },
+      {
+        title: "Feel non-commutativity & associativity",
+        detail:
+          "Order matters — a shear-then-rotate ≠ rotate-then-shear. But grouping doesn't: (AB)C = A(BC) because both mean 'apply C, then B, then A'.",
+      },
+    ],
+    quiz: [
+      {
+        id: "m1",
+        prompt:
+          "In the product M2 · M1 · v, which transformation applies FIRST?",
+        options: [
+          "M2, because it's written on the left",
+          "M1, because composition reads right-to-left",
+          "They apply simultaneously",
+          "It depends on the matrices",
+        ],
+        answer: 1,
+        explanation:
+          "Matrix multiplication mirrors function composition, and functions are written on the left of their input. So the rightmost matrix (M1) touches v first, then M2 acts on the result. Always read right-to-left.",
+      },
+      {
+        id: "m2",
+        prompt:
+          "To find the FIRST COLUMN of the product M2·M1, you compute…",
+        options: [
+          "M1's first column, unchanged",
+          "M2 times M1's first column",
+          "M1 times M2's first column",
+          "The sum of all columns",
+        ],
+        answer: 1,
+        explanation:
+          "î starts at (1,0). After M1 it lands on M1's first column. After M2 it lands on M2·(that column). So the first column of the product is M2 times the first column of M1 — that's where î ultimately ends up.",
+      },
+      {
+        id: "m3",
+        prompt:
+          "Is matrix multiplication commutative — does A·B = B·A?",
+        options: [
+          "Yes, always",
+          "No — order matters; a shear-then-rotate usually differs from rotate-then-shear",
+          "Only when both matrices are rotations",
+          "Only for 2×2 matrices",
+        ],
+        answer: 1,
+        explanation:
+          "Order matters. Applying a shear then a rotation generally produces a different final arrangement than rotating then shearing — you can see it by tracking where î and ĵ land in each case. Matrix multiplication is NOT commutative.",
+      },
+      {
+        id: "m4",
+        prompt:
+          "Why is matrix multiplication associative — (A·B)·C = A·(B·C)?",
+        options: [
+          "It's a tedious algebraic identity with no intuition",
+          "Both sides mean 'apply C, then B, then A' — the same sequence, just grouped differently",
+          "Because matrices are square",
+          "Because the identity matrix cancels out",
+        ],
+        answer: 1,
+        explanation:
+          "Associativity is obvious geometrically: both groupings describe applying C first, then B, then A. The parentheses only change how you chunk the computation, not the sequence of transformations. The geometric view turns a horrible algebra proof into a one-liner.",
+      },
+    ],
+    whatsNext: {
+      title: "Three Dimensions & Beyond",
+      blurb:
+        "We've lived in the plane long enough. Next we lift everything — vectors, matrices, transformations — into 3D space, where the same ideas scale up and new geometry emerges.",
+    },
+  },
 ];
 
 /** Total number of lessons currently in the course. */
