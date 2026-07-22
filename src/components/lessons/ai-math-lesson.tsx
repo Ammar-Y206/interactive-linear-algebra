@@ -2,20 +2,21 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Brain, Cpu, Network, Eye, MessageSquare, Car, ArrowRight, Layers3 } from "lucide-react";
+import { Brain, Cpu, Network, Eye, MessageSquare, Car, ArrowRight, Layers3, Sparkles, Zap } from "lucide-react";
 import { LessonLayout } from "@/components/course/lesson-layout";
 import { HeroSection } from "@/components/course/hero-section";
 import { LearningObjectives } from "@/components/course/learning-objectives";
 import { SectionHeading } from "@/components/course/section-heading";
 import { WhatsNext } from "@/components/course/whats-next";
 import { QuizCard } from "@/components/course/quiz-card";
-import { WhyThisMatters, BuildSomething, Connections, Motivation } from "@/components/course/curriculum-sections";
+import { ThoughtExperiment } from "@/components/course/thought-experiment";
+import { BuildSomething, Connections, Motivation } from "@/components/course/curriculum-sections";
 import { Confetti } from "@/components/course/confetti";
 import { getLessonBySlug, getNextLesson, getPrevLesson, LESSONS } from "@/lib/course-config";
 import { useProgressStore } from "@/lib/progress-store";
 
 export interface AiMathLessonProps { onNavigate: (slug: string) => void; }
-const TOC = [{ id: "network", label: "A neural network as matrices" }, { id: "gpu", label: "Why GPUs dominate AI" }, { id: "examples", label: "Where it shows up" }, { id: "connections", label: "Connections" }, { id: "quiz", label: "Check your understanding" }];
+const TOC = [{ id: "mystery", label: "How does a machine learn to see?" }, { id: "network", label: "A neural net, stripped down" }, { id: "gpu", label: "Why GPUs rule AI" }, { id: "connections", label: "Connections" }, { id: "quiz", label: "Check your understanding" }];
 
 export function AiMathLesson({ onNavigate }: AiMathLessonProps) {
   const lesson = getLessonBySlug("ai-math")!;
@@ -34,11 +35,26 @@ export function AiMathLesson({ onNavigate }: AiMathLessonProps) {
     <LessonLayout toc={TOC}>
       {celebrate && <Confetti count={100} durationMs={2600} />}
       <HeroSection lesson={lesson} />
+
+      {/* HOOK — the mystery of machine vision */}
+      <ThoughtExperiment
+        question="Show a toddler a cat once, and they'll recognize cats forever. It took humanity decades to teach a computer the same trick. What was the missing ingredient?"
+        tease="The breakthrough wasn't more data or faster chips — it was a mathematical insight: that learning itself could be reduced to a chain of matrix multiplications. Once you see it, it feels obvious."
+        accent="rose"
+      />
+
       <LearningObjectives objectives={lesson.objectives} />
 
+      {/* NETWORK — the reveal: a neural net is just matrix math */}
       <section id="network" className="scroll-mt-20 px-5 py-12 sm:px-8 lg:px-12">
         <div className="mx-auto max-w-4xl">
-          <SectionHeading eyebrow="The core idea" title="A neural network is matrix math" description="Strip away the mystique: each layer of a neural network multiplies the input by a weight matrix, adds a bias vector, and applies a simple nonlinearity. That's it. Training = nudging the matrix entries." accent="rose" icon={<Brain className="size-3.5" />} />
+          <SectionHeading
+            eyebrow="Strip away the mystique"
+            title="A neural network is matrix multiplication in a trench coat"
+            description="Strip a neural network to its essence and here's what's left: multiply the input by a matrix, add a vector, apply a simple nonlinearity. Repeat. That's it. The 'intelligence' lives entirely in the matrix entries."
+            accent="rose"
+            icon={<Brain className="size-3.5" />}
+          />
           <motion.div initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.45 }} className="rounded-2xl border border-border/50 bg-card/40 p-6">
             <div className="flex flex-wrap items-center justify-center gap-2 font-mono text-sm">
               <span className="rounded-lg bg-emerald-500/10 px-3 py-2 text-emerald-300">input vector</span>
@@ -50,37 +66,44 @@ export function AiMathLesson({ onNavigate }: AiMathLessonProps) {
               <ArrowRight className="size-4 text-muted-foreground" />
               <span className="rounded-lg bg-rose-500/10 px-3 py-2 text-rose-300">output vector</span>
             </div>
-            <p className="mt-4 text-center text-sm text-muted-foreground">Repeat for each layer. Millions of matrix multiplications per prediction. <strong>Training</strong> = adjust the matrix entries so outputs match targets — gradient descent on a vast landscape of matrix entries.</p>
+            <p className="mt-4 text-center text-sm text-muted-foreground">
+              Repeat for each layer. Millions of matrix multiplications per prediction. <strong>Training</strong> =
+              nudging the matrix entries so the output gets closer to the target — gradient descent on a vast landscape of numbers.
+            </p>
+          </motion.div>
+          <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="mt-5 rounded-2xl border border-rose-500/20 bg-rose-500/5 p-5">
+            <p className="text-sm leading-relaxed text-muted-foreground">
+              That&apos;s the whole secret. A &lsquo;deep&rsquo; network with a billion parameters is just a
+              billion numbers arranged into matrices. <strong>Learning</strong> means slowly adjusting those
+              numbers so the matrix chain transforms your input into the right output. No magic — just
+              matrix multiplication, repeated until the error shrinks.
+            </p>
           </motion.div>
         </div>
       </section>
 
+      {/* GPU — the hardware origin story */}
       <section id="gpu" className="scroll-mt-20 px-5 py-12 sm:px-8 lg:px-12">
         <div className="mx-auto max-w-4xl">
-          <SectionHeading eyebrow="The hardware story" title="Why GPUs dominate AI" description="GPUs were invented to render 3D graphics — which is also just matrix multiplication. When AI turned out to be matrix multiplication too, the same hardware excelled. The AI boom rode on gaming tech." accent="cyan" icon={<Cpu className="size-3.5" />} />
+          <SectionHeading
+            eyebrow="An accidental alliance"
+            title="Why the AI boom rode on gaming hardware"
+            description="GPUs were invented to render 3D graphics — which is also just matrix multiplication. When AI turned out to be matrix multiplication too, the same hardware excelled. NVIDIA didn't plan for AI; it stumbled into it."
+            accent="cyan"
+            icon={<Cpu className="size-3.5" />}
+          />
           <div className="grid gap-4 sm:grid-cols-2">
             <motion.div initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.45 }} className="rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-5">
               <div className="flex items-center gap-2.5"><div className="flex size-9 items-center justify-center rounded-xl bg-emerald-500/15 text-emerald-300"><Layers3 className="size-5" /></div><h3 className="font-semibold text-foreground">Graphics = matrices</h3></div>
-              <p className="mt-3 text-sm text-muted-foreground">A GPU renders a frame by multiplying vertex matrices by transformation matrices — rotate, project, light. Thousands of parallel matrix ops per frame.</p>
+              <p className="mt-3 text-sm text-muted-foreground">A GPU renders a frame by multiplying vertex matrices by transformation matrices — rotate, project, light. Thousands of parallel matrix ops per frame. Gamers paid for the hardware.</p>
             </motion.div>
             <motion.div initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.45, delay: 0.1 }} className="rounded-2xl border border-rose-500/20 bg-rose-500/5 p-5">
               <div className="flex items-center gap-2.5"><div className="flex size-9 items-center justify-center rounded-xl bg-rose-500/15 text-rose-300"><Brain className="size-5" /></div><h3 className="font-semibold text-foreground">AI = matrices</h3></div>
-              <p className="mt-3 text-sm text-muted-foreground">Training a neural net is the same operation — massive parallel matrix multiplication. Same hardware, same math, different application. That's why NVIDIA pivoted from games to AI.</p>
+              <p className="mt-3 text-sm text-muted-foreground">Training a neural net is the same operation — massive parallel matrix multiplication. Same hardware, same math, different application. That&apos;s why an AI lab looks like a gaming rig.</p>
             </motion.div>
           </div>
         </div>
       </section>
-
-      <WhyThisMatters
-        applications={[
-          { icon: <MessageSquare className="size-5" />, label: "Language models (GPT)", detail: "Attention layers are matrix products over token embeddings. Billions of parameters = a giant matrix." },
-          { icon: <Eye className="size-5" />, label: "Image generation (DALL-E, Midjourney)", detail: "Diffusion models denoise via matrix convolutions. Each step is linear algebra on the pixel grid." },
-          { icon: <Car className="size-5" />, label: "Self-driving (Tesla, Waymo)", detail: "Camera feeds → matrix convolutions → object detection → driving decisions, all in real time." },
-          { icon: <Network className="size-5" />, label: "Recommendation (TikTok, YouTube)", detail: "User and content embeddings are vectors; the 'for you' feed ranks them by dot-product similarity." },
-        ]}
-        industries={["Artificial Intelligence", "Autonomous Vehicles", "Healthcare Diagnostics", "Finance", "Content Platforms", "Drug Discovery"]}
-        products={["ChatGPT", "Midjourney", "Tesla Autopilot", "TikTok feed", "Google Photos search", "DeepMind AlphaFold"]}
-      />
 
       <BuildSomething
         items={[

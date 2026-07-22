@@ -797,3 +797,87 @@ Recommended next-phase priorities:
   Eigenvectors). Each just needs WhyThisMatters + Motivation added.
 - Consider adding bridge/recap lessons between acts (e.g. "Recap: The
   Atoms" after Lesson 9, "Recap: The Machinery" after Lesson 16).
+
+---
+Task ID: 13
+Agent: main (Z.ai Code) — preserve original teaching style
+Task: Analyze the original 16 lessons' pedagogical identity and rewrite the
+6 introductory lessons so they're indistinguishable from the originals —
+hooks instead of announcements, intuition before definitions, interaction
+over reading.
+
+Analysis of the original 16 lessons' teaching DNA:
+- Hooks open with a concrete, surprising scenario ("What even is a
+  vector?" via 3 perspectives), never an announcement.
+- Eyebrows are evocative ("The big idea", "Where geometry meets numbers").
+- Intuition before definitions: a picture or analogy precedes every formal
+  concept.
+- Show-don't-tell: every major concept has an interactive simulation
+  right after the heading.
+- ConceptChecks break up reading with a question.
+- Tone: conversational, second-person, wonder-driven.
+- Section rhythm: heading → short framing → interactive sim → concept
+  check → connecting note. No walls of text.
+
+Work Log:
+- Created `components/course/thought-experiment.tsx` — a reusable Hook
+  component: a bold surprising question + tease + optional interactive,
+  in a glowing card. Designed to open every lesson with curiosity, not
+  announcement.
+- Rewrote all 6 intro lessons to match the original DNA:
+
+  L1 Welcome: HOOK = "What if you could grab space itself — stretch it,
+  rotate it, squish it flat — and a computer could feel every move?"
+  + a LIVE draggable vector the learner interacts with immediately. Then
+  "This isn't a course about formulas" (intuition), then "See it. Move
+  it. Then name it." (the method as a 3-step rhythm).
+
+  L2 Why Learn: HOOK = "Every time your phone unlocks using your face,
+  thousands of matrix operations happen in milliseconds. Why are matrices
+  so good at understanding the world?" Then 9 apps as mini-mysteries
+  (show-don't-tell), with "nine disguises, one idea" closer.
+
+  L3 Real Life: HOOK = "You woke up, unlocked your phone with your face,
+  checked a feed... How many times did linear algebra touch your life
+  before breakfast?" Then a narrative timeline (7:00 AM → 8:00 AM) with
+  each app as a discovery, then "a photo is a matrix" + "a recommendation
+  is a distance" as concrete reveals.
+
+  L4 AI Math: HOOK = "Show a toddler a cat once, and they'll recognize
+  cats forever. It took humanity decades... What was the missing
+  ingredient?" Then the neural-net-as-matrix-math reveal as a story, then
+  the GPU/gaming origin story as an "accidental alliance."
+
+  L5 Math as Language: HOOK = "Suppose I asked you to tell a robot where
+  to find a treasure hidden in a desert. What is the smallest amount of
+  information you would need?" Then the three registers (picture/sentence/
+  symbol) as the answer to the treasure question, then notation as
+  compression with an English-vs-math side-by-side.
+
+  L6 Roadmap: HOOK = "You're about to set off into a territory most
+  people find confusing — not because it's hard, but because they were
+  never given a map." Then three acts as an adventure structure, then a
+  full clickable course map with "You're here. The trailhead."
+
+Stage Summary:
+- All 6 rewritten lessons verified: correct h1s, hooks present
+  ("Think about this" / mystery / treasure / adventure), interactive
+  elements, quizzes, no errors. Welcome lesson's draggable vector works.
+- Lint clean. Dev server healthy.
+- The intro lessons now match the original 16's pedagogical identity:
+  hooks before announcements, intuition before definitions, questions
+  before answers, interaction over reading. A learner should not be able
+  to distinguish them from the transcript-based lessons.
+
+Unresolved issues / risks:
+- Existing 16 content lessons still lack the new mandatory curriculum
+  sections (WhyThisMatters, BuildSomething, Connections, Motivation).
+  Retrofitting is a follow-up — but the 6 intro lessons now showcase
+  the full pattern (hook + curriculum sections + motivation).
+- The 15-min webDevReview cron still risks 429s.
+
+Recommended next-phase priorities:
+- Retrofit WhyThisMatters + Motivation into the high-traffic content
+  lessons (Vectors, Transformations, Determinant, Eigenvectors) so every
+  lesson answers "why does this exist?" and "after this you can
+  understand X."
