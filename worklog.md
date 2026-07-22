@@ -101,3 +101,74 @@ Recommended next-phase priorities (for the webDevReview cron or next lesson):
   as the learner scrolls a lesson (nice-to-have).
 - Consider persisting quiz answer state per lesson (currently resets on
   unmount) — low priority.
+
+---
+Task ID: 2
+Agent: main (Z.ai Code) — webDevReview round 1
+Task: QA the platform, then implement styling polish + new features
+(reading-progress, keyboard nav, confetti, concept checks, animations).
+
+Work Log:
+- Reviewed worklog.md; Lesson 1 (Vectors) was complete and stable.
+- QA via agent-browser: all 3 pages return 200, no console/runtime errors,
+  quiz scoring works, search empty-state works, prev/next disabled states
+  correct, mobile drawer works. No bugs found.
+- Implemented new reusable components:
+  - `course/use-reading-progress.ts` — scroll-progress hook (0..1).
+  - `course/page-order.ts` — linear page ordering for prev/next nav
+    (introduction → lessons → completion).
+  - `course/confetti.tsx` — dependency-free confetti burst (framer-motion).
+  - `course/concept-check.tsx` — inline reveal-answer callout for active
+    reading, with 4 accent variants.
+- Enhanced `course/course-shell.tsx`:
+  - Reading-progress bar (gradient) under the top bar on lesson pages.
+  - Reading-progress chip (% + mini bar) in the top bar.
+  - Prev/Next arrow buttons in the top bar.
+  - Keyboard navigation: ← / → arrows (ignored while typing or dialog open).
+  - Footer now shows keyboard-shortcut hints (← → navigate, ⌘K search).
+- Enhanced `course/quiz-card.tsx`:
+  - Confetti burst + toast on perfect score.
+  - Richer result banner: "Flawless!" + "Perfect" badge for 100%, color-
+    coded by score (amber/emerald/rose).
+- Enhanced `lessons/vectors-lesson.tsx`:
+  - 3 inline ConceptCheck callouts (coordinate walking, addition
+    commutativity, scaling by zero).
+  - Confetti burst on first-time lesson completion.
+- Styling polish in `globals.css`:
+  - New keyframes: `aurora-drift`, `text-shimmer`.
+  - New utilities: `.bg-aurora-animated` (slow-drifting hero bg),
+    `.text-shimmer` (gradient text sweep), `.card-lift` (hover translateY
+    + shadow).
+- Applied animated aurora to introduction hero + lesson HeroSection.
+- Applied text-shimmer to the introduction hero gradient text.
+- Applied card-lift + hover shadow to: pillars, course-map items,
+  SummaryCard, PerspectiveCard (7 lift targets on the lesson page).
+
+Stage Summary:
+- All new features verified end-to-end with agent-browser:
+  - 3 concept checks present, reveal/hide toggle works.
+  - Prev/next arrows in top bar; ← / → keyboard nav works
+    (introduction → vectors → back).
+  - Reading-progress bar + % chip appear on scroll (10% → 100%).
+  - Perfect quiz: 100% + "Flawless!" + "Perfect" badge + confetti toast.
+  - Animated aurora + 7 card-lift hover effects on lesson page.
+  - No console/runtime errors. Lint clean. Dev server healthy.
+- Lesson 1 untouched in behavior; only enriched. Architecture intact for
+  50+ lessons (new components are all reusable).
+
+Unresolved issues / risks:
+- The 15-min webDevReview cron job (id 285428) hit rate-limit 429 errors
+  on 5 of 6 runs because it competes with active sessions for API quota.
+  Recommendation: reduce frequency to every 60 min, or disable while the
+  user is actively working. (cron tool was unavailable this round, so the
+  schedule was not changed.)
+- Quiz answer state resets on page unmount (low priority — acceptable for
+  a learning platform).
+
+Recommended next-phase priorities:
+- Add Lesson 2 ("Span & Linear Combinations") when transcript arrives:
+  create `simulations/span-painter.tsx` reusing CoordinatePlane; append to
+  LESSONS + registry; do not modify Lesson 1.
+- Optionally add a "streak" tracker (consecutive days visited) and a
+  glossary/searchable term index once more lessons exist.
+- Tune cron frequency to avoid 429s.

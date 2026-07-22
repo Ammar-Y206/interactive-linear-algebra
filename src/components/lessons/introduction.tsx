@@ -76,7 +76,7 @@ export function IntroductionPage({ onNavigate }: IntroductionPageProps) {
     <div className="relative">
       {/* ===== HERO ===== */}
       <section className="relative overflow-hidden">
-        <div className="bg-aurora pointer-events-none absolute inset-0" />
+        <div className="bg-aurora-animated pointer-events-none absolute inset-0" />
         <div className="bg-grid bg-grid-fade pointer-events-none absolute inset-0 opacity-30" />
 
         <div className="relative mx-auto max-w-4xl px-5 py-20 text-center sm:px-8 sm:py-28 lg:py-32">
@@ -98,7 +98,7 @@ export function IntroductionPage({ onNavigate }: IntroductionPageProps) {
           >
             Learn linear algebra
             <br />
-            <span className="bg-gradient-to-r from-emerald-300 via-emerald-400 to-amber-300 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-emerald-300 via-amber-300 to-emerald-300 bg-clip-text text-transparent text-shimmer">
               by seeing it move.
             </span>
           </motion.h1>
@@ -154,7 +154,7 @@ export function IntroductionPage({ onNavigate }: IntroductionPageProps) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.45, delay: i * 0.1 }}
-                className="rounded-2xl border border-border/50 bg-card/40 p-6"
+                className="card-lift rounded-2xl border border-border/50 bg-card/40 p-6 hover:border-primary/40 hover:shadow-[0_8px_30px_oklch(0.7_0.16_165/8%)]"
               >
                 <div
                   className={`mb-4 flex size-11 items-center justify-center rounded-xl ${p.accent}`}
@@ -195,7 +195,7 @@ export function IntroductionPage({ onNavigate }: IntroductionPageProps) {
                     markStarted();
                     onNavigate(lesson.slug);
                   }}
-                  className="group flex w-full items-center gap-4 rounded-2xl border border-border/50 bg-card/40 p-4 text-left transition-all hover:border-primary/40 hover:bg-card/70 sm:p-5"
+                  className="card-lift group flex w-full items-center gap-4 rounded-2xl border border-border/50 bg-card/40 p-4 text-left hover:border-primary/40 hover:bg-card/70 hover:shadow-[0_8px_30px_oklch(0.7_0.16_165/8%)] sm:p-5"
                 >
                   <div className="flex size-12 shrink-0 items-center justify-center rounded-xl border border-border/60 bg-background/40 font-mono text-lg font-bold text-muted-foreground transition-colors group-hover:border-primary/40 group-hover:text-primary">
                     {lesson.number}

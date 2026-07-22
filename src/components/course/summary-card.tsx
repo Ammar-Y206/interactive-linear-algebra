@@ -45,7 +45,7 @@ export function SummaryCard({
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.4, delay: index * 0.06 }}
       className={cn(
-        "relative overflow-hidden rounded-2xl border border-border/50 bg-card/40 p-5 ring-1 ring-inset",
+        "card-lift relative overflow-hidden rounded-2xl border border-border/50 bg-card/40 p-5 ring-1 ring-inset hover:border-primary/40 hover:shadow-[0_8px_30px_oklch(0.7_0.16_165/8%)]",
         a.ring
       )}
     >

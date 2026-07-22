@@ -445,7 +445,7 @@ function PerspectiveCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.45, delay: index * 0.1 }}
-      className={`relative overflow-hidden rounded-2xl border border-border/50 bg-card/40 p-5 ring-1 ring-inset ${accents.ring}`}
+      className={`card-lift relative overflow-hidden rounded-2xl border border-border/50 bg-card/40 p-5 ring-1 ring-inset hover:shadow-[0_8px_30px_oklch(0.7_0.16_165/8%)] ${accents.ring}`}
     >
       <div className="flex items-center justify-between">
         <div className={`flex size-11 items-center justify-center rounded-xl ${accents.bg} ${accents.text}`}>

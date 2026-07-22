@@ -27,7 +27,7 @@ export function HeroSection({ lesson }: HeroSectionProps) {
   return (
     <section className="relative overflow-hidden">
       {/* aurora background */}
-      <div className="bg-aurora pointer-events-none absolute inset-0 opacity-80" />
+      <div className="bg-aurora-animated pointer-events-none absolute inset-0 opacity-80" />
       <div className="bg-grid bg-grid-fade pointer-events-none absolute inset-0 opacity-40" />
 
       <div className="relative px-5 py-14 sm:px-8 sm:py-20 lg:px-12">
