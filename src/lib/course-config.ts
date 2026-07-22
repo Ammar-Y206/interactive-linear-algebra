@@ -64,8 +64,374 @@ export interface LessonMeta {
  */
 export const LESSONS: LessonMeta[] = [
   {
-    slug: "vectors",
+    slug: "welcome",
     number: 1,
+    title: "Welcome to Linear Algebra",
+    tagline: "Your journey begins",
+    description:
+      "A warm welcome to the course. What linear algebra actually is (hint: it's not about crunching numbers), how this course teaches it — through movement, intuition, and play — and what you'll be able to do by the end.",
+    durationMin: 6,
+    difficulty: "Foundations",
+    componentKey: "welcome",
+    objectives: [
+      {
+        title: "Understand what linear algebra really is",
+        detail:
+          "Linear algebra is the study of vector spaces and the linear transformations between them — the math of space, movement, and data. Not memorizing formulas, but building a mental model.",
+      },
+      {
+        title: "Know how this course teaches",
+        detail:
+          "Every concept starts as a picture you can move. We build intuition first, then connect it to the numbers. You drag, watch, and discover — then we name what you found.",
+      },
+      {
+        title: "See the destination",
+        detail:
+          "By the end you'll understand vectors, transformations, matrices, determinants, eigenvalues, and abstract spaces — the foundation under graphics, AI, physics, and data science.",
+      },
+    ],
+    quiz: [
+      {
+        id: "w1",
+        prompt: "What is linear algebra fundamentally about?",
+        options: [
+          "Memorizing matrix multiplication formulas",
+          "Spaces, vectors, and the transformations that move them",
+          "Solving crossword puzzles with numbers",
+          "Only 2D geometry",
+        ],
+        answer: 1,
+        explanation:
+          "Linear algebra is the study of vector spaces and linear transformations — the mathematics of space, movement, and structure. The formulas are just the notation; the ideas are spatial and intuitive.",
+      },
+      {
+        id: "w2",
+        prompt: "How does this course approach teaching?",
+        options: [
+          "Lists of formulas to memorize, then drills",
+          "Intuition and visuals first — drag, watch, discover — then connect to the numbers",
+          "Reading textbook chapters aloud",
+          "Only worked examples, no concepts",
+        ],
+        answer: 1,
+        explanation:
+          "Every concept begins as something you can see and move. We build the mental model first, then attach the notation. The goal is understanding you can feel, not formulas you can forget.",
+      },
+    ],
+    whatsNext: {
+      title: "Why Learn Linear Algebra?",
+      blurb:
+        "Before we touch any math, let's answer the question every learner asks: why does this matter? Where is it used, who uses it, and what can you build with it?",
+    },
+  },
+  {
+    slug: "why-linear-algebra",
+    number: 2,
+    title: "Why Learn Linear Algebra?",
+    tagline: "The engine under modern technology",
+    description:
+      "Linear algebra is the quiet engine behind computer graphics, machine learning, robotics, physics, games, and data science. This lesson shows you exactly where it lives in the world — and why it's the single most useful math course you can take.",
+    durationMin: 9,
+    difficulty: "Foundations",
+    componentKey: "why-linear-algebra",
+    objectives: [
+      {
+        title: "See where linear algebra is used",
+        detail:
+          "From the 3D graphics in every video game and film, to the neural networks in every AI, to the physics engines simulating reality — linear algebra is the language they all share.",
+      },
+      {
+        title: "Know which careers depend on it",
+        detail:
+          "ML engineers, game developers, robotics engineers, quantitative analysts, physicists, data scientists, computer vision researchers — all use linear algebra daily.",
+      },
+      {
+        title: "Understand why it's foundational",
+        detail:
+          "It's the bridge between continuous geometry and discrete computation. Once you can describe space with numbers, a computer can manipulate it — and that's what modern technology does.",
+      },
+    ],
+    quiz: [
+      {
+        id: "wla1",
+        prompt: "Which of these fields does NOT heavily use linear algebra?",
+        options: [
+          "Computer graphics and game development",
+          "Machine learning and AI",
+          "Robotics and physics simulation",
+          "Writing poetry and prose fiction",
+        ],
+        answer: 3,
+        explanation:
+          "Graphics, AI, robotics, physics, data science, finance — all run on linear algebra. Creative writing is the odd one out. If a field involves data, space, or computation, linear algebra is probably underneath it.",
+      },
+      {
+        id: "wla2",
+        prompt: "Why is linear algebra considered 'foundational'?",
+        options: [
+          "It's the easiest math",
+          "It bridges continuous geometry with discrete computation — letting computers manipulate space and data",
+          "It's required by law",
+          "It was discovered first historically",
+        ],
+        answer: 1,
+        explanation:
+          "Linear algebra turns geometric intuition (space, movement) into numerical computation (matrices, vectors). That bridge is what lets a computer render a 3D world, train a neural net, or guide a robot — all by crunching numbers that represent space.",
+      },
+    ],
+    whatsNext: {
+      title: "Linear Algebra in Real Life",
+      blurb:
+        "Let's get concrete. Where exactly does linear algebra show up in the products and systems you use every day? From your phone's camera to your social media feed.",
+    },
+  },
+  {
+    slug: "linear-algebra-real-life",
+    number: 3,
+    title: "Linear Algebra in Real Life",
+    tagline: "The invisible math in your daily life",
+    description:
+      "Every photo you take, every video you stream, every recommendation you get, every GPS route you follow — linear algebra is working behind the scenes. This lesson makes the invisible visible.",
+    durationMin: 10,
+    difficulty: "Foundations",
+    componentKey: "real-life",
+    objectives: [
+      {
+        title: "Spot linear algebra in everyday tech",
+        detail:
+          "Image compression (JPEG), search engines (PageRank), recommendations (Netflix/Spotify), face detection, GPS, video game rendering — all built on vectors and matrices.",
+      },
+      {
+        title: "Understand image processing",
+        detail:
+          "An image is a grid of numbers (a matrix). Every filter, crop, rotate, or compression is a matrix operation. Your phone's camera does linear algebra billions of times per second.",
+      },
+      {
+        title: "See recommendations as vectors",
+        detail:
+          "Netflix represents every show and every user as a vector in a high-dimensional space. 'You might like this' means 'your vector is near this show's vector.' Linear algebra measures that distance.",
+      },
+    ],
+    quiz: [
+      {
+        id: "rl1",
+        prompt: "A digital image is, mathematically, a…",
+        options: [
+          "Random collection of pixels",
+          "Matrix — a grid of numbers representing color intensities",
+          "A single very large number",
+          "An equation",
+        ],
+        answer: 1,
+        explanation:
+          "Every digital image is a matrix: each cell holds a number (or three, for RGB) representing a pixel's color. Rotating, scaling, filtering, or compressing an image is literally matrix math — which is why your phone's image processing is linear algebra at gigahertz speed.",
+      },
+      {
+        id: "rl2",
+        prompt: "How does a recommendation system (like Netflix) use linear algebra?",
+        options: [
+          "It guesses randomly",
+          "It represents users and items as vectors, and recommends items 'near' your vector in that space",
+          "It only counts clicks",
+          "It uses calculus, not linear algebra",
+        ],
+        answer: 1,
+        explanation:
+          "Each user and each show becomes a vector in a shared high-dimensional 'taste space.' A recommendation = 'this show's vector is close to yours.' Measuring closeness, finding nearby vectors, and projecting into lower dimensions — all linear algebra.",
+      },
+    ],
+    whatsNext: {
+      title: "The Hidden Math Behind AI",
+      blurb:
+        "Modern AI is, at its computational core, mountains of matrix multiplication. Let's peek inside a neural network to see exactly where the linear algebra lives.",
+    },
+  },
+  {
+    slug: "ai-math",
+    number: 4,
+    title: "The Hidden Math Behind AI",
+    tagline: "Inside the matrix engine of machine learning",
+    description:
+      "A neural network is, stripped to its essence, a chain of matrix multiplications interleaved with simple nonlinearities. This lesson shows you exactly where the linear algebra lives inside modern AI — no prior ML knowledge needed.",
+    durationMin: 11,
+    difficulty: "Foundations",
+    componentKey: "ai-math",
+    objectives: [
+      {
+        title: "See a neural network as matrix math",
+        detail:
+          "Each layer of a neural network multiplies the input by a weight matrix and adds a bias vector. 'Training' means adjusting those matrix entries so the output matches the target. The entire computation is linear algebra.",
+      },
+      {
+        title: "Understand why GPUs excel at AI",
+        detail:
+          "GPUs were built to multiply matrices (for graphics). AI training is also mostly matrix multiplication — so the same hardware that renders games also trains neural networks. That's why the AI boom happened on GPUs.",
+      },
+      {
+        title: "Connect to the course ahead",
+        detail:
+          "Vectors (Lesson 7), matrix multiplication (Lesson 10), and eigenvectors (Lesson 20) are the exact tools that power image recognition, language models, and recommendation systems.",
+      },
+    ],
+    quiz: [
+      {
+        id: "ai1",
+        prompt: "At its computational core, what does a neural network layer do?",
+        options: [
+          "Solves a crossword puzzle",
+          "Multiplies the input by a weight matrix and adds a bias vector",
+          "Draws a picture",
+          "Only adds random noise",
+        ],
+        answer: 1,
+        explanation:
+          "Each layer computes output = weight_matrix × input + bias (then applies a simple nonlinearity). That's matrix-vector multiplication and vector addition — pure linear algebra, repeated millions of times. Training adjusts the matrix entries to improve the output.",
+      },
+      {
+        id: "ai2",
+        prompt: "Why do GPUs (originally built for video games) excel at training AI?",
+        options: [
+          "They have more memory",
+          "Both graphics and AI are dominated by matrix multiplication — the exact operation GPUs were designed to parallelize",
+          "They're cheaper",
+          "AI doesn't actually use GPUs",
+        ],
+        answer: 1,
+        explanation:
+          "GPUs were built to multiply many matrices in parallel (to render 3D graphics frame-by-frame). Neural network training is ALSO dominated by matrix multiplication. Same fundamental operation — so the same hardware accelerates both. This overlap is why the AI revolution rode on gaming hardware.",
+      },
+    ],
+    whatsNext: {
+      title: "Mathematics as a Language",
+      blurb:
+        "Before we build the vocabulary of vectors and matrices, let's appreciate what math IS: a precise language for describing patterns — and why linear algebra is one of its most elegant dialects.",
+    },
+  },
+  {
+    slug: "math-as-language",
+    number: 5,
+    title: "Mathematics as a Language",
+    tagline: "The grammar of space and structure",
+    description:
+      "Mathematics is a language — one honed over millennia to describe patterns precisely. Linear algebra is its dialect for space, movement, and linear relationships. This lesson frames how to 'read' math so the symbols become ideas, not noise.",
+    durationMin: 8,
+    difficulty: "Foundations",
+    componentKey: "math-language",
+    objectives: [
+      {
+        title: "Read math as language, not incantation",
+        detail:
+          "Every symbol is a word with a meaning. 'v = (3, 2)' is a sentence: 'a vector named v whose coordinates are 3 and 2.' Learn to hear the meaning, not just see the symbols.",
+      },
+      {
+        title: "Appreciate notation as compression",
+        detail:
+          "A single matrix equation can capture a system that would take paragraphs in English. Notation isn't there to intimidate you — it's there to compress rich ideas into a form you can manipulate.",
+      },
+      {
+        title: "Connect words, pictures, and symbols",
+        detail:
+          "Every concept in this course lives in three registers: a picture (geometry), a sentence (intuition), and a symbol (algebra). Fluency = moving freely between all three.",
+      },
+    ],
+    quiz: [
+      {
+        id: "ml1",
+        prompt: "When you see 'v = (3, 2)', what's the best way to read it?",
+        options: [
+          "As random symbols to memorize",
+          "As a sentence: 'a vector named v, with coordinates 3 and 2'",
+          "As a password",
+          "As an equation you must solve",
+        ],
+        answer: 1,
+        explanation:
+          "Math is language. Every symbol is a word with meaning. 'v = (3, 2)' is a sentence describing a specific vector. When you read math as language — hearing the meaning behind the symbols — it stops being intimidating and starts being expressive.",
+      },
+      {
+        id: "ml2",
+        prompt: "Why does math use compact notation like matrices and subscripts?",
+        options: [
+          "To intimidate beginners",
+          "To compress rich ideas into a manipulable form — one equation can capture what would take a paragraph in English",
+          "Because paper is expensive",
+          "It's purely historical",
+        ],
+        answer: 1,
+        explanation:
+          "Notation is compression. A matrix equation can express a system of relationships that would take paragraphs to describe in words. The compactness lets you manipulate complex ideas as single objects — which is exactly why linear algebra is so powerful.",
+      },
+    ],
+    whatsNext: {
+      title: "The Roadmap of This Course",
+      blurb:
+        "Here's the map of where we're going: from the atom (vectors) through the molecules (transformations, matrices) to the machines (eigenvalues, abstract spaces). Let's orient before we travel.",
+    },
+  },
+  {
+    slug: "roadmap",
+    number: 6,
+    title: "The Roadmap of This Course",
+    tagline: "The map before the journey",
+    description:
+      "A bird's-eye view of the whole course: the three acts (foundations, transformations, advanced), how each lesson connects to the next, and where you are in the journey. Knowing the map makes every step make sense.",
+    durationMin: 7,
+    difficulty: "Foundations",
+    componentKey: "roadmap",
+    objectives: [
+      {
+        title: "See the three acts of the course",
+        detail:
+          "Act I (Lessons 7–9): the atoms — vectors, span, basis. Act II (Lessons 10–16): the machinery — transformations, matrices, determinants, inverses. Act III (Lessons 17–22): the mastery — eigenvalues, abstract spaces.",
+      },
+      {
+        title: "Understand how lessons connect",
+        detail:
+          "Each lesson builds on the last. Vectors → linear combinations → transformations → matrices → composition → determinant → inverses → eigenvalues → abstract spaces. Skip none; each is a prerequisite for the next.",
+      },
+      {
+        title: "Know where you are",
+        detail:
+          "The sidebar's progress ring and the course map always show your position. Every lesson ends with a 'What's Next' preview so you always see the road ahead.",
+      },
+    ],
+    quiz: [
+      {
+        id: "rm1",
+        prompt: "The course is structured in three acts. What is Act I about?",
+        options: [
+          "Advanced abstract spaces",
+          "The atoms: vectors, span, and basis",
+          "Matrix multiplication only",
+          "History of mathematics",
+        ],
+        answer: 1,
+        explanation:
+          "Act I (the first content lessons) builds the atoms: what vectors are, how they combine, what they span, and the idea of a basis. Everything in Acts II and III is built from these foundations.",
+      },
+      {
+        id: "rm2",
+        prompt: "Why is it important not to skip lessons?",
+        options: [
+          "It's not — they're independent",
+          "Each lesson is a prerequisite for the next — the ideas build cumulatively",
+          "Only the quizzes matter",
+          "Skipping saves time with no cost",
+        ],
+        answer: 1,
+        explanation:
+          "Linear algebra is cumulative: vectors → combinations → transformations → matrices → composition → determinants → inverses → eigenvalues → abstract spaces. Each idea assumes the last. Skip one and the next stops making sense. The course is designed as a single arc.",
+      },
+    ],
+    whatsNext: {
+      title: "Vectors",
+      blurb:
+        "The journey begins. The fundamental, root-of-it-all building block of linear algebra is the vector. Let's meet it — in three different ways.",
+    },
+  },
+  {
+    slug: "vectors",
+    number: 7,
     title: "Vectors",
     tagline: "The atom of linear algebra",
     description:
@@ -156,7 +522,7 @@ export const LESSONS: LessonMeta[] = [
   },
   {
     slug: "span-linear-combinations",
-    number: 2,
+    number: 8,
     title: "Linear combinations, span & basis",
     tagline: "Two vectors, infinite possibilities",
     description:
@@ -252,7 +618,7 @@ export const LESSONS: LessonMeta[] = [
   },
   {
     slug: "linear-transformations",
-    number: 3,
+    number: 9,
     title: "Linear transformations & matrices",
     tagline: "When space itself moves",
     description:
@@ -348,7 +714,7 @@ export const LESSONS: LessonMeta[] = [
   },
   {
     slug: "matrix-multiplication",
-    number: 4,
+    number: 10,
     title: "Matrix multiplication as composition",
     tagline: "Two transforms, one matrix",
     description:
@@ -444,7 +810,7 @@ export const LESSONS: LessonMeta[] = [
   },
   {
     slug: "3d-transformations",
-    number: 5,
+    number: 11,
     title: "Three-dimensional linear transformations",
     tagline: "Lifting out of flatland",
     description:
@@ -535,7 +901,7 @@ export const LESSONS: LessonMeta[] = [
   },
   {
     slug: "determinant",
-    number: 6,
+    number: 12,
     title: "The determinant",
     tagline: "How much a transformation stretches space",
     description:
@@ -631,7 +997,7 @@ export const LESSONS: LessonMeta[] = [
   },
   {
     slug: "inverse-matrices",
-    number: 7,
+    number: 13,
     title: "Inverse matrices, column space & null space",
     tagline: "Playing the transformation in reverse",
     description:
@@ -727,7 +1093,7 @@ export const LESSONS: LessonMeta[] = [
   },
   {
     slug: "nonsquare-matrices",
-    number: 8,
+    number: 14,
     title: "Nonsquare matrices: transformations between dimensions",
     tagline: "Mapping across dimensions",
     description:
@@ -823,7 +1189,7 @@ export const LESSONS: LessonMeta[] = [
   },
   {
     slug: "dot-products",
-    number: 9,
+    number: 15,
     title: "Dot products & duality",
     tagline: "Why projecting is the same as multiplying",
     description:
@@ -914,7 +1280,7 @@ export const LESSONS: LessonMeta[] = [
   },
   {
     slug: "cross-products",
-    number: 10,
+    number: 16,
     title: "Cross products",
     tagline: "Area, orientation, and the perpendicular vector",
     description:
@@ -1010,7 +1376,7 @@ export const LESSONS: LessonMeta[] = [
   },
   {
     slug: "cross-products-duality",
-    number: 11,
+    number: 17,
     title: "Cross products in the light of linear transformations",
     tagline: "Why the determinant trick works",
     description:
@@ -1106,7 +1472,7 @@ export const LESSONS: LessonMeta[] = [
   },
   {
     slug: "cramers-rule",
-    number: 12,
+    number: 18,
     title: "Cramer's rule, explained geometrically",
     tagline: "Solving systems with areas and volumes",
     description:
@@ -1202,7 +1568,7 @@ export const LESSONS: LessonMeta[] = [
   },
   {
     slug: "change-of-basis",
-    number: 13,
+    number: 19,
     title: "Change of basis",
     tagline: "Speaking different coordinate languages",
     description:
@@ -1293,7 +1659,7 @@ export const LESSONS: LessonMeta[] = [
   },
   {
     slug: "eigenvectors",
-    number: 14,
+    number: 20,
     title: "Eigenvectors and eigenvalues",
     tagline: "Vectors that stay on their own span",
     description:
@@ -1389,7 +1755,7 @@ export const LESSONS: LessonMeta[] = [
   },
   {
     slug: "eigenvalue-trick",
-    number: 15,
+    number: 21,
     title: "A quick trick for computing eigenvalues",
     tagline: "Mean and product, straight off the matrix",
     description:
@@ -1485,7 +1851,7 @@ export const LESSONS: LessonMeta[] = [
   },
   {
     slug: "abstract-vector-spaces",
-    number: 16,
+    number: 22,
     title: "Abstract vector spaces",
     tagline: "Functions are vectors too",
     description:

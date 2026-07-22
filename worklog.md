@@ -733,3 +733,67 @@ Recommended next-phase priorities:
   that surfaces random quiz questions across lessons; add a print/
   export progress certificate; or extend with supplementary topics
   (SVD, least squares, PCA) using the same architecture.
+
+---
+Task ID: 12
+Agent: main (Z.ai Code) — curriculum-design expansion
+Task: Act as curriculum designer. Insert 6 introductory lessons before
+the existing content, renumber everything, and add the new mandatory
+curriculum sections (Why This Matters, Build Something, Connections,
+Motivation).
+
+Work Log:
+- Renumbered existing 16 lessons +6 (vectors: 1→7, ..., abstract: 16→22)
+  via reverse-order sed to avoid collisions. Slugs unchanged (immutable).
+- Inserted 6 introductory lessons at the start of the LESSONS array:
+  L1 Welcome to Linear Algebra, L2 Why Learn Linear Algebra?, L3 Linear
+  Algebra in Real Life, L4 The Hidden Math Behind AI, L5 Mathematics as
+  a Language, L6 The Roadmap of This Course. Each has objectives + a
+  2-question quiz + whatsNext chaining to the next.
+- Registered all 6 in `lessons/registry.tsx` (componentKeys: welcome,
+  why-linear-algebra, real-life, ai-math, math-language, roadmap).
+- Created `components/course/curriculum-sections.tsx` — 4 reusable
+  curriculum-design section components:
+  - WhyThisMatters: applications grid + industries + famous products
+  - BuildSomething: "what you can make" cards
+  - Connections: prev/next lesson links with navigation
+  - Motivation: the "after this, you can understand X" closer
+  All accept the 5-accent palette (emerald/amber/rose/cyan/violet).
+- Created 6 intro lesson pages, each using the new curriculum sections:
+  - welcome-lesson.tsx: what LA is, how the course teaches, the destination
+  - why-linear-algebra-lesson.tsx: WhyThisMatters (9 apps) + BuildSomething
+    (4 projects) + Connections
+  - real-life-lesson.tsx: WhyThisMatters (8 everyday apps) + BuildSomething
+  - ai-math-lesson.tsx: neural-net-as-matrices + GPU story + WhyThisMatters
+  - math-language-lesson.tsx: math as language, 3 registers, notation as
+    compression
+  - roadmap-lesson.tsx: 3 acts (atoms/machinery/mastery) + full course map
+- Fixed a `"use client">` typo (should be `;`) in math-language-lesson.
+- Aliased lucide `Image` → `ImageIcon` in real-life-lesson to avoid a
+  jsx-a11y false-positive warning.
+
+Stage Summary:
+- Verified with agent-browser:
+  - All 6 intro lessons render with correct h1s (Welcome, Why Learn, Real
+    Life, AI Math, Math as Language, Roadmap).
+  - Sidebar shows all 22 lessons; intro lessons 1-6 first, Vectors now 7.
+  - Welcome quiz + next-navigation works (→ Why Learn Linear Algebra).
+  - No errors. Lint clean. Dev server healthy.
+- The course now has a proper motivational on-ramp before the math
+  begins: every learner sees WHY (applications, careers, products), WHAT
+  they can build, and WHERE each lesson fits — before touching a vector.
+- Course total: 22 lessons, 67+ glossary terms, 7 achievements, 17 sims,
+  + 4 reusable curriculum-section components.
+
+Unresolved issues / risks:
+- Existing 16 content lessons do NOT yet have the new mandatory sections
+  (WhyThisMatters, BuildSomething, Connections, Motivation). The intro
+  lessons showcase the pattern; retrofitting all 16 is a follow-up.
+- The 15-min webDevReview cron still risks 429s.
+
+Recommended next-phase priorities:
+- Retrofit the new curriculum sections into existing content lessons
+  (start with the high-traffic ones: Vectors, Transformations, Determinant,
+  Eigenvectors). Each just needs WhyThisMatters + Motivation added.
+- Consider adding bridge/recap lessons between acts (e.g. "Recap: The
+  Atoms" after Lesson 9, "Recap: The Machinery" after Lesson 16).

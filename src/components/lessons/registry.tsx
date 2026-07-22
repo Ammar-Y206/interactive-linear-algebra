@@ -29,6 +29,12 @@ import { ChangeOfBasisLesson } from "@/components/lessons/change-of-basis-lesson
 import { EigenvectorsLesson } from "@/components/lessons/eigenvectors-lesson";
 import { EigenvalueTrickLesson } from "@/components/lessons/eigenvalue-trick-lesson";
 import { AbstractVectorSpacesLesson } from "@/components/lessons/abstract-vector-spaces-lesson";
+import { WelcomeLesson } from "@/components/lessons/welcome-lesson";
+import { WhyLinearAlgebraLesson } from "@/components/lessons/why-linear-algebra-lesson";
+import { RealLifeLesson } from "@/components/lessons/real-life-lesson";
+import { AiMathLesson } from "@/components/lessons/ai-math-lesson";
+import { MathLanguageLesson } from "@/components/lessons/math-language-lesson";
+import { RoadmapLesson } from "@/components/lessons/roadmap-lesson";
 import { IntroductionPage } from "@/components/lessons/introduction";
 import { CourseCompletionPage } from "@/components/lessons/course-completion";
 import { getLessonBySlug } from "@/lib/course-config";
@@ -58,6 +64,12 @@ export const LESSON_REGISTRY: Record<
   eigenvectors: EigenvectorsLesson,
   "eigenvalue-trick": EigenvalueTrickLesson,
   "abstract-vector-spaces": AbstractVectorSpacesLesson,
+  welcome: WelcomeLesson,
+  "why-linear-algebra": WhyLinearAlgebraLesson,
+  "real-life": RealLifeLesson,
+  "ai-math": AiMathLesson,
+  "math-language": MathLanguageLesson,
+  roadmap: RoadmapLesson,
 };
 
 /** Special (non-lesson) page renderers. */
