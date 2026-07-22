@@ -56,6 +56,18 @@ export const ACHIEVEMENTS: Achievement[] = [
     description: "Finish every lesson in the course.",
     icon: "Trophy",
   },
+  {
+    id: "streak-3",
+    title: "On a Roll",
+    description: "Practice 3 days in a row.",
+    icon: "Flame",
+  },
+  {
+    id: "streak-7",
+    title: "Consistency King",
+    description: "Practice 7 days in a row.",
+    icon: "Flame",
+  },
 ];
 
 interface ProgressState {
@@ -69,9 +81,16 @@ interface ProgressState {
   lastPage: string;
   /** whether the user has ever opened the course */
   hasStarted: boolean;
+  /** ISO date strings (yyyy-mm-dd) of days the learner visited */
+  visitDays: string[];
+  /** current consecutive-day streak */
+  streak: number;
+  /** longest streak ever reached */
+  bestStreak: number;
 
   // actions
   markStarted: () => void;
+  recordVisit: () => void;
   completeLesson: (slug: string) => void;
   setQuizScore: (slug: string, score: number) => void;
   unlockAchievement: (id: string) => boolean;
@@ -93,12 +112,37 @@ export const useProgressStore = create<ProgressState>()(
       achievements: [],
       lastPage: "introduction",
       hasStarted: false,
+      visitDays: [],
+      streak: 0,
+      bestStreak: 0,
 
       markStarted: () => {
         if (!get().hasStarted) {
           set({ hasStarted: true });
           get().unlockAchievement("first-steps");
         }
+        get().recordVisit();
+      },
+
+      recordVisit: () => {
+        const today = new Date().toISOString().slice(0, 10);
+        const state = get();
+        if (state.visitDays.includes(today)) return; // already counted today
+
+        const yesterday = new Date(Date.now() - 86400000)
+          .toISOString()
+          .slice(0, 10);
+        const newStreak = state.visitDays.includes(yesterday)
+          ? state.streak + 1
+          : 1;
+        const newBest = Math.max(state.bestStreak, newStreak);
+        set({
+          visitDays: [...state.visitDays, today],
+          streak: newStreak,
+          bestStreak: newBest,
+        });
+        if (newStreak >= 3) get().unlockAchievement("streak-3");
+        if (newStreak >= 7) get().unlockAchievement("streak-7");
       },
 
       completeLesson: (slug) => {
@@ -145,6 +189,9 @@ export const useProgressStore = create<ProgressState>()(
           achievements: [],
           lastPage: "introduction",
           hasStarted: false,
+          visitDays: [],
+          streak: 0,
+          bestStreak: 0,
         }),
 
       isComplete: (slug) => get().completed.includes(slug),

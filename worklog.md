@@ -172,3 +172,59 @@ Recommended next-phase priorities:
 - Optionally add a "streak" tracker (consecutive days visited) and a
   glossary/searchable term index once more lessons exist.
 - Tune cron frequency to avoid 429s.
+
+---
+Task ID: 3
+Agent: main (Z.ai Code) — webDevReview round 2
+Task: QA, then implement streak tracker + searchable glossary (the
+next-phase priorities recommended in the previous worklog entry).
+
+Work Log:
+- QA: all pages 200, no console/runtime errors, lint clean. Platform stable.
+- Extended `lib/progress-store.ts`:
+  - Added `visitDays`, `streak`, `bestStreak` state (persisted).
+  - Added `recordVisit()` action: counts one visit per day, computes
+    consecutive-day streak (yesterday-anchored), tracks best ever.
+  - `markStarted()` now also calls `recordVisit()`.
+  - 2 new achievements: "On a Roll" (3-day streak), "Consistency King"
+    (7-day streak), auto-unlocked by `recordVisit`.
+  - `reset()` clears the new fields.
+- Created `lib/glossary.ts`: 8 linear-algebra terms (Vector, Scalar,
+  Coordinate, Origin, Vector addition, Scalar multiplication, Tip-to-tail,
+  Dimension) with definitions, lesson links, related terms, and 4
+  categories. Includes `searchGlossary()` helper.
+- Created `course/streak-widget.tsx`: compact flame streak indicator +
+  7-day calendar of visits (today highlighted, visited days checkmarked).
+  Added to sidebar above ProgressTracker.
+- Created `course/glossary-panel.tsx`: searchable + category-filterable
+  term index. Animated list (framer-motion layout), click any term to
+  jump to its lesson. Color-coded category badges. Added a "Glossary"
+  section to the Introduction page.
+
+Stage Summary:
+- Verified end-to-end with agent-browser:
+  - Streak widget renders in sidebar; today's visit recorded
+    (visitDays: ["2026-07-22"], streak: 1) and persisted to localStorage.
+  - 1 checkmark on the 7-day calendar (today).
+  - Glossary section on Introduction: 8 terms on fresh load.
+  - Search filters correctly ("scalar" -> 2 matching terms).
+  - Category filter works (Operation -> 2 operation entries).
+  - Clicking a glossary term navigates to its lesson (Vector addition ->
+    /?page=vectors).
+  - No errors. Lint clean. Dev server healthy.
+- Lesson 1 behavior untouched. All new components are reusable.
+
+Unresolved issues / risks:
+- The 15-min webDevReview cron (id 285428) still hits 429 rate-limits
+  when competing with active sessions. cron tool was unavailable again
+  this round; schedule unchanged. Strongly recommend reducing to 60 min
+  or pausing while the user is actively in session.
+- Quiz answer state resets on page unmount (low priority).
+
+Recommended next-phase priorities:
+- Add Lesson 2 ("Span & Linear Combinations") when the transcript
+  arrives: build `simulations/span-painter.tsx` reusing CoordinatePlane;
+  append to LESSONS + GLOSSARY + registry; do not modify Lesson 1.
+- Consider a "recently viewed lessons" strip on the Introduction page
+  (cheap to add from existing `lastPage`/`visitDays` data).
+- Tune cron frequency to avoid 429s.

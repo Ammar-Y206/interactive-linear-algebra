@@ -20,10 +20,12 @@ import {
   Compass,
   Layers,
   TrendingUp,
+  BookOpen,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SectionHeading } from "@/components/course/section-heading";
 import { AchievementBadge } from "@/components/course/achievement-badge";
+import { GlossaryPanel } from "@/components/course/glossary-panel";
 import {
   LESSONS,
   TOTAL_LESSONS,
@@ -230,6 +232,20 @@ export function IntroductionPage({ onNavigate }: IntroductionPageProps) {
               );
             })}
           </div>
+        </div>
+      </section>
+
+      {/* ===== GLOSSARY ===== */}
+      <section className="px-5 py-12 sm:px-8 lg:px-12">
+        <div className="mx-auto max-w-5xl">
+          <SectionHeading
+            eyebrow="Reference"
+            title="Glossary"
+            description="Every term we use, defined in one place. Search it, filter by type, or jump straight to the lesson that introduces it."
+            accent="cyan"
+            icon={<BookOpen className="size-3.5" />}
+          />
+          <GlossaryPanel onNavigate={onNavigate} />
         </div>
       </section>
 

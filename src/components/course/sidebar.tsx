@@ -26,6 +26,7 @@ import { cn } from "@/lib/utils";
 import { LESSONS, SPECIAL_PAGES } from "@/lib/course-config";
 import { useProgressStore } from "@/lib/progress-store";
 import { ProgressTracker } from "./progress-tracker";
+import { StreakWidget } from "./streak-widget";
 
 export interface SidebarProps {
   currentPage: string;
@@ -142,7 +143,8 @@ export function Sidebar({ currentPage, onNavigate, onClose }: SidebarProps) {
         />
       </nav>
 
-      <div className="border-t border-sidebar-border/60 p-3">
+      <div className="space-y-2 border-t border-sidebar-border/60 p-3">
+        <StreakWidget />
         <ProgressTracker />
       </div>
     </div>
