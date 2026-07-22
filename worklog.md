@@ -930,3 +930,29 @@ GitHub deployment prep:
 
 Verified: collapse button present, clicking hides the sidebar and swaps
 to a "show" button, no errors, lint clean.
+
+---
+Task ID: 16
+Agent: main (Z.ai Code) — responsive improvements
+Task: Make the platform fully responsive across mobile, tablet, and
+desktop. User requested "خليه responsive".
+
+Issues found + fixed:
+1. Horizontal overflow on mobile (390px) — root cause: the main column
+   and <main> element lacked `min-w-0`, allowing flex children to expand
+   beyond the viewport. Added `min-w-0` to both the main column div and
+   the <main> element. Now scrollWidth = innerWidth on all viewports.
+2. Hero badge bar could overflow on very small screens — added
+   `flex-wrap` and smaller padding/text on mobile (xs → sm → md scaling).
+3. Intro page hero h1 was 48px on mobile (too large) — reduced to
+   text-4xl (36px) on mobile, scaling up through sm/lg/xl.
+4. TOC rail appeared at xl (1280px) which crowded content when the
+   sidebar was also visible — moved to 2xl (1536px) so it only shows
+   on genuinely wide screens.
+
+Verified across all breakpoints:
+- 390x844 (mobile): no overflow, h1=36px, sidebar hidden, menu button.
+- 768x1024 (tablet): no overflow, h1=48px, sidebar hidden, menu button.
+- 1280x800 (small desktop): no overflow, h1=60px, sidebar visible, no TOC rail.
+- 1536x900 (wide desktop): no overflow, h1=60px, sidebar + TOC rail visible.
+Lint clean.

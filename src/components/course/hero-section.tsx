@@ -37,20 +37,20 @@ export function HeroSection({ lesson }: HeroSectionProps) {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="mx-auto max-w-3xl text-center"
         >
-          <div className="mb-5 flex items-center justify-center gap-3 text-sm">
-            <span className="flex items-center gap-1.5 rounded-full border border-border/60 bg-card/50 px-3 py-1 text-muted-foreground">
+          <div className="mb-5 flex flex-wrap items-center justify-center gap-2 text-xs sm:gap-3 sm:text-sm">
+            <span className="flex items-center gap-1.5 rounded-full border border-border/60 bg-card/50 px-2.5 py-1 text-muted-foreground sm:px-3">
               <Hash className="size-3.5" />
               Lesson {lesson.number}
             </span>
             <span
-              className={`flex items-center gap-1.5 rounded-full border px-3 py-1 ${
+              className={`flex items-center gap-1.5 rounded-full border px-2.5 py-1 sm:px-3 ${
                 difficultyColor[lesson.difficulty] ?? difficultyColor.Core
               }`}
             >
               <BarChart3 className="size-3.5" />
               {lesson.difficulty}
             </span>
-            <span className="flex items-center gap-1.5 rounded-full border border-border/60 bg-card/50 px-3 py-1 text-muted-foreground">
+            <span className="flex items-center gap-1.5 rounded-full border border-border/60 bg-card/50 px-2.5 py-1 text-muted-foreground sm:px-3">
               <Clock className="size-3.5" />
               {lesson.durationMin} min
             </span>

@@ -155,7 +155,7 @@ export function CourseShell({ currentPage, onNavigate, children }: CourseShellPr
       </Sheet>
 
       {/* main column — expands when sidebar is collapsed */}
-      <div className={cn("flex min-h-screen flex-1 flex-col transition-[padding] duration-300 ease-in-out", sidebarCollapsed ? "lg:pl-0" : "lg:pl-72")}>
+      <div className={cn("flex min-h-screen min-w-0 flex-1 flex-col transition-[padding] duration-300 ease-in-out", sidebarCollapsed ? "lg:pl-0" : "lg:pl-72")}>
         {/* top bar */}
         <header className="sticky top-0 z-20 flex h-14 items-center gap-2 border-b border-border/60 bg-background/70 px-4 pl-16 backdrop-blur-xl lg:pl-6">
           {/* sidebar collapse toggle (desktop only) */}
@@ -244,7 +244,7 @@ export function CourseShell({ currentPage, onNavigate, children }: CourseShellPr
         )}
 
         {/* page content */}
-        <main className="flex-1">{children}</main>
+        <main className="min-w-0 flex-1">{children}</main>
 
         {/* sticky footer */}
         <footer className="mt-auto border-t border-border/60 bg-background/60 px-5 py-5 backdrop-blur-sm sm:px-8 lg:px-12">

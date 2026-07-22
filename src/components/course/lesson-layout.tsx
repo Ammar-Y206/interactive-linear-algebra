@@ -60,8 +60,8 @@ export function LessonLayout({ toc, children }: LessonLayoutProps) {
 
   return (
     <div className="relative">
-      {/* desktop TOC rail */}
-      <aside className="pointer-events-none fixed right-6 top-1/2 z-20 hidden -translate-y-1/2 xl:block">
+      {/* desktop TOC rail — only on very wide screens so it never crowds content */}
+      <aside className="pointer-events-none fixed right-6 top-1/2 z-20 hidden -translate-y-1/2 2xl:block">
         <div className="pointer-events-auto rounded-2xl border border-border/40 bg-card/60 p-3 backdrop-blur-md">
           <div className="mb-2 flex items-center gap-1.5 px-2 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
             <BookOpen className="size-3" />
@@ -90,7 +90,7 @@ export function LessonLayout({ toc, children }: LessonLayoutProps) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.4 }}
-        className="xl:pr-56"
+        className="2xl:pr-56"
       >
         {children}
       </motion.article>
