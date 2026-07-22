@@ -15,10 +15,12 @@
 
 import { useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Check, X, RotateCcw, Trophy, ChevronRight } from "lucide-react";
+import { Check, X, RotateCcw, Trophy, ChevronRight, PartyPopper, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useProgressStore } from "@/lib/progress-store";
+import { Confetti } from "@/components/course/confetti";
+import { toast } from "sonner";
 import type { QuizQuestion } from "@/lib/course-config";
 
 export interface QuizCardProps {
@@ -29,6 +31,7 @@ export interface QuizCardProps {
 export function QuizCard({ lessonSlug, questions }: QuizCardProps) {
   const [answers, setAnswers] = useState<Record<string, number>>({});
   const [submitted, setSubmitted] = useState(false);
+  const [showConfetti, setShowConfetti] = useState(false);
   const setQuizScore = useProgressStore((s) => s.setQuizScore);
 
   const score = useMemo(() => {
@@ -37,18 +40,31 @@ export function QuizCard({ lessonSlug, questions }: QuizCardProps) {
     return correct / questions.length;
   }, [submitted, answers, questions]);
 
+  const correctCount = questions.filter((q) => answers[q.id] === q.answer).length;
   const allAnswered = questions.every((q) => answers[q.id] !== undefined);
+  const isPerfect = submitted && score >= 1;
 
   function handleSubmit() {
     if (!allAnswered) return;
     setSubmitted(true);
     const correct = questions.filter((q) => answers[q.id] === q.answer).length;
-    setQuizScore(lessonSlug, correct / questions.length);
+    const ratio = correct / questions.length;
+    setQuizScore(lessonSlug, ratio);
+    // celebrate a perfect score — fire side effects here, not in an effect
+    if (ratio >= 1) {
+      setShowConfetti(true);
+      toast.success("Perfect score!", {
+        description: "Sharp pencil unlocked — you're thinking in vectors now.",
+        icon: <PartyPopper className="size-4" />,
+      });
+      setTimeout(() => setShowConfetti(false), 2600);
+    }
   }
 
   function handleReset() {
     setAnswers({});
     setSubmitted(false);
+    setShowConfetti(false);
   }
 
   return (
@@ -164,6 +180,9 @@ export function QuizCard({ lessonSlug, questions }: QuizCardProps) {
         );
       })}
 
+      {/* confetti burst on perfect score */}
+      {showConfetti && <Confetti count={90} durationMs={2600} />}
+
       <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-between">
         {!submitted ? (
           <Button
@@ -177,21 +196,52 @@ export function QuizCard({ lessonSlug, questions }: QuizCardProps) {
           </Button>
         ) : (
           <div className="flex w-full flex-col items-center gap-3 sm:flex-row sm:justify-between">
-            <div className="flex items-center gap-3">
-              <div className="flex size-11 items-center justify-center rounded-full bg-primary/15">
-                <Trophy className="size-5 text-primary" />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4, type: "spring" }}
+              className={cn(
+                "flex items-center gap-4 rounded-2xl border p-4",
+                isPerfect
+                  ? "border-amber-500/40 bg-gradient-to-r from-amber-500/15 to-emerald-500/10 shadow-[0_0_30px_oklch(0.75_0.16_80/20%)]"
+                  : score >= 0.5
+                    ? "border-emerald-500/30 bg-emerald-500/5"
+                    : "border-rose-500/30 bg-rose-500/5"
+              )}
+            >
+              <div
+                className={cn(
+                  "flex size-12 items-center justify-center rounded-full",
+                  isPerfect
+                    ? "bg-gradient-to-br from-amber-400 to-amber-600"
+                    : "bg-primary/15"
+                )}
+              >
+                {isPerfect ? (
+                  <PartyPopper className="size-6 text-amber-950" />
+                ) : (
+                  <Trophy className="size-5 text-primary" />
+                )}
               </div>
               <div>
-                <div className="text-sm text-muted-foreground">Your score</div>
-                <div className="font-mono text-xl font-bold text-foreground">
+                <div className="flex items-center gap-2">
+                  <span className="text-sm text-muted-foreground">
+                    {isPerfect ? "Flawless!" : "Your score"}
+                  </span>
+                  {isPerfect && (
+                    <span className="inline-flex items-center gap-1 rounded-full bg-amber-500/20 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-amber-300">
+                      <Sparkles className="size-2.5" /> Perfect
+                    </span>
+                  )}
+                </div>
+                <div className="font-mono text-2xl font-bold text-foreground">
                   {Math.round(score * 100)}%
                   <span className="ml-2 text-sm font-normal text-muted-foreground">
-                    ({questions.filter((q) => answers[q.id] === q.answer).length}/
-                    {questions.length} correct)
+                    ({correctCount}/{questions.length} correct)
                   </span>
                 </div>
               </div>
-            </div>
+            </motion.div>
             <Button onClick={handleReset} variant="outline" size="lg">
               <RotateCcw className="mr-1.5 size-4" />
               Try again

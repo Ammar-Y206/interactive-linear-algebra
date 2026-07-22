@@ -18,6 +18,7 @@
  * ----------------------------------------------------------------
  */
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   ListOrdered,
@@ -41,6 +42,8 @@ import { SummaryCard } from "@/components/course/summary-card";
 import { WhatsNext } from "@/components/course/whats-next";
 import { QuizCard } from "@/components/course/quiz-card";
 import { SimulationContainer } from "@/components/course/simulation-container";
+import { ConceptCheck } from "@/components/course/concept-check";
+import { Confetti } from "@/components/course/confetti";
 import {
   CoordinatePlane,
   type PlaneVector,
@@ -70,6 +73,7 @@ export function VectorsLesson({ onNavigate }: VectorsLessonProps) {
   const isComplete = useProgressStore((s) => s.isComplete);
   const completeLesson = useProgressStore((s) => s.completeLesson);
   const done = isComplete("vectors");
+  const [celebrate, setCelebrate] = useState(false);
 
   const next = getNextLesson("vectors");
   const prev = getPrevLesson("vectors");
@@ -78,9 +82,14 @@ export function VectorsLesson({ onNavigate }: VectorsLessonProps) {
 
   function handleComplete() {
     completeLesson("vectors");
+    // burst confetti the first time this lesson is completed
+    if (!done) {
+      setCelebrate(true);
+      setTimeout(() => setCelebrate(false), 2600);
+    }
     // continue to the next lesson, or to the completion page if this is the last
     const dest = next ? next.slug : "completion";
-    setTimeout(() => onNavigate(dest), 500);
+    setTimeout(() => onNavigate(dest), done ? 500 : 1400);
   }
 
   function handleNav(direction: "prev" | "next") {
@@ -92,6 +101,7 @@ export function VectorsLesson({ onNavigate }: VectorsLessonProps) {
 
   return (
     <LessonLayout toc={TOC}>
+      {celebrate && <Confetti count={100} durationMs={2600} />}
       <HeroSection lesson={lesson} />
 
       <LearningObjectives objectives={lesson.objectives} />
@@ -196,6 +206,14 @@ export function VectorsLesson({ onNavigate }: VectorsLessonProps) {
             description="Drag the glowing tip. The arrow and the pair of numbers are the same object, described two ways."
           />
 
+          <div className="mt-5">
+            <ConceptCheck
+              accent="emerald"
+              prompt="A vector points to (−2, 3). Starting from the origin, how do you walk to its tip?"
+              answer="First move 2 units left along the x-axis (negative = leftward), then move 3 units up parallel to the y-axis (positive = upward). The order is always x first, then y — and the sign tells you the direction."
+            />
+          </div>
+
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -252,6 +270,14 @@ export function VectorsLesson({ onNavigate }: VectorsLessonProps) {
               formula="(1,2) + (3,−1) = (4,1)"
             />
           </motion.div>
+
+          <div className="mt-5">
+            <ConceptCheck
+              accent="amber"
+              prompt="Does the order matter when adding two vectors? That is, is v + w the same as w + v?"
+              answer="Geometrically, yes — they're equal. Whether you walk v then w, or w then v, you land at the same tip. Numerically, (x₁+x₂, y₁+y₂) = (x₂+x₁, y₂+y₁) because regular addition commutes. This property — commutativity of vector addition — will feel obvious now, but it's worth naming; not every operation in linear algebra is this forgiving."
+            />
+          </div>
         </div>
       </section>
 
@@ -289,6 +315,14 @@ export function VectorsLesson({ onNavigate }: VectorsLessonProps) {
               <strong>number</strong>.
             </p>
           </motion.div>
+
+          <div className="mt-5">
+            <ConceptCheck
+              accent="rose"
+              prompt="You multiply a vector by 0. What happens — and why is that a useful edge case to keep in mind?"
+              answer="Every component becomes 0, so the vector collapses to the origin — a single point with no direction. It's the only scalar that destroys information entirely, which is exactly why 0 gets special treatment throughout linear algebra (think 'zero vector', and later, why matrices can't be undone when they squish space to nothing)."
+            />
+          </div>
         </div>
       </section>
 
