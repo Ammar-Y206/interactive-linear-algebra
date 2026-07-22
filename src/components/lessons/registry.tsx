@@ -19,6 +19,9 @@ import { TransformationsLesson } from "@/components/lessons/transformations-less
 import { CompositionLesson } from "@/components/lessons/composition-lesson";
 import { Transform3DLesson } from "@/components/lessons/transform-3d-lesson";
 import { DeterminantLesson } from "@/components/lessons/determinant-lesson";
+import { InverseLesson } from "@/components/lessons/inverse-lesson";
+import { NonsquareLesson } from "@/components/lessons/nonsquare-lesson";
+import { DotProductLesson } from "@/components/lessons/dot-product-lesson";
 import { IntroductionPage } from "@/components/lessons/introduction";
 import { CourseCompletionPage } from "@/components/lessons/course-completion";
 import { getLessonBySlug } from "@/lib/course-config";
@@ -38,6 +41,9 @@ export const LESSON_REGISTRY: Record<
   composition: CompositionLesson,
   "transform-3d": Transform3DLesson,
   determinant: DeterminantLesson,
+  inverse: InverseLesson,
+  nonsquare: NonsquareLesson,
+  "dot-product": DotProductLesson,
 };
 
 /** Special (non-lesson) page renderers. */

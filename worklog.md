@@ -535,3 +535,64 @@ Recommended next-phase priorities:
 - Add Lesson 7 ("Inverse Matrices & Linear Systems") when transcript
   arrives. Natural fit: det≠0 is the invertibility test (just covered);
   reuse DeterminantSim to show the inverse "un-doing" a transform.
+
+---
+Task ID: 9
+Agent: main (Z.ai Code) — add Lessons 7, 8, 9
+Task: Add three lessons in one batch: "Inverse matrices, column space
+& null space" (L7), "Nonsquare matrices" (L8), "Dot products & duality"
+(L9). WITHOUT modifying Lessons 1–6.
+
+Work Log:
+- Appended all 3 lessons to `lib/course-config.ts` (slugs inverse-matrices,
+  nonsquare-matrices, dot-products; componentKeys inverse, nonsquare,
+  dot-product; numbers 7/8/9; difficulties Intermediate). 12 quiz
+  questions total; whatsNext chains L7→L8→L9→cross products.
+- Registered all 3 in `lessons/registry.tsx`.
+- Appended 11 glossary terms (Linear system, Inverse matrix, Identity
+  matrix, Rank, Column space, Null space, Nonsquare matrix, Full rank
+  non-square, Dot product, Projection, Duality).
+- Created 3 new reusable simulations:
+  - `simulations/inverse-sim.tsx` — solve A·x=v by playing the transform
+    in reverse; draggable î/ĵ define A, draggable v sets the target;
+    computes A⁻¹·v = x live; play/pause animates x→v forward & reverse;
+    det=0 disables the inverse with an explanatory panel. Presets
+    include a Collapse case.
+  - `simulations/nonsquare-sim.tsx` — three modes (2D→3D, 3D→2D, 2D→1D)
+    showing the dimension-crossing map with the matrix shape badge;
+    2D→1D mode draws an actual number line at the bottom.
+  - `simulations/dot-product-sim.tsx` — draggable v/w, projects w onto v
+    (rose), live v·w readout color-coded by sign, |v|/|proj|/angle
+    readouts, right-angle marker, perpendicular detection, AND a
+    duality panel showing the 1×2 matrix = v tipped over.
+- Created 3 lesson pages:
+  - `lessons/inverse-lesson.tsx` (7 sections, 2 concept checks)
+  - `lessons/nonsquare-lesson.tsx` (5 sections, 1 concept check)
+  - `lessons/dot-product-lesson.tsx` (6 sections, 1 concept check)
+  Each with confetti on completion, reusing all shared components.
+
+NOTE: A build error occurred mid-way because the registry imported the
+three lesson files before they were created. Resolved by creating all
+missing files (the three sims + three lesson pages).
+
+Stage Summary:
+- All 3 lessons verified with agent-browser:
+  - L7 renders: h1 "Inverse matrices…", 53 SVGs, 2 concept checks.
+  - L8 renders: h1 "Nonsquare matrices…", 48 SVGs, 1 concept check.
+  - L9 renders: h1 "Dot products & duality", 46 SVGs, 1 concept check.
+  - L9 quiz: A,B,B,B → 100% + "Flawless!" + confetti.
+  - Sidebar shows all 9 lessons.
+  - No errors. Lint clean. Dev server healthy.
+- Lessons 1–6 completely untouched. Architecture held: purely append-
+  only (config + registry + glossary + 6 new files).
+- Course now has 9 lessons, 44 glossary terms, 7 achievements, 10
+  reusable simulations.
+
+Unresolved issues / risks:
+- The 15-min webDevReview cron (id 285428) still risks 429 rate-limits.
+  Recommend reducing to 60 min.
+
+Recommended next-phase priorities:
+- Add Lesson 10 ("Cross products") when transcript arrives. Natural
+  reuse of the duality concept just introduced; build a CrossProductSim
+  showing the perpendicular vector + the parallelogram area.

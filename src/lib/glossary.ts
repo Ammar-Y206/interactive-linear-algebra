@@ -281,6 +281,94 @@ export const GLOSSARY: GlossaryEntry[] = [
     related: ["Orientation", "Determinant"],
     category: "Concept",
   },
+  {
+    term: "Linear system of equations",
+    definition:
+      "A set of equations where each variable is only scaled by a constant and the scaled variables are only added. Packaged as A·x = v: find the input vector x that the transformation A sends to v.",
+    lessonSlug: "inverse-matrices",
+    related: ["Inverse matrix", "Matrix-vector multiplication"],
+    category: "Concept",
+  },
+  {
+    term: "Inverse matrix",
+    definition:
+      "The transformation A⁻¹ that undoes A: A⁻¹·A = I (the identity). Exists iff det(A) ≠ 0. Solving A·x = v is just x = A⁻¹·v — play the transformation in reverse.",
+    lessonSlug: "inverse-matrices",
+    related: ["Identity matrix", "Determinant", "Linear system of equations"],
+    category: "Concept",
+  },
+  {
+    term: "Identity matrix",
+    definition:
+      "The matrix that does nothing — leaves every vector unchanged. In 2D it has columns (1,0) and (0,1). A⁻¹·A = I is the algebraic statement of 'A⁻¹ undoes A'.",
+    lessonSlug: "inverse-matrices",
+    related: ["Inverse matrix"],
+    category: "Concept",
+  },
+  {
+    term: "Rank",
+    definition:
+      "The number of dimensions in a transformation's output (its column space). Full rank means no dimension was lost; rank 1 means everything landed on a line.",
+    lessonSlug: "inverse-matrices",
+    related: ["Column space", "Determinant"],
+    category: "Concept",
+  },
+  {
+    term: "Column space",
+    definition:
+      "The span of a matrix's columns — the set of all vectors it can possibly output. Tells you which right-hand sides v are even reachable by A·x.",
+    lessonSlug: "inverse-matrices",
+    related: ["Rank", "Span", "Matrix"],
+    category: "Concept",
+  },
+  {
+    term: "Null space",
+    definition:
+      "The set of input vectors that land on the origin (zero). For full-rank matrices it's just {0}; when a dimension collapses, a whole line or plane of inputs gets crushed to zero.",
+    lessonSlug: "inverse-matrices",
+    related: ["Column space", "Rank", "Span"],
+    category: "Concept",
+  },
+  {
+    term: "Nonsquare matrix",
+    definition:
+      "An m×n matrix with m ≠ n. It maps between spaces of different dimension: n columns = input dimension, m rows = output dimension. A 3×2 lifts 2D→3D; a 2×3 projects 3D→2D.",
+    lessonSlug: "nonsquare-matrices",
+    related: ["Matrix", "Column space"],
+    category: "Concept",
+  },
+  {
+    term: "Full rank (non-square)",
+    definition:
+      "A non-square matrix is full rank when its column space's dimension equals its input dimension — no information lost, even though input and output dimensions differ.",
+    lessonSlug: "nonsquare-matrices",
+    related: ["Rank", "Nonsquare matrix"],
+    category: "Concept",
+  },
+  {
+    term: "Dot product",
+    definition:
+      "Pair the coordinates of two vectors, multiply each pair, sum: (a,b)·(c,d) = ac+bd. Geometrically = |projection of w onto v| × |v|. Zero when perpendicular.",
+    lessonSlug: "dot-products",
+    related: ["Projection", "Duality"],
+    category: "Operation",
+  },
+  {
+    term: "Projection",
+    definition:
+      "Dropping a vector onto the line through another, keeping only the component along that direction. The dot product computes (projection length) × (the other vector's length).",
+    lessonSlug: "dot-products",
+    related: ["Dot product"],
+    category: "Concept",
+  },
+  {
+    term: "Duality",
+    definition:
+      "The surprising correspondence between vectors and certain transformations: any linear map from vectors to numbers is encoded by a 1×n matrix, which is just a vector tipped on its side. Applying it = taking a dot product.",
+    lessonSlug: "dot-products",
+    related: ["Dot product", "Linear transformation"],
+    category: "Concept",
+  },
 ];
 
 /** Resolve the lesson number for a glossary entry. */

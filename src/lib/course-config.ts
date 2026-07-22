@@ -629,6 +629,289 @@ export const LESSONS: LessonMeta[] = [
         "If a transformation squishes space to a line, you can't undo it — information is lost. The determinant tells you when an inverse exists. Next we solve linear systems by asking: which vector maps to this one?",
     },
   },
+  {
+    slug: "inverse-matrices",
+    number: 7,
+    title: "Inverse matrices, column space & null space",
+    tagline: "Playing the transformation in reverse",
+    description:
+      "Solving Ax = v means asking: which vector x lands on v? If det ≠ 0 you can play the transformation in reverse — the inverse. If det = 0, space got squished and information was lost. Rank, column space, and null space describe exactly what's recoverable.",
+    durationMin: 24,
+    difficulty: "Intermediate",
+    componentKey: "inverse",
+    objectives: [
+      {
+        title: "Read Ax = v geometrically",
+        detail:
+          "A linear system is the question 'which input vector x lands on v after the transformation A?' Solving it means rewinding the transformation.",
+      },
+      {
+        title: "Understand the inverse A⁻¹",
+        detail:
+          "When det ≠ 0, there's a unique reverse transformation A⁻¹ with A⁻¹A = I (the identity). Apply it to v to recover x. No inverse exists when det = 0 — you can't un-squish a line into a plane.",
+      },
+      {
+        title: "Decode rank & column space",
+        detail:
+          "The column space is the span of the columns — every possible output. Rank is its dimension. Full rank means outputs fill the whole target space; otherwise a dimension was lost.",
+      },
+      {
+        title: "Interpret the null space",
+        detail:
+          "The set of vectors that land on the origin. For full-rank matrices it's just {0}; when a dimension collapses, a whole line or plane of inputs gets crushed to zero.",
+      },
+    ],
+    quiz: [
+      {
+        id: "i1",
+        prompt:
+          "Solving the matrix equation A·x = v geometrically means finding…",
+        options: [
+          "The determinant of A",
+          "The vector x that, after transformation A, lands on v",
+          "The inverse of A",
+          "A vector perpendicular to v",
+        ],
+        answer: 1,
+        explanation:
+          "A·x = v asks: which input x, when transformed by A, lands on v? You're rewinding the transformation to find the input that produced the given output.",
+      },
+      {
+        id: "i2",
+        prompt:
+          "When does a matrix A have an inverse A⁻¹?",
+        options: [
+          "Always, for any square matrix",
+          "Only when det(A) ≠ 0 — the transformation didn't collapse a dimension",
+          "Only when A is the identity",
+          "Only when A is symmetric",
+        ],
+        answer: 1,
+        explanation:
+          "An inverse exists iff the transformation is reversible — iff det ≠ 0, meaning no dimension was squished away. If det = 0, multiple inputs map to the same output, so a function can't undo it.",
+      },
+      {
+        id: "i3",
+        prompt:
+          "The 'column space' of a matrix is…",
+        options: [
+          "The space of all valid inputs",
+          "The span of its columns — the set of all possible outputs",
+          "The set of vectors that land on zero",
+          "The number of rows",
+        ],
+        answer: 1,
+        explanation:
+          "The columns are where the basis vectors land, so their span is every vector the transformation can produce — the column space. It tells you which outputs v are even reachable.",
+      },
+      {
+        id: "i4",
+        prompt:
+          "A 3D transformation squishes all of space onto a single line. What is its null space?",
+        options: [
+          "Just the zero vector",
+          "A single line of vectors that land on zero",
+          "An entire plane of vectors that land on the origin",
+          "All of 3D space",
+        ],
+        answer: 2,
+        explanation:
+          "When 3D collapses to a line (rank 1), a whole 2D plane of input vectors gets crushed onto the origin. That plane is the null space. The more dimensions you lose, the bigger the null space.",
+      },
+    ],
+    whatsNext: {
+      title: "Nonsquare Matrices",
+      blurb:
+        "So far every matrix was square — same dimensions in and out. But a 3×2 or 2×3 matrix maps between spaces of different dimension, lifting 2D into 3D or projecting 3D down to 2D.",
+    },
+  },
+  {
+    slug: "nonsquare-matrices",
+    number: 8,
+    title: "Nonsquare matrices: transformations between dimensions",
+    tagline: "Mapping across dimensions",
+    description:
+      "A 3×2 matrix lifts 2D into 3D; a 2×3 matrix projects 3D down to 2D; a 1×2 matrix squishes 2D onto the number line. The shape of the matrix tells you exactly which dimensions you're traveling between.",
+    durationMin: 11,
+    difficulty: "Intermediate",
+    componentKey: "nonsquare",
+    objectives: [
+      {
+        title: "Read a matrix's shape as a dimension map",
+        detail:
+          "An m×n matrix takes n-dimensional inputs to m-dimensional outputs: n columns (input basis vectors), m rows (coordinates of each landing spot).",
+      },
+      {
+        title: "See 2D → 3D embeddings",
+        detail:
+          "A 3×2 matrix lifts the plane into a 2D slice of 3D space. The column space is a plane through the origin — full rank even though it's 'in' 3D.",
+      },
+      {
+        title: "See 3D → 2D projections",
+        detail:
+          "A 2×3 matrix collapses 3D onto the plane. Information is lost; the null space is generally a line of vectors that get squished to zero.",
+      },
+      {
+        title: "Meet 2D → 1D (the number line)",
+        detail:
+          "A 1×2 matrix takes 2D vectors to single numbers. Linearity means evenly-spaced dots stay evenly spaced on the number line. This sets up the dot product.",
+      },
+    ],
+    quiz: [
+      {
+        id: "n1",
+        prompt:
+          "A matrix is 3 rows by 2 columns (3×2). What transformation does it represent?",
+        options: [
+          "3D → 3D",
+          "2D → 3D (lifts the plane into space)",
+          "3D → 2D (projects space onto the plane)",
+          "2D → 2D",
+        ],
+        answer: 1,
+        explanation:
+          "2 columns = 2 input basis vectors (so 2D input). 3 rows = each landing spot has 3 coordinates (so 3D output). A 3×2 matrix lifts 2D vectors into 3D space.",
+      },
+      {
+        id: "n2",
+        prompt:
+          "What does a 1×2 matrix do, geometrically?",
+        options: [
+          "Rotates 2D space",
+          "Takes 2D vectors to single numbers — a projection onto the number line",
+          "Doubles every vector's length",
+          "Maps 3D to 2D",
+        ],
+        answer: 1,
+        explanation:
+          "2 columns (2D input), 1 row (1D output = the number line). Each basis vector lands on a single number. Linearity keeps evenly-spaced dots evenly spaced. This is the seed of the dot product.",
+      },
+      {
+        id: "n3",
+        prompt:
+          "A 3×2 matrix's column space is a 2D plane inside 3D space. Is it full rank?",
+        options: [
+          "No — it's not 3D",
+          "Yes — the column space's dimension (2) equals the input dimension (2)",
+          "Only if the determinant is non-zero",
+          "It depends on the entries",
+        ],
+        answer: 1,
+        explanation:
+          "Full rank means the output dimension equals the input dimension. Here both are 2, so the matrix is full rank even though it lives inside 3D. No information was lost; the plane is faithfully embedded.",
+      },
+      {
+        id: "n4",
+        prompt:
+          "A 2×3 matrix (3D → 2D) generally has a non-trivial null space. Why?",
+        options: [
+          "Because 2 < 3, a whole line of 3D vectors gets crushed to zero",
+          "Because the determinant is always 1",
+          "Because non-square matrices can't be linear",
+          "Because 3D vectors are longer than 2D vectors",
+        ],
+        answer: 0,
+        explanation:
+          "Collapsing 3D to 2D loses a dimension. The vectors that get squished onto the origin form a line (a 1D null space). Whenever outputs have fewer dimensions than inputs, the null space is non-trivial.",
+      },
+    ],
+    whatsNext: {
+      title: "Dot Products & Duality",
+      blurb:
+        "A 1×2 matrix takes 2D vectors to numbers — and looks suspiciously like a tipped-over vector. That's no coincidence: it's duality, and it's why the dot product computes projections.",
+    },
+  },
+  {
+    slug: "dot-products",
+    number: 9,
+    title: "Dot products & duality",
+    tagline: "Why projecting is the same as multiplying",
+    description:
+      "The dot product pairs coordinates, multiplies, and adds — but geometrically it's a projection times a length. The deep reason: a 1×2 matrix (a transformation to the number line) IS a tipped-over vector. That's duality.",
+    durationMin: 19,
+    difficulty: "Intermediate",
+    componentKey: "dot-product",
+    objectives: [
+      {
+        title: "Compute a dot product",
+        detail:
+          "Pair the coordinates, multiply each pair, sum the results: (1,2)·(3,4) = 1·3 + 2·4 = 11. Straightforward arithmetic — but the geometry is the prize.",
+      },
+      {
+        title: "Read the dot product as a projection",
+        detail:
+          "v·w = (length of w's projection onto v) × (length of v). Positive when they point the same way; zero when perpendicular; negative when opposite.",
+      },
+      {
+        title: "See why order doesn't matter",
+        detail:
+          "Projecting w onto v × |v| gives the same number as projecting v onto w × |w|. Scaling either vector scales the product the same way under both views — symmetry survives.",
+      },
+      {
+        title: "Grasp duality",
+        detail:
+          "A linear transformation from vectors to numbers is described by a 1×2 matrix — which is just a vector tipped on its side. Every vector embodies a transformation to the number line; that's duality.",
+      },
+    ],
+    quiz: [
+      {
+        id: "dp1",
+        prompt:
+          "What is (1, 2) · (3, 4)?",
+        options: ["11", "7", "24", "14"],
+        answer: 0,
+        explanation:
+          "Pair coordinates, multiply, add: 1·3 + 2·4 = 3 + 8 = 11. That's the numerical definition of the dot product.",
+      },
+      {
+        id: "dp2",
+        prompt:
+          "Geometrically, v · w equals…",
+        options: [
+          "The sum of the vectors' lengths",
+          "(length of w's projection onto v) × (length of v)",
+          "The angle between the vectors",
+          "The area of the parallelogram they span",
+        ],
+        answer: 1,
+        explanation:
+          "Project w onto the line through v, then multiply that projected length by |v|. Sign tracks direction: positive (same way), zero (perpendicular), negative (opposite).",
+      },
+      {
+        id: "dp3",
+        prompt:
+          "Two vectors are perpendicular. What is their dot product?",
+        options: [
+          "1",
+          "0 — the projection of one onto the other is zero",
+          "Negative",
+          "Their lengths multiplied",
+        ],
+        answer: 1,
+        explanation:
+          "If they're perpendicular, projecting one onto the other lands on the origin — a zero-length projection. So the dot product is 0. This is why dot=0 is the standard perpendicularity test.",
+      },
+      {
+        id: "dp4",
+        prompt:
+          "Why is a 1×2 matrix the same as a 2D vector tipped on its side?",
+        options: [
+          "It's a coincidence of notation",
+          "Duality: any linear map from 2D to the number line corresponds to a unique vector, and applying it = taking a dot product with that vector",
+          "Because matrices and vectors are the same object",
+          "Only true for unit vectors",
+        ],
+        answer: 1,
+        explanation:
+          "A transformation from 2D to 1D is described by a 1×2 matrix (where î and ĵ each land on the number line). That row of two numbers is exactly a 2D vector tipped over. Applying the matrix = dotting with that vector. This correspondence is duality.",
+      },
+    ],
+    whatsNext: {
+      title: "Cross Products & Geometry",
+      blurb:
+        "If the dot product collapses two vectors to a number, the cross product builds a new vector perpendicular to both. It's duality in reverse — and it computes areas and orientations in 3D.",
+    },
+  },
 ];
 
 /** Total number of lessons currently in the course. */
