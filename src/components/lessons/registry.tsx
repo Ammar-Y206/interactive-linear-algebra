@@ -14,8 +14,10 @@
  */
 
 import { VectorsLesson } from "@/components/lessons/vectors-lesson";
+import { SpanLesson } from "@/components/lessons/span-lesson";
 import { IntroductionPage } from "@/components/lessons/introduction";
 import { CourseCompletionPage } from "@/components/lessons/course-completion";
+import { getLessonBySlug } from "@/lib/course-config";
 
 export interface LessonComponentProps {
   onNavigate: (slug: string) => void;
@@ -27,6 +29,7 @@ export const LESSON_REGISTRY: Record<
   React.ComponentType<LessonComponentProps>
 > = {
   vectors: VectorsLesson,
+  span: SpanLesson,
 };
 
 /** Special (non-lesson) page renderers. */
@@ -40,11 +43,19 @@ export const SPECIAL_REGISTRY: Record<
 
 /**
  * Resolve which component to render for a given page slug.
- * Falls back to the introduction page for unknown slugs.
+ *
+ * Special pages (introduction, completion) are keyed directly by slug.
+ * Lessons are keyed in LESSON_REGISTRY by their `componentKey`, so we
+ * first look the slug up in course-config to get the componentKey, then
+ * resolve the component. Falls back to the introduction page.
  */
 export function resolvePage(
   slug: string
 ): React.ComponentType<LessonComponentProps> {
   if (slug in SPECIAL_REGISTRY) return SPECIAL_REGISTRY[slug];
-  return LESSON_REGISTRY[slug] ?? SPECIAL_REGISTRY.introduction;
+  const lesson = getLessonBySlug(slug);
+  if (lesson && lesson.componentKey in LESSON_REGISTRY) {
+    return LESSON_REGISTRY[lesson.componentKey];
+  }
+  return SPECIAL_REGISTRY.introduction;
 }

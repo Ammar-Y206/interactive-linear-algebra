@@ -228,3 +228,84 @@ Recommended next-phase priorities:
 - Consider a "recently viewed lessons" strip on the Introduction page
   (cheap to add from existing `lastPage`/`visitDays` data).
 - Tune cron frequency to avoid 429s.
+
+---
+Task ID: 4
+Agent: main (Z.ai Code) — add Lesson 2
+Task: Add Lesson 2 "Linear combinations, span & basis" to the existing
+platform WITHOUT modifying Lesson 1. Then fix a hydration mismatch bug
+that surfaced in the sidebar.
+
+Work Log:
+- Appended Lesson 2 to `lib/course-config.ts` (slug "span-linear-
+  combinations", componentKey "span", number 2). TOTAL_LESSONS,
+  TOTAL_DURATION_MIN, sidebar nav, search, and progress all picked it
+  up automatically. Quiz has 4 questions; whatsNext teases matrices.
+- Registered `SpanLesson` in `lessons/registry.tsx` under componentKey
+  "span".
+- Appended 9 new glossary terms to `lib/glossary.ts` (Basis vectors,
+  î, ĵ, Linear combination, Span, Linearly dependent/independent,
+  Basis) — all linked to the new lesson slug.
+- Created 3 new reusable simulations (all built on CoordinatePlane):
+  - `simulations/basis-explorer.tsx` — î/ĵ coordinate-as-scalars viz
+    with x/y sliders; reconstructs (x,y) = x·î + y·ĵ tip-to-tail.
+  - `simulations/linear-combination-sim.tsx` — general a·v + b·w with
+    draggable v,w + scalar sliders + a "sweep b" animation that shows
+    the tip tracing a straight line (the "linear" intuition).
+  - `simulations/span-painter.tsx` — dot-grid span visualization with 3
+    presets (Span the plane / Line them up / Both zero) showing the
+    span collapsing to a line or the origin when vectors are dependent.
+- Created `lessons/span-lesson.tsx` with 8 sections: hero, objectives,
+  coordinates-as-scalars, linear combinations, the span, vectors-as-
+  points, 3D span & dependence, quiz + summary + what's next. Includes
+  3 inline ConceptChecks and confetti on completion. Reuses all shared
+  components (LessonLayout, HeroSection, SummaryCard, WhatsNext,
+  QuizCard, ConceptCheck, Confetti, SectionHeading).
+
+BUG FIX (hydration mismatch):
+- Symptom: sidebar rendered `CheckCircle2` (client) vs `Circle` (server)
+  for completed lessons → hydration error, because Zustand's persist
+  middleware hydrates from localStorage synchronously on the client's
+  first render but the server renders with empty state.
+- Fix: set `skipHydration: true` on the persist middleware in
+  `lib/progress-store.ts`, then call `useProgressStore.persist.
+  rehydrate()` in a `useEffect` in `page.tsx` after mount. Now the
+  client's first render matches the server (empty), and persisted state
+  fills in a frame later with no mismatch. Verified: with a completed
+  lesson in localStorage, reload produces no hydration errors and the
+  checkmark/progress-ring appear correctly post-mount.
+- ALSO fixed a latent routing bug in `registry.tsx`: `resolvePage` was
+  looking up `LESSON_REGISTRY[slug]`, but the registry is keyed by
+  `componentKey` (e.g. "span"), not the slug ("span-linear-combinations").
+  Lesson 1 worked only because its slug happened to equal its
+  componentKey ("vectors"). Now `resolvePage` looks the slug up in
+  course-config to get the componentKey, then resolves. This was
+  blocking Lesson 2 from rendering at all (showed the intro fallback).
+
+Stage Summary:
+- Lesson 2 verified end-to-end with agent-browser:
+  - Page renders: h1 "Linear combinations, span & basis", 57 SVGs, 7
+    sections, 4 sliders, 3 concept checks, all 3 simulations present.
+  - SpanPainter presets: "Line them up" → badge "Span = a single line";
+    "Both zero" → "Span = { origin }"; "Span the plane" → "Span = all
+    of 2D space". Collinearity detected via cross-product.
+  - Quiz: answered A,B,B,C → 100% + "Flawless!" + confetti.
+  - No hydration errors after the fix (tested with a pre-seeded
+    completed lesson in localStorage).
+  - Lint clean. Dev server healthy. Lesson 1 completely untouched.
+- Course now has 2 lessons, 17 glossary terms, 7 achievements, 3 new
+  reusable simulations ready for future lessons.
+
+Unresolved issues / risks:
+- The 15-min webDevReview cron (id 285428) still risks 429 rate-limits
+  when running concurrently with active sessions. Recommend reducing to
+  60 min.
+- The "Mark complete & continue" confetti delay is 1.4s on first
+  completion (to let confetti play) — feels good but worth noting.
+
+Recommended next-phase priorities:
+- Add Lesson 3 ("Matrices & Linear Transformations") when transcript
+  arrives: build a reusable `TransformationSim` (watch a grid of points
+  move as a matrix is applied); append to LESSONS + GLOSSARY + registry.
+- Consider a "recently viewed" strip on the Introduction page using
+  existing visitDays/lastPage data.

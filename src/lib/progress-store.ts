@@ -201,6 +201,12 @@ export const useProgressStore = create<ProgressState>()(
     }),
     {
       name: "vectorflow-progress-v1",
+      // Skip auto-hydration so the client's first render matches the
+      // server's (empty) state — preventing hydration mismatches on any
+      // UI that depends on persisted progress (sidebar checkmarks, the
+      // progress ring, streak widget, …). We rehydrate manually after
+      // mount in page.tsx.
+      skipHydration: true,
     }
   )
 );

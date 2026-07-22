@@ -89,6 +89,70 @@ export const GLOSSARY: GlossaryEntry[] = [
     related: ["Coordinate"],
     category: "Concept",
   },
+  {
+    term: "Basis vectors",
+    definition:
+      "A set of vectors that every other vector is built from via linear combinations. In the xy-plane, î = (1,0) and ĵ = (0,1) are the standard basis — but any two non-collinear vectors form a valid basis.",
+    lessonSlug: "span-linear-combinations",
+    related: ["î (i-hat)", "ĵ (j-hat)", "Basis", "Linear combination"],
+    category: "Concept",
+  },
+  {
+    term: "î (i-hat)",
+    definition:
+      "The unit vector pointing along the positive x-axis: (1, 0). One of the two standard basis vectors of the xy-plane.",
+    lessonSlug: "span-linear-combinations",
+    related: ["ĵ (j-hat)", "Basis vectors"],
+    category: "Vector",
+  },
+  {
+    term: "ĵ (j-hat)",
+    definition:
+      "The unit vector pointing along the positive y-axis: (0, 1). One of the two standard basis vectors of the xy-plane.",
+    lessonSlug: "span-linear-combinations",
+    related: ["î (i-hat)", "Basis vectors"],
+    category: "Vector",
+  },
+  {
+    term: "Linear combination",
+    definition:
+      "Scaling each of several vectors by a number and adding the results: a·v + b·w + … . The single operation that generates every vector reachable from a given set.",
+    lessonSlug: "span-linear-combinations",
+    related: ["Scalar multiplication", "Vector addition", "Span"],
+    category: "Operation",
+  },
+  {
+    term: "Span",
+    definition:
+      "The set of every vector reachable by linear combinations of a given set of vectors. Two non-collinear 2D vectors span the whole plane; two collinear ones span only a line.",
+    lessonSlug: "span-linear-combinations",
+    related: ["Linear combination", "Linearly dependent"],
+    category: "Concept",
+  },
+  {
+    term: "Linearly dependent",
+    definition:
+      "Describes a set of vectors where at least one is redundant — it already sits in the span of the others, so removing it doesn't shrink the span. Equivalently, one can be written as a linear combination of the rest.",
+    lessonSlug: "span-linear-combinations",
+    related: ["Linearly independent", "Span"],
+    category: "Concept",
+  },
+  {
+    term: "Linearly independent",
+    definition:
+      "Describes a set of vectors where each one genuinely adds a new direction — none can be written as a linear combination of the others. Removing any would shrink the span.",
+    lessonSlug: "span-linear-combinations",
+    related: ["Linearly dependent", "Basis vectors"],
+    category: "Concept",
+  },
+  {
+    term: "Basis",
+    definition:
+      "Technically: a set of linearly independent vectors that span a space. A minimal building set — enough vectors to reach everywhere, with none wasted.",
+    lessonSlug: "span-linear-combinations",
+    related: ["Basis vectors", "Linearly independent", "Span"],
+    category: "Concept",
+  },
 ];
 
 /** Resolve the lesson number for a glossary entry. */

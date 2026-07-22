@@ -37,8 +37,11 @@ function HomePage() {
   ]);
   const currentPage = validPages.has(rawPage) ? rawPage : "introduction";
 
-  // mark the user as started + remember last page
+  // Rehydrate the persisted progress store AFTER mount, so the client's
+  // first render matches the server's empty state (no hydration mismatch
+  // on sidebar checkmarks / progress ring / streak). Then record the visit.
   useEffect(() => {
+    useProgressStore.persist.rehydrate();
     markStarted();
     setLastPage(currentPage);
   }, [currentPage, markStarted, setLastPage]);

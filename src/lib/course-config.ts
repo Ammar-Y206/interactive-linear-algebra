@@ -154,6 +154,102 @@ export const LESSONS: LessonMeta[] = [
         "If vectors are the atoms, linear combinations are the molecules. Next we'll see how two vectors can sweep out entire lines and planes — and what it means for a vector to be 'redundant'.",
     },
   },
+  {
+    slug: "span-linear-combinations",
+    number: 2,
+    title: "Linear combinations, span & basis",
+    tagline: "Two vectors, infinite possibilities",
+    description:
+      "See coordinates as scalars scaling î and ĵ, build any vector as a linear combination, and discover the span — the full set of vectors two arrows can reach, from a single line to all of 2D space.",
+    durationMin: 20,
+    difficulty: "Foundations",
+    componentKey: "span",
+    objectives: [
+      {
+        title: "Read coordinates as scalars",
+        detail:
+          "Understand that the pair (x, y) is really x·î + y·ĵ — each coordinate scales a basis vector, and the result is their sum.",
+      },
+      {
+        title: "Build linear combinations",
+        detail:
+          "Combine two vectors as a·v + b·w for any scalars a, b — the single operation that generates every vector in the plane.",
+      },
+      {
+        title: "Picture the span",
+        detail:
+          "Visualize the span of two vectors: the whole plane when they point different ways, a single line when they line up, the origin if both are zero.",
+      },
+      {
+        title: "Spot linear dependence",
+        detail:
+          "Recognize when a vector is redundant (already in the span of the others) versus when it genuinely adds a new dimension.",
+      },
+    ],
+    quiz: [
+      {
+        id: "s1",
+        prompt:
+          "The vector (3, −2) can be written as a linear combination of î and ĵ. Which one?",
+        options: [
+          "3·î + (−2)·ĵ",
+          "(−2)·î + 3·ĵ",
+          "3·ĵ + (−2)·î",
+          "î + ĵ + 3",
+        ],
+        answer: 0,
+        explanation:
+          "Each coordinate is a scalar for the matching basis vector: the x-coordinate scales î, the y-coordinate scales ĵ. So (3, −2) = 3·î + (−2)·ĵ.",
+      },
+      {
+        id: "s2",
+        prompt:
+          "Two 2D vectors point in the same direction (they line up). What is their span?",
+        options: [
+          "All of 2D space",
+          "A single line through the origin",
+          "Just the origin",
+          "A flat sheet in 3D",
+        ],
+        answer: 1,
+        explanation:
+          "When two vectors are collinear, every linear combination a·v + b·w still lands on the same line through the origin — you never escape it.",
+      },
+      {
+        id: "s3",
+        prompt:
+          "You add a third vector to a pair that already spans a plane, and it lies ON that plane. What happens to the span?",
+        options: [
+          "The span becomes all of 3D space",
+          "The span doesn't change — the vector is redundant",
+          "The span collapses to a line",
+          "The span becomes the origin",
+        ],
+        answer: 1,
+        explanation:
+          "A vector already inside the span of the others adds nothing new. The three are linearly dependent — you could remove one without shrinking the span.",
+      },
+      {
+        id: "s4",
+        prompt:
+          "A 'basis' of a space is, technically, a set of vectors that…",
+        options: [
+          "All have length 1",
+          "Point along the coordinate axes",
+          "Are linearly independent AND span the space",
+          "Add up to the zero vector",
+        ],
+        answer: 2,
+        explanation:
+          "A basis is a minimal spanning set: the vectors are linearly independent (none redundant) and together they span the whole space. î and ĵ are one such basis for 2D, but not the only one.",
+      },
+    ],
+    whatsNext: {
+      title: "Matrices & Linear Transformations",
+      blurb:
+        "Now that vectors can move and combine, we'll let the whole space move. Matrices are the language for transforming space — rotating, stretching, and shearing every vector at once.",
+    },
+  },
 ];
 
 /** Total number of lessons currently in the course. */
