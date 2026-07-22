@@ -881,3 +881,23 @@ Recommended next-phase priorities:
   lessons (Vectors, Transformations, Determinant, Eigenvectors) so every
   lesson answers "why does this exist?" and "after this you can
   understand X."
+
+---
+Task ID: 14
+Agent: main (Z.ai Code) — fix duplicate React key warning
+Task: Fix "Encountered two children with the same key 'Parallelepiped'"
+console error in the GlossaryPanel.
+
+Root cause: The glossary has two valid entries with term "Parallelepiped"
+(one in the determinant lesson, one in cross-products-duality — both
+legitimate, with different definitions). The GlossaryPanel used
+entry.term as the React key, so duplicate terms collided.
+
+Fix: Changed the key in glossary-panel.tsx from {entry.term} to a
+composite {entry.term}-{entry.lessonSlug}-{idx}. This is guaranteed
+unique even when the same concept appears across multiple lessons, while
+preserving both entries (each links to its own lesson). No glossary
+content was deleted.
+
+Verified: lint clean, no duplicate-key console errors. Both
+Parallelepiped entries still display and navigate correctly.

@@ -104,9 +104,9 @@ export function GlossaryPanel({ onNavigate }: GlossaryPanelProps) {
               No terms match “{query}”.
             </motion.div>
           ) : (
-            results.map((entry) => (
+            results.map((entry, idx) => (
               <motion.button
-                key={entry.term}
+                key={`${entry.term}-${entry.lessonSlug}-${idx}`}
                 layout
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
