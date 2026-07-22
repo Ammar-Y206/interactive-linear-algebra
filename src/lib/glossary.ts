@@ -153,6 +153,46 @@ export const GLOSSARY: GlossaryEntry[] = [
     related: ["Basis vectors", "Linearly independent", "Span"],
     category: "Concept",
   },
+  {
+    term: "Transformation",
+    definition:
+      "A function that takes vectors as input and returns vectors as output. Visualized as movement: each input vector travels to its output location, and the whole grid morphs along with it.",
+    lessonSlug: "linear-transformations",
+    related: ["Linear transformation", "Matrix"],
+    category: "Concept",
+  },
+  {
+    term: "Linear transformation",
+    definition:
+      "A transformation where grid lines stay straight, parallel, and evenly spaced, and the origin stays fixed. Completely determined by where î and ĵ land.",
+    lessonSlug: "linear-transformations",
+    related: ["Transformation", "Matrix", "Basis vectors"],
+    category: "Concept",
+  },
+  {
+    term: "Matrix",
+    definition:
+      "A grid of numbers that describes a linear transformation. In 2D, a 2×2 matrix's first column is where î lands and its second column is where ĵ lands — four numbers, the whole transformation.",
+    lessonSlug: "linear-transformations",
+    related: ["Linear transformation", "Matrix-vector multiplication"],
+    category: "Concept",
+  },
+  {
+    term: "Matrix-vector multiplication",
+    definition:
+      "Applying a matrix's transformation to a vector (x, y): the result is x·(first column) + y·(second column) — a linear combination of the transformed basis vectors.",
+    lessonSlug: "linear-transformations",
+    related: ["Matrix", "Linear combination"],
+    category: "Operation",
+  },
+  {
+    term: "Shear",
+    definition:
+      "A linear transformation that pushes space sideways: î stays put (first column (1,0)) while ĵ tilts, e.g. to (1,1). Vertical lines slant but stay parallel and evenly spaced.",
+    lessonSlug: "linear-transformations",
+    related: ["Linear transformation", "Matrix"],
+    category: "Concept",
+  },
 ];
 
 /** Resolve the lesson number for a glossary entry. */

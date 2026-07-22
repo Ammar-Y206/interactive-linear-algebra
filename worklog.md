@@ -309,3 +309,61 @@ Recommended next-phase priorities:
   move as a matrix is applied); append to LESSONS + GLOSSARY + registry.
 - Consider a "recently viewed" strip on the Introduction page using
   existing visitDays/lastPage data.
+
+---
+Task ID: 5
+Agent: main (Z.ai Code) — add Lesson 3
+Task: Add Lesson 3 "Linear transformations & matrices" to the existing
+platform WITHOUT modifying Lessons 1–2.
+
+Work Log:
+- Appended Lesson 3 to `lib/course-config.ts` (slug "linear-transformations",
+  componentKey "transformations", number 3, difficulty "Core"). 4 quiz
+  questions; whatsNext teases matrix multiplication & composition.
+- Registered `TransformationsLesson` in `lessons/registry.tsx` under
+  componentKey "transformations".
+- Appended 5 new glossary terms to `lib/glossary.ts` (Transformation,
+  Linear transformation, Matrix, Matrix-vector multiplication, Shear).
+- Created `simulations/transformation-sim.tsx` — the signature reusable
+  visualization for all matrix lessons. Draggable î (amber) and ĵ (cyan)
+  define the matrix columns; a full grid morphs in real time; an input
+  vector v (emerald) with sliders transforms to its rose image; live
+  matrix display + computation readout; 5 presets (identity, 90°
+  rotation, shear, scale ×2, squish); detects linear dependence and
+  shows a "space squished to a line" badge. Built standalone (not on
+  CoordinatePlane) because it needs a morphing point grid.
+- Created `lessons/transformations-lesson.tsx` with 8 sections: hero,
+  objectives, transformations-as-movement, the two linearity rules,
+  matrix-as-where-î-ĵ-land (TransformationSim), matrix-vector
+  multiplication as linear combination, worked examples (rotation/shear/
+  squish), quiz + summary + what's next. 2 inline ConceptChecks +
+  confetti on completion.
+
+Stage Summary:
+- Lesson 3 verified end-to-end with agent-browser:
+  - Page renders: h1 "Linear transformations & matrices", 55 SVGs, 11
+    sections, 2 concept checks, all 5 TransformationSim presets present.
+  - 90° rotation preset → matrix [0,-1 | 1,0] ✓
+  - Squish preset → "Columns dependent → space squished to a line" badge ✓
+  - Identity preset resets correctly ✓
+  - Quiz: answered B,A,B,B → 100% + "Flawless!" + confetti ✓
+  - Keyboard ← navigates Lesson 3 → Lesson 2 ✓
+  - Sidebar shows all 3 lessons ✓
+  - No errors. Lint clean. Dev server healthy.
+- Lessons 1 & 2 completely untouched. Architecture held: adding Lesson 3
+  was purely append-only (config + registry + glossary + 2 new files).
+- Course now has 3 lessons, 22 glossary terms, 7 achievements, 4 reusable
+  simulations (CoordinatePlane-based + TransformationSim).
+
+Unresolved issues / risks:
+- The 15-min webDevReview cron (id 285428) still risks 429 rate-limits
+  when running concurrently with active sessions. Recommend reducing to
+  60 min.
+
+Recommended next-phase priorities:
+- Add Lesson 4 ("Matrix Multiplication & Composition") when transcript
+  arrives: build a `CompositionSim` reusing TransformationSim (apply two
+  transforms in sequence, show the composed matrix); append to config +
+  registry + glossary.
+- Consider adding a "determinant" mini-lesson or extending the squish
+  detection in TransformationSim to preview the determinant concept.

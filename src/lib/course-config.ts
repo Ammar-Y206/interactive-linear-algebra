@@ -250,6 +250,102 @@ export const LESSONS: LessonMeta[] = [
         "Now that vectors can move and combine, we'll let the whole space move. Matrices are the language for transforming space — rotating, stretching, and shearing every vector at once.",
     },
   },
+  {
+    slug: "linear-transformations",
+    number: 3,
+    title: "Linear transformations & matrices",
+    tagline: "When space itself moves",
+    description:
+      "See a transformation as movement of the whole grid. Learn the two rules that make it 'linear', discover that a matrix is just 'where î and ĵ land', and read matrix-vector multiplication as a linear combination — no memorization.",
+    durationMin: 22,
+    difficulty: "Core",
+    componentKey: "transformations",
+    objectives: [
+      {
+        title: "See transformations as movement",
+        detail:
+          "Picture a function from vectors to vectors as every point in space moving to a new home — the grid morphing as a whole.",
+      },
+      {
+        title: "Know the two linearity rules",
+        detail:
+          "A transformation is linear iff grid lines stay straight and parallel, evenly spaced, and the origin stays fixed. Everything else follows from these.",
+      },
+      {
+        title: "Read a matrix as transformed basis",
+        detail:
+          "A 2×2 matrix's columns are simply where î and ĵ land. Four numbers fully describe any 2D linear transformation.",
+      },
+      {
+        title: "Multiply without memorizing",
+        detail:
+          "Matrix-vector multiplication is a linear combination: x·(transformed î) + y·(transformed ĵ). Compute it from the columns, not a formula.",
+      },
+    ],
+    quiz: [
+      {
+        id: "t1",
+        prompt:
+          "Which two properties must a transformation have to be called 'linear'?",
+        options: [
+          "It scales all vectors by the same factor and keeps the origin fixed",
+          "Grid lines stay straight & parallel (evenly spaced), and the origin stays fixed",
+          "It maps î to ĵ and keeps all lengths the same",
+          "It is a rotation, and every vector stays on its own line",
+        ],
+        answer: 1,
+        explanation:
+          "Linearity means grid lines remain lines, parallel, and evenly spaced — and the origin doesn't move. That's it; no curvature, no shifting of the origin.",
+      },
+      {
+        id: "t2",
+        prompt:
+          "A transformation sends î → (1, −2) and ĵ → (3, 0). Where does the vector (−1, 2) land?",
+        options: [
+          "(5, 2)",
+          "(2, 5)",
+          "(−5, −2)",
+          "(1, 2)",
+        ],
+        answer: 0,
+        explanation:
+          "(−1, 2) = −1·î + 2·ĵ, so it lands on −1·(1,−2) + 2·(3,0) = (−1+6, 2+0) = (5, 2). The transformed vector is the same linear combination of where î and ĵ landed.",
+      },
+      {
+        id: "t3",
+        prompt:
+          "A 2×2 matrix has columns (1, 0) and (1, 1). What transformation is this?",
+        options: [
+          "A 90° counterclockwise rotation",
+          "A horizontal shear (î stays put, ĵ tilts right)",
+          "A reflection across the x-axis",
+          "A uniform scaling by 2",
+        ],
+        answer: 1,
+        explanation:
+          "î lands at (1,0) — unchanged. ĵ lands at (1,1) — tilted over to the right. That's the classic horizontal shear: vertical lines slant but stay parallel and evenly spaced.",
+      },
+      {
+        id: "t4",
+        prompt:
+          "If a matrix's two columns are linearly dependent (one is a scaled copy of the other), the transformation…",
+        options: [
+          "is a rotation",
+          "squishes all of 2D space onto a single line through the origin",
+          "leaves every vector unchanged",
+          "doubles the area of space",
+        ],
+        answer: 1,
+        explanation:
+          "When the transformed î and ĵ line up, the whole grid collapses onto their shared span — a single line. The transformation still keeps the origin fixed and lines straight, but it crushes a dimension.",
+      },
+    ],
+    whatsNext: {
+      title: "Matrix Multiplication & Composition",
+      blurb:
+        "If one transformation follows another, what single matrix does the job of both? Matrix multiplication is composition — and once you see it geometrically, the formula writes itself.",
+    },
+  },
 ];
 
 /** Total number of lessons currently in the course. */
