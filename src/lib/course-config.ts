@@ -442,6 +442,97 @@ export const LESSONS: LessonMeta[] = [
         "We've lived in the plane long enough. Next we lift everything — vectors, matrices, transformations — into 3D space, where the same ideas scale up and new geometry emerges.",
     },
   },
+  {
+    slug: "3d-transformations",
+    number: 5,
+    title: "Three-dimensional linear transformations",
+    tagline: "Lifting out of flatland",
+    description:
+      "A short bridge into 3D. Meet k̂, the third basis vector. A 3×3 matrix is just where î, ĵ, and k̂ each land — nine numbers describing any transformation of space. The same ideas scale up effortlessly.",
+    durationMin: 12,
+    difficulty: "Core",
+    componentKey: "transform-3d",
+    objectives: [
+      {
+        title: "Meet the third basis vector k̂",
+        detail:
+          "Beyond î (x) and ĵ (y) sits k̂ — the unit vector along the z-axis. Three basis vectors span all of 3D space.",
+      },
+      {
+        title: "Read a 3×3 matrix as three landing spots",
+        detail:
+          "A 3×3 matrix's three columns are simply where î, ĵ, and k̂ land. Nine numbers fully describe any 3D linear transformation.",
+      },
+      {
+        title: "Apply a 3D matrix to a vector",
+        detail:
+          "Matrix-vector multiplication is the same linear-combination idea, now with three terms: x·(col 1) + y·(col 2) + z·(col 3).",
+      },
+      {
+        title: "Compose 3D transformations",
+        detail:
+          "3D matrix multiplication is composition, read right-to-left — vital for computer graphics and robotics, where complex rotations break into simpler ones.",
+      },
+    ],
+    quiz: [
+      {
+        id: "td1",
+        prompt:
+          "In 3D, how many basis vectors are there, and what are they?",
+        options: [
+          "Two: î and ĵ",
+          "Three: î, ĵ, and k̂ — along the x, y, and z axes",
+          "Three: x, y, and z (the axes themselves)",
+          "Four: î, ĵ, k̂, and the origin",
+        ],
+        answer: 1,
+        explanation:
+          "3D has three standard basis vectors: î = (1,0,0) along x, ĵ = (0,1,0) along y, and k̂ = (0,0,1) along z. Every 3D vector is a linear combination of these three.",
+      },
+      {
+        id: "td2",
+        prompt:
+          "A 3×3 matrix completely describes a 3D linear transformation using how many numbers?",
+        options: ["Three", "Six", "Nine", "Twelve"],
+        answer: 2,
+        explanation:
+          "Nine — three columns (where î, ĵ, k̂ each land), each with three coordinates. Just as a 2×2 matrix needed four numbers (two columns × two coords), a 3×3 needs nine.",
+      },
+      {
+        id: "td3",
+        prompt:
+          "A 90° rotation around the y-axis sends î → (0,0,−1), leaves ĵ → (0,1,0), and sends k̂ → (1,0,0). What's the matrix?",
+        options: [
+          "Columns (0,0,−1), (0,1,0), (1,0,0)",
+          "Columns (1,0,0), (0,1,0), (0,0,1)",
+          "Columns (0,1,0), (0,0,−1), (1,0,0)",
+          "Columns (1,0,0), (0,0,−1), (0,1,0)",
+        ],
+        answer: 0,
+        explanation:
+          "The columns are, in order, where î, ĵ, k̂ land: î → (0,0,−1) is column 1, ĵ → (0,1,0) is column 2, k̂ → (1,0,0) is column 3. Read the landing spots off as columns.",
+      },
+      {
+        id: "td4",
+        prompt:
+          "To apply a 3D matrix M to the vector (x, y, z), you compute…",
+        options: [
+          "The sum of all nine matrix entries, times x+y+z",
+          "x·(column 1) + y·(column 2) + z·(column 3)",
+          "The dot product of the vector with each row",
+          "(x, y, z) read directly as a column",
+        ],
+        answer: 1,
+        explanation:
+          "Same as 2D: the coordinates are scalars for the basis vectors, so the image is x·(where î landed) + y·(where ĵ landed) + z·(where k̂ landed) — a linear combination of the three columns.",
+      },
+    ],
+    whatsNext: {
+      title: "The Determinant",
+      blurb:
+        "How much does a transformation stretch or squish space? The determinant measures the scaling factor of area (and volume) — and reveals when a transformation collapses a dimension entirely.",
+    },
+  },
 ];
 
 /** Total number of lessons currently in the course. */

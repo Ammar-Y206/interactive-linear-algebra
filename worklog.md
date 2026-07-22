@@ -423,3 +423,60 @@ Recommended next-phase priorities:
   area scaling) — natural next step.
 - The CompositionSim could be extended to show a 3rd matrix (ABC) to
   make associativity tactile.
+
+---
+Task ID: 7
+Agent: main (Z.ai Code) — add Lesson 5
+Task: Add Lesson 5 "Three-dimensional linear transformations" to the
+existing platform WITHOUT modifying Lessons 1–4.
+
+Work Log:
+- Appended Lesson 5 to `lib/course-config.ts` (slug "3d-transformations",
+  componentKey "transform-3d", number 5, "Core", 12 min — a short bridge
+  lesson). 4 quiz questions; whatsNext teases the determinant.
+- Registered `Transform3DLesson` in `lessons/registry.tsx` under
+  componentKey "transform-3d".
+- Appended 3 glossary terms (k̂, 3D linear transformation, 3×3 matrix).
+- Created `simulations/transform-3d-sim.tsx` — the 3D counterpart to
+  TransformationSim. Isometric projection of 3D space with three
+  draggable basis vectors î (amber/x), ĵ (cyan/y), k̂ (violet/z);
+  ±z buttons to lift each off the ground plane; a 3×3 matrix display
+  (columns = î,ĵ,k̂ destinations); a tracked input vector (emerald)
+  with x/y/z sliders transforming to its rose image; 3 presets
+  (identity, 90° y-rotation, flatten); detects linear dependence via
+  the scalar triple product and shows a "space flattened" badge.
+  Reusable for future 3D lessons (determinants in 3D, etc.).
+- Created `lessons/transform-3d-lesson.tsx` with 7 sections: hero,
+  objectives, out-of-flatland, meet k̂ (Transform3DSim), 3×3 matrix,
+  multiply & compose in 3D (graphics/robotics hook), quiz + summary +
+  what's next. 2 inline ConceptChecks + confetti on completion.
+
+Stage Summary:
+- Lesson 5 verified end-to-end with agent-browser:
+  - Page renders: h1 "Three-dimensional linear transformations", 51
+    SVGs, 10 sections, 2 concept checks, Transform3DSim present, 3
+    presets.
+  - 90° y-rotation preset → matrix [0,0,1 | 0,1,0 | -1,0,0] ✓
+    (î→(0,0,-1), ĵ→(0,1,0), k̂→(1,0,0))
+  - Flatten preset → "Vectors dependent → space flattened" badge ✓
+    (k̂→(0,0,0) collapses z — previews zero determinant)
+  - Quiz: answered B,C,A,B → 100% + "Flawless!" + confetti.
+  - Sidebar shows all 5 lessons (1 Vectors / 2 Span / 3 Transformations
+    / 4 Composition / 5 3D Transformations).
+  - Keyboard ← navigates Lesson 5 → Lesson 4.
+  - No errors. Lint clean. Dev server healthy.
+- Lessons 1–4 completely untouched. Architecture held: purely append-
+  only (config + registry + glossary + 2 new files).
+- Course now has 5 lessons, 29 glossary terms, 7 achievements, 6
+  reusable simulations (incl. the new 3D one).
+
+Unresolved issues / risks:
+- The 15-min webDevReview cron (id 285428) still risks 429 rate-limits
+  when running concurrently with active sessions. Recommend reducing to
+  60 min.
+
+Recommended next-phase priorities:
+- Add Lesson 6 ("The Determinant") when transcript arrives. Natural fit:
+  extend TransformationSim to show area scaling (2D) and reuse
+  Transform3DSim for volume scaling (3D). The flatten/dependence
+  detection already in Transform3DSim is a perfect segue.

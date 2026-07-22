@@ -225,6 +225,30 @@ export const GLOSSARY: GlossaryEntry[] = [
     related: ["Matrix multiplication", "Composition"],
     category: "Concept",
   },
+  {
+    term: "k̂ (k-hat)",
+    definition:
+      "The unit vector pointing along the positive z-axis: (0, 0, 1). The third standard basis vector of 3D space, joining î and ĵ.",
+    lessonSlug: "3d-transformations",
+    related: ["î (i-hat)", "ĵ (j-hat)", "Basis vectors"],
+    category: "Vector",
+  },
+  {
+    term: "3D linear transformation",
+    definition:
+      "A linear transformation of 3D space — grid lines stay parallel and evenly spaced, origin fixed. Described by where î, ĵ, and k̂ each land: nine numbers, packed as a 3×3 matrix.",
+    lessonSlug: "3d-transformations",
+    related: ["Linear transformation", "3×3 matrix", "k̂ (k-hat)"],
+    category: "Concept",
+  },
+  {
+    term: "3×3 matrix",
+    definition:
+      "A grid of nine numbers describing a 3D linear transformation. Its three columns are where î, ĵ, and k̂ land. Multiplying it by a 3-vector (x,y,z) gives x·(col 1) + y·(col 2) + z·(col 3).",
+    lessonSlug: "3d-transformations",
+    related: ["Matrix", "3D linear transformation"],
+    category: "Concept",
+  },
 ];
 
 /** Resolve the lesson number for a glossary entry. */
