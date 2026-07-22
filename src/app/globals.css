@@ -1,0 +1,195 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  --radius: 0.75rem;
+  /* Premium dark theme is the default (this platform is dark-first) */
+  --background: oklch(0.16 0.012 250);
+  --foreground: oklch(0.97 0.005 250);
+  --card: oklch(0.2 0.014 250);
+  --card-foreground: oklch(0.97 0.005 250);
+  --popover: oklch(0.2 0.014 250);
+  --popover-foreground: oklch(0.97 0.005 250);
+  --primary: oklch(0.7 0.16 165);
+  --primary-foreground: oklch(0.16 0.02 250);
+  --secondary: oklch(0.26 0.014 250);
+  --secondary-foreground: oklch(0.97 0.005 250);
+  --muted: oklch(0.24 0.012 250);
+  --muted-foreground: oklch(0.68 0.012 250);
+  --accent: oklch(0.32 0.02 250);
+  --accent-foreground: oklch(0.97 0.005 250);
+  --destructive: oklch(0.65 0.22 25);
+  --border: oklch(1 0 0 / 8%);
+  --input: oklch(1 0 0 / 12%);
+  --ring: oklch(0.7 0.16 165);
+  --chart-1: oklch(0.7 0.16 165);
+  --chart-2: oklch(0.75 0.16 80);
+  --chart-3: oklch(0.65 0.24 350);
+  --chart-4: oklch(0.72 0.15 200);
+  --chart-5: oklch(0.78 0.14 140);
+  --sidebar: oklch(0.18 0.013 250);
+  --sidebar-foreground: oklch(0.97 0.005 250);
+  --sidebar-primary: oklch(0.7 0.16 165);
+  --sidebar-primary-foreground: oklch(0.16 0.02 250);
+  --sidebar-accent: oklch(0.26 0.014 250);
+  --sidebar-accent-foreground: oklch(0.97 0.005 250);
+  --sidebar-border: oklch(1 0 0 / 8%);
+  --sidebar-ring: oklch(0.7 0.16 165);
+}
+
+/* Keep a light variant available, though the platform is dark-first */
+.dark {
+  --background: oklch(0.16 0.012 250);
+  --foreground: oklch(0.97 0.005 250);
+  --card: oklch(0.2 0.014 250);
+  --card-foreground: oklch(0.97 0.005 250);
+  --popover: oklch(0.2 0.014 250);
+  --popover-foreground: oklch(0.97 0.005 250);
+  --primary: oklch(0.7 0.16 165);
+  --primary-foreground: oklch(0.16 0.02 250);
+  --secondary: oklch(0.26 0.014 250);
+  --secondary-foreground: oklch(0.97 0.005 250);
+  --muted: oklch(0.24 0.012 250);
+  --muted-foreground: oklch(0.68 0.012 250);
+  --accent: oklch(0.32 0.02 250);
+  --accent-foreground: oklch(0.97 0.005 250);
+  --destructive: oklch(0.65 0.22 25);
+  --border: oklch(1 0 0 / 8%);
+  --input: oklch(1 0 0 / 12%);
+  --ring: oklch(0.7 0.16 165);
+  --chart-1: oklch(0.7 0.16 165);
+  --chart-2: oklch(0.75 0.16 80);
+  --chart-3: oklch(0.65 0.24 350);
+  --chart-4: oklch(0.72 0.15 200);
+  --chart-5: oklch(0.78 0.14 140);
+  --sidebar: oklch(0.18 0.013 250);
+  --sidebar-foreground: oklch(0.97 0.005 250);
+  --sidebar-primary: oklch(0.7 0.16 165);
+  --sidebar-primary-foreground: oklch(0.16 0.02 250);
+  --sidebar-accent: oklch(0.26 0.014 250);
+  --sidebar-accent-foreground: oklch(0.97 0.005 250);
+  --sidebar-border: oklch(1 0 0 / 8%);
+  --sidebar-ring: oklch(0.7 0.16 165);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "cv11", "ss01";
+    text-rendering: optimizeLegibility;
+  }
+  /* Custom selection */
+  ::selection {
+    background-color: oklch(0.7 0.16 165 / 30%);
+    color: oklch(0.99 0 0);
+  }
+}
+
+/* Custom scrollbar */
+@layer utilities {
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: oklch(0.4 0.02 250 / 60%) transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: oklch(0.4 0.02 250 / 60%);
+    border-radius: 9999px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background-color: oklch(0.5 0.02 250 / 80%);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Glow utilities for accent elements */
+  .glow-emerald {
+    box-shadow: 0 0 24px oklch(0.7 0.16 165 / 25%);
+  }
+  .glow-amber {
+    box-shadow: 0 0 24px oklch(0.75 0.16 80 / 25%);
+  }
+  .glow-rose {
+    box-shadow: 0 0 24px oklch(0.65 0.24 350 / 25%);
+  }
+
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, oklch(1 0 0 / 4%) 1px, transparent 1px),
+      linear-gradient(to bottom, oklch(1 0 0 / 4%) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .bg-grid-fade {
+    -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+  }
+
+  .bg-aurora {
+    background:
+      radial-gradient(60% 50% at 20% 10%, oklch(0.7 0.16 165 / 18%) 0%, transparent 60%),
+      radial-gradient(50% 50% at 85% 20%, oklch(0.75 0.16 80 / 14%) 0%, transparent 60%),
+      radial-gradient(55% 55% at 60% 90%, oklch(0.65 0.24 350 / 12%) 0%, transparent 60%);
+  }
+}
+
+/* Smooth anchor scrolling for in-page navigation */
+html {
+  scroll-behavior: smooth;
+}
