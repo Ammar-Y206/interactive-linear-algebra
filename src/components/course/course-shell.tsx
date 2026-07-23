@@ -20,7 +20,6 @@ import { Button } from "@/components/ui/button";
 import {
   Sheet,
   SheetContent,
-  SheetTrigger,
   SheetTitle,
 } from "@/components/ui/sheet";
 import { Sidebar } from "./sidebar";
@@ -132,18 +131,8 @@ export function CourseShell({ currentPage, onNavigate, children }: CourseShellPr
         <Sidebar currentPage={currentPage} onNavigate={onNavigate} />
       </aside>
 
-      {/* mobile sidebar drawer */}
+      {/* mobile sidebar drawer (opened from the top bar menu button) */}
       <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
-        <SheetTrigger asChild>
-          <Button
-            variant="outline"
-            size="icon"
-            className="fixed left-3 top-3 z-40 lg:hidden"
-            aria-label="Open navigation"
-          >
-            <Menu className="size-5" />
-          </Button>
-        </SheetTrigger>
         <SheetContent side="left" className="w-72 p-0">
           <SheetTitle className="sr-only">Navigation</SheetTitle>
           <Sidebar
@@ -157,12 +146,23 @@ export function CourseShell({ currentPage, onNavigate, children }: CourseShellPr
       {/* main column — expands when sidebar is collapsed */}
       <div className={cn("flex min-h-screen min-w-0 flex-1 flex-col transition-[padding] duration-300 ease-in-out", sidebarCollapsed ? "lg:pl-0" : "lg:pl-72")}>
         {/* top bar */}
-        <header className="sticky top-0 z-20 flex h-14 items-center gap-2 border-b border-border/60 bg-background/70 px-4 pl-16 backdrop-blur-xl lg:pl-6">
+        <header className="sticky top-0 z-20 flex h-14 items-center gap-1 border-b border-border/60 bg-background/80 px-3 backdrop-blur-xl sm:gap-2 sm:px-4 lg:pl-6">
+          {/* mobile menu button (fixed on far left for easy thumb reach) */}
+          <Button
+            variant="outline"
+            size="icon"
+            className="size-9 shrink-0 lg:hidden"
+            onClick={() => setMobileOpen(true)}
+            aria-label="Open navigation"
+          >
+            <Menu className="size-5" />
+          </Button>
+
           {/* sidebar collapse toggle (desktop only) */}
           <Button
             variant="ghost"
             size="icon"
-            className="hidden size-8 lg:flex"
+            className="hidden size-8 shrink-0 lg:flex"
             onClick={toggleSidebar}
             aria-label={sidebarCollapsed ? "Show sidebar" : "Hide sidebar"}
             title={sidebarCollapsed ? "Show sidebar ([)" : "Hide sidebar ([)"}
@@ -170,37 +170,36 @@ export function CourseShell({ currentPage, onNavigate, children }: CourseShellPr
             {sidebarCollapsed ? <PanelLeftOpen className="size-4" /> : <PanelLeftClose className="size-4" />}
           </Button>
 
-          {/* prev/next arrows */}
-          <div className="hidden items-center gap-1 sm:flex">
-            <Button
-              variant="ghost"
-              size="icon"
-              className="size-8 disabled:opacity-30"
-              disabled={!prev}
-              onClick={() => prev && onNavigate(prev)}
-              aria-label="Previous page"
-            >
-              <ChevronLeft className="size-4" />
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="size-8 disabled:opacity-30"
-              disabled={!next}
-              onClick={() => next && onNavigate(next)}
-              aria-label="Next page"
-            >
-              <ChevronRight className="size-4" />
-            </Button>
-          </div>
+          {/* prev/next arrows — show on all sizes (icons only on mobile) */}
+          <Button
+            variant="ghost"
+            size="icon"
+            className="size-9 shrink-0 disabled:opacity-30 sm:size-8"
+            disabled={!prev}
+            onClick={() => prev && onNavigate(prev)}
+            aria-label="Previous page"
+          >
+            <ChevronLeft className="size-5 sm:size-4" />
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="size-9 shrink-0 disabled:opacity-30 sm:size-8"
+            disabled={!next}
+            onClick={() => next && onNavigate(next)}
+            aria-label="Next page"
+          >
+            <ChevronRight className="size-5 sm:size-4" />
+          </Button>
 
-          <div className="flex min-w-0 items-center gap-2 text-sm text-muted-foreground">
-            <span className="hidden sm:inline">Vectorflow</span>
-            <span className="hidden text-muted-foreground/40 sm:inline">/</span>
+          {/* page title — hidden on very small screens to save space */}
+          <div className="flex min-w-0 flex-1 items-center gap-2 text-sm text-muted-foreground">
+            <span className="hidden md:inline">Vectorflow</span>
+            <span className="hidden text-muted-foreground/40 md:inline">/</span>
             <span className="truncate font-medium text-foreground">{pageTitle}</span>
           </div>
 
-          <div className="ml-auto flex items-center gap-2">
+          <div className="ml-auto flex items-center gap-1.5 sm:gap-2">
             {/* reading progress chip — only on lesson pages with scroll */}
             {readingProgress > 0.02 && lesson && (
               <div className="hidden items-center gap-1.5 rounded-full border border-border/60 bg-card/40 px-2.5 py-1 text-[10px] text-muted-foreground md:flex">
@@ -247,7 +246,7 @@ export function CourseShell({ currentPage, onNavigate, children }: CourseShellPr
         <main className="min-w-0 flex-1">{children}</main>
 
         {/* sticky footer */}
-        <footer className="mt-auto border-t border-border/60 bg-background/60 px-5 py-5 backdrop-blur-sm sm:px-8 lg:px-12">
+        <footer className="mt-auto border-t border-border/60 bg-background/60 px-4 py-5 backdrop-blur-sm sm:px-8 lg:px-12" style={{ paddingBottom: "max(1.25rem, env(safe-area-inset-bottom))" }}>
           <div className="flex flex-col items-center justify-between gap-3 text-xs text-muted-foreground sm:flex-row">
             <div className="flex items-center gap-2">
               <span className="flex size-5 items-center justify-center rounded-md bg-gradient-to-br from-emerald-400 to-emerald-600">

@@ -120,11 +120,30 @@
   }
   html {
     color-scheme: dark;
+    -webkit-text-size-adjust: 100%;
   }
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "cv11", "ss01";
     text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    /* prevent horizontal scroll on mobile */
+    overflow-x: hidden;
+  }
+  /* Improve mobile readability */
+  p, li {
+    line-height: 1.65;
+  }
+  /* Ensure touch targets are at least 44px on mobile */
+  @media (max-width: 768px) {
+    button, [role="button"], a {
+      min-height: 40px;
+    }
+    /* Slightly larger body text on mobile for readability */
+    .text-sm {
+      font-size: 0.875rem;
+      line-height: 1.6;
+    }
   }
   /* Custom selection */
   ::selection {

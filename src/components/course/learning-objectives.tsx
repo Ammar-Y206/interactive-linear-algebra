@@ -18,14 +18,14 @@ export interface LearningObjectivesProps {
 
 export function LearningObjectives({ objectives }: LearningObjectivesProps) {
   return (
-    <section className="px-5 py-10 sm:px-8 lg:px-12">
+    <section className="px-4 py-8 sm:px-8 sm:py-10 lg:px-12">
       <div className="mx-auto max-w-4xl">
-        <div className="mb-6 flex items-center gap-2.5">
-          <div className="flex size-9 items-center justify-center rounded-xl bg-primary/15">
+        <div className="mb-5 flex items-center gap-2.5 sm:mb-6">
+          <div className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-primary/15">
             <Target className="size-5 text-primary" />
           </div>
           <div>
-            <h2 className="text-xl font-semibold tracking-tight text-foreground sm:text-2xl">
+            <h2 className="text-lg font-semibold tracking-tight text-foreground sm:text-xl md:text-2xl">
               Learning Objectives
             </h2>
             <p className="text-sm text-muted-foreground">

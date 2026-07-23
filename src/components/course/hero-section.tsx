@@ -30,7 +30,7 @@ export function HeroSection({ lesson }: HeroSectionProps) {
       <div className="bg-aurora-animated pointer-events-none absolute inset-0 opacity-80" />
       <div className="bg-grid bg-grid-fade pointer-events-none absolute inset-0 opacity-40" />
 
-      <div className="relative px-5 py-14 sm:px-8 sm:py-20 lg:px-12">
+      <div className="relative px-4 py-10 sm:px-8 sm:py-14 lg:px-12 lg:py-20">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

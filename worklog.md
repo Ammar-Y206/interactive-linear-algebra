@@ -956,3 +956,36 @@ Verified across all breakpoints:
 - 1280x800 (small desktop): no overflow, h1=60px, sidebar visible, no TOC rail.
 - 1536x900 (wide desktop): no overflow, h1=60px, sidebar + TOC rail visible.
 Lint clean.
+
+---
+Task ID: 17
+Agent: main (Z.ai Code) — mobile + tablet UX improvements
+Task: Improve the mobile and tablet experience significantly. User asked
+"خليه احسن شويه للموبايل والتابلت".
+
+Improvements made:
+1. **globals.css mobile base styles**: added `overflow-x: hidden` on
+   body (prevents any horizontal scroll), `-webkit-text-size-adjust:
+   100%` (prevents iOS auto-zoom), `-webkit-font-smoothing: antialiased`,
+   `line-height: 1.65` on p/li (better readability), and a media query
+   enforcing 40px min touch-target height on all buttons/links below 768px.
+2. **Top bar redesigned for mobile**: moved the hamburger menu INTO the
+   top bar (was a floating fixed button) for better thumb reach. Prev/
+   next arrows now show on ALL sizes (were hidden below sm). Icons are
+   size-9 on mobile, size-8 on desktop. Removed the old floating menu
+   button + SheetTrigger. Page title hidden on very small screens.
+3. **Hero section**: reduced mobile padding from px-5 py-14 to px-4 py-10.
+   Badge bar uses flex-wrap + smaller text on mobile.
+4. **Learning objectives**: mobile padding reduced to px-4 py-8, heading
+   scales text-lg → sm:text-xl → md:text-2xl.
+5. **SectionHeading**: mb-8 → mb-6 on mobile (tighter vertical rhythm).
+6. **QuizCard**: quiz options get py-3.5 on mobile (larger touch target),
+   py-3 on desktop.
+7. **Footer**: added `env(safe-area-inset-bottom)` padding for iPhone
+   home indicator. Mobile padding reduced to px-4.
+8. **Intro page hero h1**: text-4xl on mobile (was text-5xl), scaling
+   through sm/lg/xl.
+
+Verified: 390px mobile — no overflow, menu + prev/next buttons in top
+bar, touch targets ≥40px. 768px tablet — no overflow, menu button
+present, sidebar hidden. Lint clean.

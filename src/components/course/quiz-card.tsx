@@ -102,7 +102,7 @@ export function QuizCard({ lessonSlug, questions }: QuizCardProps) {
                     disabled={submitted}
                     onClick={() => setAnswers((a) => ({ ...a, [q.id]: oi }))}
                     className={cn(
-                      "group flex items-center gap-3 rounded-xl border px-4 py-3 text-left text-sm transition-all",
+                      "group flex items-center gap-3 rounded-xl border px-4 py-3.5 text-left text-sm transition-all sm:py-3",
                       "border-border/50 bg-background/40 hover:border-primary/40 hover:bg-background/70",
                       isSel && !submitted && "border-primary bg-primary/10",
                       correctOption && "border-emerald-500/60 bg-emerald-500/10",
