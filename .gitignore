@@ -60,3 +60,5 @@ server.log
 /.zscripts/
 /skills/
 /mini-services/*/node_modules
+*.png
+/tool-results/
