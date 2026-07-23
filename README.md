@@ -53,7 +53,7 @@ https://interactive-linear-algebra-gthngjhet-aym1352006-4407s-projects.vercel.ap
 -   Cramer's Rule
 -   Abstract Vector Spaces
 
-## Tech Stack
+## Tech Stack (vibe coding)
 
 -   Next.js 16
 -   TypeScript
