@@ -95,8 +95,8 @@ Hosted on Vercel and automatically redeployed on every push to GitHub.
 
 Created by **Ammar (Yasser) Abd-Elkawi**
 
-GitHub: https://github.com/Ammar-Y206
-www.linkedin.com/in/ammar-yasser-ece
+- GitHub: https://github.com/Ammar-Y206
+- LinkedIn: www.linkedin.com/in/ammar-yasser-ece
 
 ---
 ## 🤝 Contributing
