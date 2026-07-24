@@ -96,7 +96,22 @@ Hosted on Vercel and automatically redeployed on every push to GitHub.
 Created by **Ammar (Yasser) Abd-Elkawi**
 
 GitHub: https://github.com/Ammar-Y206
+www.linkedin.com/in/ammar-yasser-ece
 
+---
+## 🤝 Contributing
+
+Contributions are welcome!
+
+If you'd like to improve lessons, simulations, or visualizations, please open an issue first to discuss the proposed changes.
+
+---
+
+## 📜 License
+
+This project is licensed under the MIT License.
+
+---
 ------------------------------------------------------------------------
 
 If you've ever wondered how AI recognizes faces, how games render 3D
